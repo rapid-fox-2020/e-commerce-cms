@@ -1,0 +1,8 @@
+1. siapkan package jest, sequelize, exprss dll
+2. ubah config json di env test
+3. sequelize create, migrate, ..--env test
+4. buat file test js
+5. jika perlu routing, install supertest
+  - buka dokumentasi supertest
+6. describe, test, dan request ke /register
+7. test validation, 400, 404, 403, 401
