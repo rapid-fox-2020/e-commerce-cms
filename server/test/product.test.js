@@ -155,25 +155,25 @@ describe('PATCH /products/:id', function() {
   });
 });
 
-// describe('DELETE /products/:id', function() {
-//   it('Delete Product', function(done) {
-//     const idTest = 1;
-//     request(app)
-//       .delete(`/products/${idTest}`)
-//       .set('access_token', userToken)
-//       .set('Accept', 'application/json')
-//       .then((response) => {
-//         const { status, body } = response;
-//         expect(status).toBe(200);
-//         expect(body).toHaveProperty('id', idTest);
-//         done();
-//       })
-//       .catch(err => {
-//         console.log(err);
-//         done(err);
-//       })
-//   });
-// });
+describe('DELETE /products/:id', function() {
+  it('Delete Product', function(done) {
+    const idTest = 1;
+    request(app)
+      .delete(`/products/${idTest}`)
+      .set('access_token', userToken)
+      .set('Accept', 'application/json')
+      .then((response) => {
+        const { status, body } = response;
+        expect(status).toBe(200);
+        expect(body).toHaveProperty('id', idTest);
+        done();
+      })
+      .catch(err => {
+        console.log(err);
+        done(err);
+      })
+  });
+});
 
 
 
@@ -408,22 +408,22 @@ describe('PATCH /products/:id', function() {
   });
 });
 
-// describe('DELETE /products:id', function() {
-//   it('Delete Product without "access_token"', function(done) {
-//     const idTest = 1;
-//     request(app)
-//       .delete(`/products/${idTest}`)
-//       // .set('access_token', userToken)
-//       .set('Accept', 'application/json')
-//       .then((response) => {
-//         const { status, body } = response;
-//         expect(status).toBe(400);
-//         expect(body).toBe('token needed');
-//         done();
-//       })
-//       .catch(err => {
-//         console.log(err);
-//         done(err);
-//       })
-//   });
-// });
+describe('DELETE /products:id', function() {
+  it('Delete Product without "access_token"', function(done) {
+    const idTest = 1;
+    request(app)
+      .delete(`/products/${idTest}`)
+      // .set('access_token', userToken)
+      .set('Accept', 'application/json')
+      .then((response) => {
+        const { status, body } = response;
+        expect(status).toBe(400);
+        expect(body).toBe('token needed');
+        done();
+      })
+      .catch(err => {
+        console.log(err);
+        done(err);
+      })
+  });
+});
