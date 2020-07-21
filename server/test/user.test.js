@@ -1,13 +1,37 @@
 const app = require('../app')
 const request = require('supertest')
+const { sequelize } = require('../models')
+const { queryInterface } = sequelize
+const { hashPassword } = require('../helpers/bcrypt')
 
 // TEST ROUTES (POST /login)
+
+beforeAll((done) => {
+   queryInterface.bulkInsert('Users',
+      [
+         {
+            email: "admin@mail.com",
+            password: hashPassword("12345"),
+            role: "admin",
+            createdAt: new Date(),
+            updatedAt: new Date()
+         }
+      ], {})
+      .then(() => {
+         done()
+      })
+      .catch(err => {
+         done(err)
+      })
+})
+
 
 describe("POST /login", () => {
    const adminData = {
       email: "admin@mail.com",
       password: "12345",
    }
+
 
    // Success Scenario
 

@@ -70,20 +70,26 @@ class productsController {
    }
 
    static deleteProduct(req, res, next) {
-      let productData;
       const id = req.params.id
+      console.log(req.params.id, "<<< Params");
+      const Error = { name: "DATA_NOT_FOUND" }
 
-      Product.findOne({ where: { id } })
+      Product.findByPk(id)
          .then(data => {
-            if (!data) {
-               next({ name: "DATA_NOT_FOUND" })
-            } else {
-               productData = data
+            console.log(data, "<<< DATA DI DELETE CONTROLLER");
+
+            if (data) {
+               console.log("<<<<<<<<<");
                return Product.destroy({ where: { id } })
+            } else {
+               console.log(data, "masuk ke else ni gaes");
+               throw Error
+               // next({ name: "DATA_NOT_FOUND" })
             }
          })
-         .then(() => {
-            res.status(200).json({ message: "succesfully deleted" })
+         .then((iniApa) => {
+            console.log(iniApa, "KOK DIA MASUK????");
+            res.status(200).json({ message: "successfully deleted" })
          })
          .catch(err => {
             next(err)

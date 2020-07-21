@@ -2,6 +2,7 @@ const app = require('../app')
 const request = require('supertest')
 const { User, Product } = require('../models')
 const { encode } = require('../helpers/jwt')
+const { sequelize } = require('../models')
 const { queryInterface } = sequelize
 
 describe("CRUD /products", () => {
@@ -77,7 +78,11 @@ describe("CRUD /products", () => {
 
    afterAll((done) => {
       queryInterface.bulkDelete('Products', {})
-         .then(result => {
+         .then(() => {
+            return queryInterface.bulkDelete('Users', {})
+            // done()
+         })
+         .then(() => {
             done()
          })
          .catch(err => {
@@ -260,7 +265,7 @@ describe("CRUD /products", () => {
       // Error Data Not Found
       it("data not found by id response (404)", (done) => {
          request(app)
-            .get(`/products/${wrongId}`)
+            .get(`/products/0`)
             .set("access_token", access_token)
             .then(response => {
                const { body, status } = response
@@ -282,23 +287,15 @@ describe("CRUD /products", () => {
       // Success Scenario
 
       it("update products by id response (200)", (done) => {
+         console.log("<<<<<<< INI MASUK GA DI PUT");
          request(app)
-            .put(`/products/${updatedProduct.id}`)
-            .set("access_token", access_token)
+            .put(`/products/${productGlobal.id}`)
             .send(updatedProduct)
+            .set("access_token", access_token)
             .then(response => {
                const { body, status } = response
-               console.log(body, "<<<<<< DI UPDATED PUT ");
                expect(status).toBe(200)
-
-               // expect(body).toHaveProperty("message", "successfully updated")
-               // expect(body).toHaveProperty("id", updatedProduct.id)
-               // expect(body).toHaveProperty("name", updatedProduct.name)
-               // expect(body).toHaveProperty("imageUrl", expect.any(String))
-               // expect(body).toHaveProperty("price", updatedProduct.price)
-               // expect(body).toHaveProperty("stock", updatedProduct.stock)
-               // expect(body).toHaveProperty("createdAt", expect.any(String))
-               // expect(body).toHaveProperty("updatedAt", expect.any(String))
+               expect(body).toHaveProperty("message", "successfully updated")
                done()
             })
             .catch(err => {
@@ -328,6 +325,7 @@ describe("CRUD /products", () => {
       // Error Invalid Input
 
       it("update data not found by id response (400)", (done) => {
+
          request(app)
             .put(`/products/${wrongId}`)
             .set("access_token", access_token)
@@ -346,6 +344,62 @@ describe("CRUD /products", () => {
 
    })
 
+   // Delete Products by its Id
+
+   describe("DELETE /products/:id", () => {
+
+      // Success Scenario
+
+      it("delete products by id response (200)", (done) => {
+         request(app)
+            .delete(`/products/${productGlobal.id}`)
+            .set("access_token", access_token)
+            .then(response => {
+               const { body, status } = response
+               expect(status).toBe(200)
+               expect(body).toHaveProperty("message", 'successfully deleted')
+               done()
+            })
+            .catch(err => {
+               done(err)
+            })
+      })
+
+      //  Error Authorization
+
+      it(" delete authorization errors by id response (403)", (done) => {
+         request(app)
+            .delete(`/products/${productGlobal.id}`)
+            .set("access_token", wrong_token)
+            .then(response => {
+               const { body, status } = response
+
+               expect(status).toBe(403)
+               expect(body).toHaveProperty("message", 'Forbidden Access')
+               done()
+            })
+            .catch(err => {
+               done(err)
+            })
+      })
+
+      // Error Data Not Found
+
+      it("data not found by id response (404)", (done) => {
+         request(app)
+            .delete(`/products/1`)
+            .set("access_token", access_token)
+            .then(response => {
+               const { body, status } = response
+
+               expect(status).toBe(404)
+               expect(body).toHaveProperty("message", 'Data not found')
+               done()
+            })
+            .catch(err => {
+               done(err)
+            })
+      })
+   })
+
 })
-
-
