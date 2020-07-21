@@ -1,8 +1,28 @@
+==== FLOW KERJA DENGAN MENGGUNAKAN TEST ====
+
 1. siapkan package jest, sequelize, exprss dll
 2. ubah config json di env test
 3. sequelize create, migrate, ..--env test
 4. buat file test js
 5. jika perlu routing, install supertest
   - buka dokumentasi supertest
-6. describe, test, dan request ke /register
+6. describe, test, dan request ke (routes)
 7. test validation, 400, 404, 403, 401
+
+
+=== WHAT TO DO TODAY ===
+
+1. menjalankan fungsi seeders,
+2. Buat tes untuk menjalankan fungsi dan Routing Login
+3. Buat tes untuk menjalankan Routing dan fungsi CRUD pada Products
+
+=== TES UNTUK MENJALANKAN FUNGSI USER ===
+
+1. User mempunyai 3 attributes, email, password dan role
+2. saat migrate user mempunyai role, yang default nya itu admin
+3. password harus dihash menggunakan bcrypt (gunakan hooks before create)
+4. expected error 500
+5. email admin harus unique
+6. expected response 201 user created
+7. Buat error Handler yang jelas
+8. #rocket (bisa menambah role baru selain admin)
