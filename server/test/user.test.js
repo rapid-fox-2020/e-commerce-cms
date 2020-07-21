@@ -28,7 +28,7 @@ describe('POST /login', function() {
 });
 
 describe('POST /login', function() {
-  it('Login User with role "admin"', function(done) {
+  it('Login User with role NOT "admin"', function(done) {
     request(app)
       .post('/login')
       .set('Accept', 'application/json')

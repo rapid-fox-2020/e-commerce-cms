@@ -408,7 +408,7 @@ describe('PATCH /products/:id', function() {
   });
 });
 
-describe('DELETE /products:id', function() {
+describe('DELETE /products/:id', function() {
   it('Delete Product without "access_token"', function(done) {
     const idTest = 1;
     request(app)
