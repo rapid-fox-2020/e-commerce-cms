@@ -45,10 +45,18 @@ class ProductController {
         stock: +req.body.stock,
         updatedAt: new Date()
       }
-      await Product.update(newData, {
-        where: { id: req.params.id }
-      })
-      return res.status(200).json(newData);
+      newData = await Product.update(newData, {
+        where: { id: req.params.id },
+        returning: true,
+      });
+      if (newData[0] === 1) {
+        return res.status(200).json(newData[1][0].dataValues);
+      } else {
+        throw {
+          name: 'not found',
+          message: `Product with id ${req.params.id} not found`,
+        }
+      }
     } catch (e) {
       next(e);
     }
@@ -57,8 +65,15 @@ class ProductController {
   static async destroy(req, res, next) {
     try {
       const product = await Product.findOne({where: {id: req.params.id}});
-      await Product.destroy({where: {id: +req.params.id}});
-      return res.status(200).json(product);
+      if (!product) {
+        throw {
+          name: 'not found',
+          message: `Product with id ${req.params.id} not found`,
+        }
+      } else {
+        await Product.destroy({where: {id: +req.params.id}});
+        return res.status(200).json(product);
+      }
     } catch (e) {
       next(e);
     }

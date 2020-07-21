@@ -133,7 +133,7 @@ describe('PATCH /products/:id', function() {
   it('Update Product', function(done) {
     const nameTest = 'Hello';
     request(app)
-      .patch('/products/10')
+      .patch('/products/1')
       .set('access_token', userToken)
       .set('Accept', 'application/json')
       .send({
@@ -301,6 +301,32 @@ describe('GET /products/:id', function() {
         console.log(err);
         done(err);
       })
+  });
+});
+
+describe('PATCH /products/:id', function() {
+  it(`Update Product with wrong params.id`, function(done) {
+    const dataTest = {
+      name: 'Hello 2',
+      image_url: 'http://buku.com',
+      price: 12000,
+      stock: 10
+    }
+    request(app)
+      .patch('/products/10')
+      .set('access_token', userToken)
+      .set('Accept', 'application/json')
+      .send(dataTest)
+    .then((response) => {
+      const { status, body } = response;
+      expect(status).toBe(404);
+      expect(body).toBe('Product with id 10 not found');
+      done();
+    })
+    .catch(err => {
+      console.log(err);
+      done(err);
+    })
   });
 });
 
