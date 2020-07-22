@@ -83,94 +83,94 @@ describe("Product Routes", () => {
                     done (err)
                 })
         })
-    //     test("400 name cannot be empty! - should return json message", (done) => {
-    //         const newProduct = {
-    //             name: "",
-    //             image_url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftekno.kompas.com%2Fread%2F2019%2F05%2F09%2F15160047%2Fjadwal-update-windows-10-bakal-bisa-diatur-oleh-pengguna-&psig=AOvVaw1_OkTkaARc5V7aBLa0lGLt&ust=1595432231230000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjGsK_W3uoCFQAAAAAdAAAAABAD",
-    //             price: 2000000,
-    //             stock: 10,
-    //         }
-    //         return request(server)
-    //             .post(`/products/`)
-    //             .set("Accept", "application/json")
-    //             .set("access_token", access_token)
-    //             .send(newProduct)
-    //             .then(response => {
-    //                 const { body, status } = response
-    //                 expect(status).toBe(400)
-    //                 expect(body).toHaveProperty("message", "name cannot be empty!")
-    //                 done()
-    //             })
-    //             .catch (err => {
-    //                 done (err)
-    //             })
-    //     })
-    //     test("400 image_url cannot be empty! - should return json message", (done) => {
-    //         const newProduct = {
-    //             name: "windows",
-    //             image_url: "",
-    //             price: 2000000,
-    //             stock: 10,
-    //         }
-    //         return request(server)
-    //             .post(`/products/`)
-    //             .set("Accept", "application/json")
-    //             .set("access_token", access_token)
-    //             .send(newProduct)
-    //             .then(response => {
-    //                 const { body, status } = response
-    //                 expect(status).toBe(400)
-    //                 expect(body).toHaveProperty("message", "image_url cannot be empty!")
-    //                 done()
-    //             })
-    //             .catch (err => {
-    //                 done (err)
-    //             })
-    //     })
-    //     test("400 price cannot be empty! - should return json message", (done) => {
-    //         const newProduct = {
-    //             name: "windows",
-    //             image_url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftekno.kompas.com%2Fread%2F2019%2F05%2F09%2F15160047%2Fjadwal-update-windows-10-bakal-bisa-diatur-oleh-pengguna-&psig=AOvVaw1_OkTkaARc5V7aBLa0lGLt&ust=1595432231230000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjGsK_W3uoCFQAAAAAdAAAAABAD",
-    //             price: "",
-    //             stock: 10,
-    //         }
-    //         return request(server)
-    //             .post(`/products/`)
-    //             .set("Accept", "application/json")
-    //             .set("access_token", access_token)
-    //             .send(newProduct)
-    //             .then(response => {
-    //                 const { body, status } = response
-    //                 expect(status).toBe(400)
-    //                 expect(body).toHaveProperty("message", "price cannot be empty!")
-    //                 done()
-    //             })
-    //             .catch (err => {
-    //                 done (err)
-    //             })
-    //     })
-    //     test("400 name cannot be empty! - should return json message", (done) => {
-    //         const newProduct = {
-    //             name: "windows",
-    //             image_url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftekno.kompas.com%2Fread%2F2019%2F05%2F09%2F15160047%2Fjadwal-update-windows-10-bakal-bisa-diatur-oleh-pengguna-&psig=AOvVaw1_OkTkaARc5V7aBLa0lGLt&ust=1595432231230000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjGsK_W3uoCFQAAAAAdAAAAABAD",
-    //             price: 2000000,
-    //             stock: "",
-    //         }
-    //         return request(server)
-    //             .post(`/products/`)
-    //             .set("Accept", "application/json")
-    //             .set("access_token", access_token)
-    //             .send(newProduct)
-    //             .then(response => {
-    //                 const { body, status } = response
-    //                 expect(status).toBe(400)
-    //                 expect(body).toHaveProperty("message", "stock cannot be empty!")
-    //                 done()
-    //             })
-    //             .catch (err => {
-    //                 done (err)
-    //             })
-    //     })
+        test("400 name cannot be empty! - should return json message", (done) => {
+            const newProduct = {
+                name: "",
+                image_url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftekno.kompas.com%2Fread%2F2019%2F05%2F09%2F15160047%2Fjadwal-update-windows-10-bakal-bisa-diatur-oleh-pengguna-&psig=AOvVaw1_OkTkaARc5V7aBLa0lGLt&ust=1595432231230000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjGsK_W3uoCFQAAAAAdAAAAABAD",
+                price: 2000000,
+                stock: 10,
+            }
+            return request(server)
+                .post(`/products/`)
+                .set("Accept", "application/json")
+                .set("access_token", access_token)
+                .send(newProduct)
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(400)
+                    expect(body).toHaveProperty("message", "name cannot be empty!")
+                    done()
+                })
+                .catch (err => {
+                    done (err)
+                })
+        })
+        test("400 image_url cannot be empty! - should return json message", (done) => {
+            const newProduct = {
+                name: "windows",
+                image_url: "",
+                price: 2000000,
+                stock: 10,
+            }
+            return request(server)
+                .post(`/products/`)
+                .set("Accept", "application/json")
+                .set("access_token", access_token)
+                .send(newProduct)
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(400)
+                    expect(body).toHaveProperty("message", "image_url cannot be empty!")
+                    done()
+                })
+                .catch (err => {
+                    done (err)
+                })
+        })
+        test("400 price cannot be empty! - should return json message", (done) => {
+            const newProduct = {
+                name: "windows",
+                image_url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftekno.kompas.com%2Fread%2F2019%2F05%2F09%2F15160047%2Fjadwal-update-windows-10-bakal-bisa-diatur-oleh-pengguna-&psig=AOvVaw1_OkTkaARc5V7aBLa0lGLt&ust=1595432231230000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjGsK_W3uoCFQAAAAAdAAAAABAD",
+                price: "",
+                stock: 10,
+            }
+            return request(server)
+                .post(`/products/`)
+                .set("Accept", "application/json")
+                .set("access_token", access_token)
+                .send(newProduct)
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(400)
+                    expect(body).toHaveProperty("message", "price cannot be empty!")
+                    done()
+                })
+                .catch (err => {
+                    done (err)
+                })
+        })
+        test("400 name cannot be empty! - should return json message", (done) => {
+            const newProduct = {
+                name: "windows",
+                image_url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftekno.kompas.com%2Fread%2F2019%2F05%2F09%2F15160047%2Fjadwal-update-windows-10-bakal-bisa-diatur-oleh-pengguna-&psig=AOvVaw1_OkTkaARc5V7aBLa0lGLt&ust=1595432231230000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjGsK_W3uoCFQAAAAAdAAAAABAD",
+                price: 2000000,
+                stock: "",
+            }
+            return request(server)
+                .post(`/products/`)
+                .set("Accept", "application/json")
+                .set("access_token", access_token)
+                .send(newProduct)
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(400)
+                    expect(body).toHaveProperty("message", "stock cannot be empty!")
+                    done()
+                })
+                .catch (err => {
+                    done (err)
+                })
+        })
     })
 //     describe("GET /products/", () => {
 //         test("200 succes get all products - should return json message", (done) => {
