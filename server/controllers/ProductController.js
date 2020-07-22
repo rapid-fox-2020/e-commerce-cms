@@ -45,10 +45,42 @@ class ProductController {
 
     }
     static delete (req, res, next) {
-
+        console.log('masuk delete');
+        const id = req.params.id
+        Product.findByPk(id)
+            .then(data => {
+                if (!data) {
+                    return res.status(404).json({message: "product not found"})
+                } else {
+                    data.destroy()
+                        .then(results => {
+                            return res.status(200).json(data)
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
     static findOne (req, res, next) {
-
+        console.log('masuk findOne <<<<<');
+        console.log(req.params, '<<< req params');
+        const id = req.params.id
+        Product.findByPk(id)
+            .then(product => {
+                if(!product) {
+                    return res.status(404).json({message: "product not found"})
+                } else {
+                    return res.status(200).json(product)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                next (err)
+            })
     }
 }
 
