@@ -2,9 +2,16 @@ const request = require('supertest')
 const app = require('../app')
 const { encode } = require('../helper/jwt')
 const { User, sequelize } = require('../models')
-const queryInterface = sequelize
+const { queryInterface } = sequelize
 
-beforeAll ((done) => {
+beforeAll ( async (done) => {
+    try {
+        await queryInterface.bulkDelete(`Users`, {})
+        done()
+    } catch(err) {
+        done(err)
+    }
+
     let input = {
         email: "admin@mail.com",
         password: "12345",
@@ -16,6 +23,7 @@ beforeAll ((done) => {
             id: user.id,
             email: user.email
         })
+        done()
     }).catch((err) => {
         done(err)
     });
@@ -34,7 +42,7 @@ let incorrectUser = {
 describe('POST /login', () => {
 
     test('(200) success login', (done) => {
-        request(app)
+        return request(app)
             .post('/login')
             .send(correctUser)
             .set('Accept', 'application/json')
