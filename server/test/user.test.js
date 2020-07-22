@@ -64,25 +64,29 @@ describe(`User routes`, () => {
         let userEmpty = {
             name: ``,
             email: ``,
-            password: ``
+            password: ``,
+            role: ``,
         }
 
         let userInvalidEmail = {
             name: ``,
             email: `maya`,
-            password: ``
+            password: ``,
+            role: ``,
         }
 
         const notNull = [
             `Name is required!`,
             `Email is required!`,
-            `Password is required!`
+            `Password is required!`,
+            `Role is required!`
         ]
 
         const notEmpty = [
             `Name must be filled!`,
             `Email must be filled!`,
-            `Password must be filled!`
+            `Password must be filled!`,
+            `Role must be filled!`
         ]
 
         const emailFormat = [

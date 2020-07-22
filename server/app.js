@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true}))
 app.use(routes)
 app.use(errorHandler)
 
-// app.listen(port, () => {
-//     console.log(`We are open now at ${port}`)
-// })
+app.listen(port, () => {
+    console.log(`We are open now at ${port}`)
+})
 
 module.exports = app
