@@ -8,7 +8,7 @@ beforeAll ((done) => {
     }
     User.create(input)
     .then((user) => {
-        access_token = jwt({
+        access_token = encode({
             id: user.id,
             email: user.email
         })
