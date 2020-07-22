@@ -37,21 +37,23 @@ beforeAll ((done) => {
 })
 
 describe("Product Routes", () => {
-    // test("401 Unauthorized - should return json message", (done) => {
-    //     return request(server)
-    //             .get('/products')
-    //             .set("Accept", "application/json")
-    //             .set("access_token", "sadsaddasdasdnbvas")
-    //             .then(response => {
-    //                 const { body, status } = response
-    //                 expect(status).toBe(401)
-    //                 expect(body).toHaveProperty("message", "Not authroized to do the actions")
-    //                 done()
-    //             })
-    //             .catch (err => {
-    //                 done (err)
-    //             })
-    // })
+    test("401 Unauthorized - should return json message", (done) => {
+        return request(server)
+                .get('/products')
+                .set("Accept", "application/json")
+                .set("access_token", "sadsaddasdasdnbvas")
+                .then(result => {
+                    console.log(result, '<< ini result');
+                    const { body, status } = result
+                    expect(status).toBe(401)
+                    expect(body).toHaveProperty("message", "Not authroized to do the actions")
+                    done()
+                })
+                .catch (err => {
+                    console.log(err, 'ini err <<<');
+                    done (err)
+                })
+    })
     describe("POST /products", () => {
         test("201 created - should return json message", (done) => {
             const newProduct = {
@@ -96,8 +98,8 @@ describe("Product Routes", () => {
                 .set("Accept", "application/json")
                 .set("access_token", access_token)
                 .send(newProduct)
-                .then(response => {
-                    const { body, status } = response
+                .then(result => {
+                    const { body, status } = result
                     expect(status).toBe(400)
                     expect(body).toHaveProperty("message", "name cannot be empty!")
                     done()
@@ -173,63 +175,63 @@ describe("Product Routes", () => {
                 })
         })
     })
-    // describe("GET /products/", () => {
-    //     test("200 succes get all products - should return json message", (done) => {
-    //         return request(server)
-    //             .get('/products')
-    //             .set("access_token", access_token)
-    //             .set("Accept", "application/json")
-    //             .then(result => {
-    //                 const { body, status } = result
-    //                 expect(status).toBe(200)
-    //                 expect(body).toEqual(expect.any(Array))
-    //                 done()
-    //             })
-    //             .catch(err => {
-    //                 done (err)
-    //             })
-    //     })
-    // })
-    // describe("GET /products/:id", () => {
-    //     test("200 succes get  product - should return json message", (done) => {
-    //         return request(server)
-    //             .get(`/products/${product.id}`)
-    //             .set("access_token", access_token)
-    //             .set("Accept", "application/json")
-    //             .then(result => {
-    //                 console.log(result, 'result <<<<<');
-    //                 console.log(product.id, 'id <<<<<');
-    //                 const { body, status } = result
-    //                 expect(status).toBe(200)
-    //                 expect(body).toHaveProperty("id")
-    //                 expect(body).toHaveProperty("name")
-    //                 expect(body).toHaveProperty("image_url")
-    //                 expect(body).toHaveProperty("price")
-    //                 expect(body).toHaveProperty("stock")
-    //                 expect(body).toHaveProperty("createdAt")
-    //                 expect(body).toHaveProperty("updatedAt")
-    //                 done()
-    //             })
-    //             .catch(err => {
-    //                 done (err)
-    //             })
-    //     })
-    //     test("404 product not found - should return json message", (done) => {
-    //         return request(server)
-    //             .get(`/products/10000`)
-    //             .set("access_token", access_token)
-    //             .set("Accept", "application/json")
-    //             .then(result => {
-    //                 const { body, status } = result
-    //                 expect(status).toBe(404)
-    //                 expect(body).toHaveProperty("message", "product not found")
-    //                 done()
-    //             })
-    //             .catch(err => {
-    //                 done (err)
-    //             })
-    //     })
-    // })
+    describe("GET /products/", () => {
+        test("200 succes get all products - should return json message", (done) => {
+            return request(server)
+                .get('/products')
+                .set("access_token", access_token)
+                .set("Accept", "application/json")
+                .then(result => {
+                    const { body, status } = result
+                    expect(status).toBe(200)
+                    expect(body).toEqual(expect.any(Array))
+                    done()
+                })
+                .catch(err => {
+                    done (err)
+                })
+        })
+    })
+    describe("GET /products/:id", () => {
+        test("200 succes get  product - should return json message", (done) => {
+            return request(server)
+                .get(`/products/${product.id}`)
+                .set("access_token", access_token)
+                .set("Accept", "application/json")
+                .then(result => {
+                    console.log(result, 'result <<<<<');
+                    console.log(product.id, 'id <<<<<');
+                    const { body, status } = result
+                    expect(status).toBe(200)
+                    expect(body).toHaveProperty("id")
+                    expect(body).toHaveProperty("name")
+                    expect(body).toHaveProperty("image_url")
+                    expect(body).toHaveProperty("price")
+                    expect(body).toHaveProperty("stock")
+                    expect(body).toHaveProperty("createdAt")
+                    expect(body).toHaveProperty("updatedAt")
+                    done()
+                })
+                .catch(err => {
+                    done (err)
+                })
+        })
+        test("404 product not found - should return json message", (done) => {
+            return request(server)
+                .get(`/products/10000`)
+                .set("access_token", access_token)
+                .set("Accept", "application/json")
+                .then(result => {
+                    const { body, status } = result
+                    expect(status).toBe(404)
+                    expect(body).toHaveProperty("message", "product not found")
+                    done()
+                })
+                .catch(err => {
+                    done (err)
+                })
+        })
+    })
     describe("PUT /product/:id", () => {
         test("200 succes updated product - should return json message", (done) => {
             const edittedProduct = {
@@ -371,44 +373,44 @@ describe("Product Routes", () => {
                 })
         })
     })
-    // describe("DELETE /products/:id", () => {
-    //     test("200 succes deleted product - should return json message", (done) => {
-    //         console.log(product, 'ini product <<<');
-    //         return request(server)
-    //         .delete(`/products/${product.id}`)
-    //         .set("access_token", access_token)
-    //         .set("Accept", "application/json")
-    //         .then(result => {
-    //             console.log(result, '<<< ini result');
-    //                 const { body, status } = result
-    //                 expect(status).toBe(200)
-    //                 expect(body).toHaveProperty("id")
-    //                 expect(body).toHaveProperty("name")
-    //                 expect(body).toHaveProperty("image_url")
-    //                 expect(body).toHaveProperty("price")
-    //                 expect(body).toHaveProperty("stock")
-    //                 expect(body).toHaveProperty("createdAt")
-    //                 expect(body).toHaveProperty("updatedAt")
-    //                 done()
-    //             })
-    //             .catch(err => {
-    //                 done (err)
-    //             })
-    //     })
-    //     test("404 product not found - should return json message", (done) => {
-    //         return request(server)
-    //             .delete(`/products/1000`)
-    //             .set("access_token", access_token)
-    //             .set("Accept", "application/json")
-    //             .then(result => {
-    //                 const { body, status } = result
-    //                 expect(status).toBe(404)
-    //                 expect(body).toHaveProperty("message", "product not found")
-    //                 done()
-    //             })
-    //             .catch(err => {
-    //                 done (err)
-    //             })
-    //     })
-    // })
+    describe("DELETE /products/:id", () => {
+        test("200 succes deleted product - should return json message", (done) => {
+            console.log(product, 'ini product <<<');
+            return request(server)
+            .delete(`/products/${product.id}`)
+            .set("access_token", access_token)
+            .set("Accept", "application/json")
+            .then(result => {
+                console.log(result, '<<< ini result');
+                    const { body, status } = result
+                    expect(status).toBe(200)
+                    expect(body).toHaveProperty("id")
+                    expect(body).toHaveProperty("name")
+                    expect(body).toHaveProperty("image_url")
+                    expect(body).toHaveProperty("price")
+                    expect(body).toHaveProperty("stock")
+                    expect(body).toHaveProperty("createdAt")
+                    expect(body).toHaveProperty("updatedAt")
+                    done()
+                })
+                .catch(err => {
+                    done (err)
+                })
+        })
+        test("404 product not found - should return json message", (done) => {
+            return request(server)
+                .delete(`/products/1000`)
+                .set("access_token", access_token)
+                .set("Accept", "application/json")
+                .then(result => {
+                    const { body, status } = result
+                    expect(status).toBe(404)
+                    expect(body).toHaveProperty("message", "product not found")
+                    done()
+                })
+                .catch(err => {
+                    done (err)
+                })
+        })
+    })
 })

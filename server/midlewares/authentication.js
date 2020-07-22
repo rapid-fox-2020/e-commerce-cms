@@ -1,18 +1,26 @@
-const { decode } = require('../helpers/jwt')
+const { User } = require('../models')
+const { decode } = require('jsonwebtoken')
 
 function authentication (req, res, next) {
     try {
-        req.userData = decode(req.headers.access_token)
-        User.findByPk(req.userData.id)
-        .then( data => {
-            next()
-        })
-        .catch( err => {
-            res.status(404).json({error: "unauthenticated"})
-        })
+        if (req.headers.access_token) {
+            let verify = decode(req.headers.access_token)
+            // console.log(verify)
+            User.findByPk(verify.id)
+                .then((data) => {
+                    // console.log('>>>>>'.data);
+                    req.UserId = data.id
+                    console.log('success auth');
+                    next()
+                })
+                .catch(err => {
+                    next (err)
+                })
+        }
     } catch {
-        res.status(401).json({error: "wrong access token"})
+        next({ name: 'Unauthenticated' })
     }
+
 }
 
 module.exports = authentication

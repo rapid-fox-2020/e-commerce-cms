@@ -5,11 +5,18 @@ const { encode } = require('../helpers/jwt')
 class UserController {
     static login (req, res, next) {
         console.log('masukkkk');
+        let message;
         if (!req.body.email) {
-            return res.status(404).json({message: "email cannot be empty"})
+            message = "email cannot be empty"
         }
         if (!req.body.password) {
-            return res.status(404).json({message: "password cannot be empty"})
+            message = "password cannot be empty"
+        }if (message) {
+            throw {
+                status: 404,
+                type: "EmptyFied",
+                message: message
+            }
         }
         User.findOne({
             where: { email: req.body.email}
@@ -17,13 +24,11 @@ class UserController {
             .then(data => {
                 console.log('masuk lagi <<<<');
                 if (!data) {
-                    
-                    // const errorMessage = {
-                    //     name: "NotFoundError",
-                    //     message: "Email not Found",
-                    //     statusCode: 404,
-                    // }
-                    // throw errorMessage
+                    throw {
+                        status: 404,
+                        type: "NotFound",
+                        message: "email not found"
+                    }
                 }
                 if (checkPassword(req.body.password, data.password)) {
                     console.log("masuk cek pasword <<<<");
@@ -34,16 +39,15 @@ class UserController {
                     return res.status(200).json({ access_token })
                 } else {
                     console.log('masuk else cek password <<<');
-                    const errorMessage = {
-                        name: "ValidationError",
+                    throw {
+                        type: "ValidationError",
                         message: "Password incorrect",
                         statusCode: 401,
                     }
-                    throw errorMessage
                 }
             })
             .catch(err => {
-                console.log(err, '<<<<< error catch');
+                // console.log(err, '<<<<< error catch');
                 next(err)
             })
     }
