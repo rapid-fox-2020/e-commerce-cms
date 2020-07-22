@@ -15,16 +15,16 @@ class ProductController {
         console.log(req.body, 'req body <<<<<');
         const { name, image_url, price, stock } = req.body
         if (!name) {
-            res.status(400).json({message: "name cannot be empty!"})
+            return res.status(400).json({message: "name cannot be empty!"})
         }
         if (!image_url) {
-            res.status(400).json({message: "image_url cannot be empty!"})
+            return res.status(400).json({message: "image_url cannot be empty!"})
         }
         if (!price) {
-            res.status(400).json({message: "price cannot be empty!"})
+            return res.status(400).json({message: "price cannot be empty!"})
         }
         if (!stock) {
-            res.status(400).json({message: "stock cannot be empty!"})
+            return res.status(400).json({message: "stock cannot be empty!"})
         }
         Product.create({
             name: name,
@@ -42,7 +42,37 @@ class ProductController {
             })
     }
     static edit (req, res, next) {
-
+        const id = req.params.id
+        const { name, image_url, price, stock } = req.body
+        if (!name) {
+            return res.status(400).json({message: "name cannot be empty"})
+        }
+        if (!image_url) {
+            return res.status(400).json({message: "image_url cannot be empty"})
+        }
+        if (!price) {
+            return res.status(400).json({message: "price cannot be empty"})
+        }
+        if (!stock) {
+            return res.status(400).json({message: "stock cannot be empty"})
+        }
+        Product.findByPk(id)
+            .then(product => {
+                if (product) {
+                    product.update({
+                        name: name,
+                        image_url: image_url,
+                        price: price,
+                        stock: stock,
+                    })
+                    return res.status(200).json(product)
+                } else {
+                    return res.status(404).json({message: "product not found"})
+                }
+            })
+            .catch(err => {
+                next(err)
+            })
     }
     static delete (req, res, next) {
         console.log('masuk delete');

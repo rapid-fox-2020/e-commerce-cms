@@ -190,16 +190,61 @@ describe("Product Routes", () => {
     //             })
     //     })
     // })
-    describe("GET /products/:id", () => {
-        test("200 succes get  product - should return json message", (done) => {
+    // describe("GET /products/:id", () => {
+    //     test("200 succes get  product - should return json message", (done) => {
+    //         return request(server)
+    //             .get(`/products/${product.id}`)
+    //             .set("access_token", access_token)
+    //             .set("Accept", "application/json")
+    //             .then(result => {
+    //                 console.log(result, 'result <<<<<');
+    //                 console.log(product.id, 'id <<<<<');
+    //                 const { body, status } = result
+    //                 expect(status).toBe(200)
+    //                 expect(body).toHaveProperty("id")
+    //                 expect(body).toHaveProperty("name")
+    //                 expect(body).toHaveProperty("image_url")
+    //                 expect(body).toHaveProperty("price")
+    //                 expect(body).toHaveProperty("stock")
+    //                 expect(body).toHaveProperty("createdAt")
+    //                 expect(body).toHaveProperty("updatedAt")
+    //                 done()
+    //             })
+    //             .catch(err => {
+    //                 done (err)
+    //             })
+    //     })
+    //     test("404 product not found - should return json message", (done) => {
+    //         return request(server)
+    //             .get(`/products/10000`)
+    //             .set("access_token", access_token)
+    //             .set("Accept", "application/json")
+    //             .then(result => {
+    //                 const { body, status } = result
+    //                 expect(status).toBe(404)
+    //                 expect(body).toHaveProperty("message", "product not found")
+    //                 done()
+    //             })
+    //             .catch(err => {
+    //                 done (err)
+    //             })
+    //     })
+    // })
+    describe("PUT /product/:id", () => {
+        test("200 succes updated product - should return json message", (done) => {
+            const edittedProduct = {
+                name: "linux",
+                image_url: "https://www.google.com/",
+                price: 1500000,
+                stock: 5,
+            }
             return request(server)
-                .get(`/products/${product.id}`)
+                .put(`/products/${product.id}`)
                 .set("access_token", access_token)
                 .set("Accept", "application/json")
-                .then(result => {
-                    console.log(result, 'result <<<<<');
-                    console.log(product.id, 'id <<<<<');
-                    const { body, status } = result
+                .send(edittedProduct)
+                .then(response => {
+                    const { body, status } = response
                     expect(status).toBe(200)
                     expect(body).toHaveProperty("id")
                     expect(body).toHaveProperty("name")
@@ -208,6 +253,95 @@ describe("Product Routes", () => {
                     expect(body).toHaveProperty("stock")
                     expect(body).toHaveProperty("createdAt")
                     expect(body).toHaveProperty("updatedAt")
+                    product = body
+                    done()
+                })
+                .catch(err => {
+                    done (err)
+                })
+        })
+        test("400 name cannot be empty - should return json message", (done) => {
+            const edittedProduct = {
+                name: "",
+                image_url: "https://www.google.com/",
+                price: 1500000,
+                stock: 5,
+            }
+            return request(server)
+                .put(`/products/${product.id}`)
+                .set("access_token", access_token)
+                .set("Accept", "application/json")
+                .send(edittedProduct)
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(400)
+                    expect(body).toHaveProperty("message", "name cannot be empty")
+                    done()
+                })
+                .catch(err => {
+                    done (err)
+                })
+        })
+        test("400 image_url cannot be empty - should return json message", (done) => {
+            const edittedProduct = {
+                name: "linux",
+                image_url: "",
+                price: 1500000,
+                stock: 5,
+            }
+            return request(server)
+                .put(`/products/${product.id}`)
+                .set("access_token", access_token)
+                .set("Accept", "application/json")
+                .send(edittedProduct)
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(400)
+                    expect(body).toHaveProperty("message", "image_url cannot be empty")
+                    done()
+                })
+                .catch(err => {
+                    done (err)
+                })
+        })
+        test("400 price cannot be empty - should return json message", (done) => {
+            const edittedProduct = {
+                name: "linux",
+                image_url: "https://www.google.com/",
+                price: "",
+                stock: 5,
+            }
+            return request(server)
+                .put(`/products/${product.id}`)
+                .set("access_token", access_token)
+                .set("Accept", "application/json")
+                .send(edittedProduct)
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(400)
+                    expect(body).toHaveProperty("message", "price cannot be empty")
+                    done()
+                })
+                .catch(err => {
+                    done (err)
+                })
+        })
+        test("400 stock cannot be empty - should return json message", (done) => {
+            const edittedProduct = {
+                name: "linux",
+                image_url: "https://www.google.com/",
+                price: 1500000,
+                stock: "",
+            }
+            return request(server)
+                .put(`/products/${product.id}`)
+                .set("access_token", access_token)
+                .set("Accept", "application/json")
+                .send(edittedProduct)
+                .then(response => {
+                    const { body, status } = response
+                    expect(status).toBe(400)
+                    expect(body).toHaveProperty("message", "stock cannot be empty")
                     done()
                 })
                 .catch(err => {
@@ -215,12 +349,19 @@ describe("Product Routes", () => {
                 })
         })
         test("404 product not found - should return json message", (done) => {
+            const edittedProduct = {
+                name: "linux",
+                image_url: "https://www.google.com/",
+                price: 1500000,
+                stock: 5,
+            }
             return request(server)
-                .get(`/products/10000`)
+                .put(`/products/10000`)
                 .set("access_token", access_token)
                 .set("Accept", "application/json")
-                .then(result => {
-                    const { body, status } = result
+                .send(edittedProduct)
+                .then(response => {
+                    const { body, status } = response
                     expect(status).toBe(404)
                     expect(body).toHaveProperty("message", "product not found")
                     done()
@@ -230,147 +371,6 @@ describe("Product Routes", () => {
                 })
         })
     })
-//     describe("PUT /product/:id", () => {
-//         test("200 succes updated product - should return json message", (done) => {
-//             const edittedProduct = {
-//                 name: "linux",
-//                 image_url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftekno.kompas.com%2Fread%2F2019%2F05%2F09%2F15160047%2Fjadwal-update-windows-10-bakal-bisa-diatur-oleh-pengguna-&psig=AOvVaw1_OkTkaARc5V7aBLa0lGLt&ust=1595432231230000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjGsK_W3uoCFQAAAAAdAAAAABAD",
-//                 price: 1500000,
-//                 stock: 5,
-//             }
-//             return request(server)
-//                 .put(`/products/${product.id}`)
-//                 .set("access_token", access_token)
-//                 .set("Accept", "application/json")
-//                 .send(edittedProduct)
-//                 .then(response => {
-//                     const { body, status } = response
-//                     expect(status).toBe(200)
-//                     expect(body).toHaveProperty("id")
-//                     expect(body).toHaveProperty("name")
-//                     expect(body).toHaveProperty("image_url")
-//                     expect(body).toHaveProperty("price")
-//                     expect(body).toHaveProperty("stock")
-//                     expect(body).toHaveProperty("createdAt")
-//                     expect(body).toHaveProperty("updatedAt")
-//                     product = body
-//                     done()
-//                 })
-//                 .catch(err => {
-//                     done (err)
-//                 })
-//         })
-//         test("400 name cannot be empty - should return json message", (done) => {
-//             const edittedProduct = {
-//                 name: "",
-//                 image_url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftekno.kompas.com%2Fread%2F2019%2F05%2F09%2F15160047%2Fjadwal-update-windows-10-bakal-bisa-diatur-oleh-pengguna-&psig=AOvVaw1_OkTkaARc5V7aBLa0lGLt&ust=1595432231230000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjGsK_W3uoCFQAAAAAdAAAAABAD",
-//                 price: 1500000,
-//                 stock: 5,
-//             }
-//             return request(server)
-//                 .put(`/products/${product.id}`)
-//                 .set("access_token", access_token)
-//                 .set("Accept", "application/json")
-//                 .send(edittedProduct)
-//                 .then(response => {
-//                     const { body, status } = response
-//                     expect(status).toBe(400)
-//                     expect(body).toHaveProperty("message", "name cannot be empty")
-//                     done()
-//                 })
-//                 .catch(err => {
-//                     done (err)
-//                 })
-//         })
-//         test("400 image_url cannot be empty - should return json message", (done) => {
-//             const edittedProduct = {
-//                 name: "linux",
-//                 image_url: "",
-//                 price: 1500000,
-//                 stock: 5,
-//             }
-//             return request(server)
-//                 .put(`/products/${product.id}`)
-//                 .set("access_token", access_token)
-//                 .set("Accept", "application/json")
-//                 .send(edittedProduct)
-//                 .then(response => {
-//                     const { body, status } = response
-//                     expect(status).toBe(400)
-//                     expect(body).toHaveProperty("message", "image_url cannot be empty")
-//                     done()
-//                 })
-//                 .catch(err => {
-//                     done (err)
-//                 })
-//         })
-//         test("400 price cannot be empty - should return json message", (done) => {
-//             const edittedProduct = {
-//                 name: "linux",
-//                 image_url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftekno.kompas.com%2Fread%2F2019%2F05%2F09%2F15160047%2Fjadwal-update-windows-10-bakal-bisa-diatur-oleh-pengguna-&psig=AOvVaw1_OkTkaARc5V7aBLa0lGLt&ust=1595432231230000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjGsK_W3uoCFQAAAAAdAAAAABAD",
-//                 price: "",
-//                 stock: 5,
-//             }
-//             return request(server)
-//                 .put(`/products/${product.id}`)
-//                 .set("access_token", access_token)
-//                 .set("Accept", "application/json")
-//                 .send(edittedProduct)
-//                 .then(response => {
-//                     const { body, status } = response
-//                     expect(status).toBe(400)
-//                     expect(body).toHaveProperty("message", "price cannot be empty")
-//                     done()
-//                 })
-//                 .catch(err => {
-//                     done (err)
-//                 })
-//         })
-//         test("400 stock cannot be empty - should return json message", (done) => {
-//             const edittedProduct = {
-//                 name: "linux",
-//                 image_url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftekno.kompas.com%2Fread%2F2019%2F05%2F09%2F15160047%2Fjadwal-update-windows-10-bakal-bisa-diatur-oleh-pengguna-&psig=AOvVaw1_OkTkaARc5V7aBLa0lGLt&ust=1595432231230000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjGsK_W3uoCFQAAAAAdAAAAABAD",
-//                 price: 1500000,
-//                 stock: "",
-//             }
-//             return request(server)
-//                 .put(`/products/${product.id}`)
-//                 .set("access_token", access_token)
-//                 .set("Accept", "application/json")
-//                 .send(edittedProduct)
-//                 .then(response => {
-//                     const { body, status } = response
-//                     expect(status).toBe(400)
-//                     expect(body).toHaveProperty("message", "stock cannot be empty")
-//                     done()
-//                 })
-//                 .catch(err => {
-//                     done (err)
-//                 })
-//         })
-//         test("404 product not found - should return json message", (done) => {
-//             const edittedProduct = {
-//                 name: "linux",
-//                 image_url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftekno.kompas.com%2Fread%2F2019%2F05%2F09%2F15160047%2Fjadwal-update-windows-10-bakal-bisa-diatur-oleh-pengguna-&psig=AOvVaw1_OkTkaARc5V7aBLa0lGLt&ust=1595432231230000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIjGsK_W3uoCFQAAAAAdAAAAABAD",
-//                 price: 1500000,
-//                 stock: 5,
-//             }
-//             return request(server)
-//                 .put(`/products/10000`)
-//                 .set("access_token", access_token)
-//                 .set("Accept", "application/json")
-//                 .send(edittedProduct)
-//                 .then(response => {
-//                     const { body, status } = response
-//                     expect(status).toBe(404)
-//                     expect(body).toHaveProperty("message", "product not found")
-//                     done()
-//                 })
-//                 .catch(err => {
-//                     done (err)
-//                 })
-//         })
-//     })
     // describe("DELETE /products/:id", () => {
     //     test("200 succes deleted product - should return json message", (done) => {
     //         console.log(product, 'ini product <<<');
