@@ -1,4 +1,6 @@
 const request = require('supertest')
+const app = require('../app')
+
 
 let access_token = ''
 let error_token = ''
