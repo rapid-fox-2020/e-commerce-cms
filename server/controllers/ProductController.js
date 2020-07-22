@@ -2,7 +2,13 @@ const { Product } = require('../models')
 
 class ProductController {
     static list (req, res, next) {
-        // Product.findAll()
+        Product.findAll()
+            .then(products => {
+                return res.status(200).json(products)
+            })
+            .catch(err => {
+                next (err)
+            })
     }
     static create (req, res, next) {
         console.log('masuk create');
