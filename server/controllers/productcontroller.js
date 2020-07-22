@@ -10,6 +10,26 @@ class ProductController {
       next(err)
     })
   }
+
+  static showById(req,res,next){
+    Product.findByPk(+req.params.id)
+    .then((data)=>{
+      if(!data){
+        const errorMessage = {
+          name: "NotFoundError",
+          message: "Data not Found",
+          statusCode: 404
+        }
+        throw(errorMessage)
+      }
+      else{
+        return res.status(200).json(data)
+      }
+    })
+    .catch((err)=>{
+      next(err)
+    })
+  }
   static addProduct(req,res,next){
     let product = {
       name:req.body.name,
@@ -17,6 +37,7 @@ class ProductController {
       price:req.body.price,
       stock:req.body.stock
     }
+    console.log(product)
     Product.create(product)
     .then((data)=>{
       console.log(data)

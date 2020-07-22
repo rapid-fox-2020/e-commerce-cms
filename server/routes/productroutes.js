@@ -4,6 +4,8 @@ const { userAuthentication, userAuthorization } = require("../middlewares/auth.j
 
 productRoutes.get("/products",userAuthentication, userAuthorization,ProductController.showAll)
 
+productRoutes.get("/products/:id",userAuthentication,userAuthorization,ProductController.showById)
+
 productRoutes.post("/products",userAuthentication,userAuthorization,ProductController.addProduct)
 
 productRoutes.put("/products/:id",userAuthentication,userAuthorization,ProductController.updateProduct)

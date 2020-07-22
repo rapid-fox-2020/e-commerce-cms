@@ -251,10 +251,26 @@ describe('Test products',()=>{
         done(err)
       })
     })
-
+    test('response(403) failed get Data - return forbidden access', (done) => {
+      const accessToken = notAdminAccessToken
+      const addProduct = {name:"Baju baju",image_url:"www.google.com",price:100000,stock:100}
+      request(app)
+      .post('/products')
+      .set({token:accessToken,Accept:'application/json'})
+      .send(addProduct)
+      .then((response)=>{
+        const { body, status } = response
+        expect(status).toBe(403)
+        expect(body).toHaveProperty("message","You dont have permission to access this page/features")
+        done()
+      })
+      .catch((err)=>{
+        done(err)
+      })
+    })
   })
 
-  //Routing for update Product
+  //Routing for update Product (validation for put === validation for post)
   describe('Test Route PUT/products/:id', () => {
     test('response(200) success update Data - return new updated product data', (done) => {
       const accessToken = getAccessToken
