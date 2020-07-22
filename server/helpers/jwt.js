@@ -1,9 +1,9 @@
-const jwt = require("jsonwebtoken");
-
-
+const jwt = require('jsonwebtoken');
 const secretKey = process.env.SECRET;
 
 function encode(obj) {
+    console.log(obj, 'obj<<<<');
+    console.log('masuk jwt <<<<');
     return jwt.sign(obj, secretKey);
 }
 
