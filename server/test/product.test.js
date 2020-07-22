@@ -145,7 +145,6 @@ describe("CRUD /products", () => {
             .set("access_token", access_token)
             .then(response => {
                const { body, status } = response
-               console.log(body);
 
                expect(status).toBe(400)
                expect(body).toHaveProperty("message", expect.any(Array))
@@ -287,7 +286,6 @@ describe("CRUD /products", () => {
       // Success Scenario
 
       it("update products by id response (200)", (done) => {
-         console.log("<<<<<<< INI MASUK GA DI PUT");
          request(app)
             .put(`/products/${productGlobal.id}`)
             .send(updatedProduct)

@@ -22,7 +22,7 @@ class productsController {
    }
 
    static getAllProduct(req, res, next) {
-      Product.findAll()
+      Product.findAll({ order: [['id', 'ASC']] })
          .then(allProducts => {
             res.status(200).json(allProducts)
          })
@@ -56,7 +56,6 @@ class productsController {
 
       Product.update(editProduct, { where: { id: req.params.id } })
          .then(updatedProduct => {
-            console.log(updatedProduct[0], "<<<<<<<<<< updated products");
             if (updatedProduct[0] == 1) {
                res.status(200).json({ message: "successfully updated" })
                next()
@@ -71,24 +70,19 @@ class productsController {
 
    static deleteProduct(req, res, next) {
       const id = req.params.id
-      console.log(req.params.id, "<<< Params");
       const Error = { name: "DATA_NOT_FOUND" }
 
       Product.findByPk(id)
          .then(data => {
-            console.log(data, "<<< DATA DI DELETE CONTROLLER");
 
             if (data) {
-               console.log("<<<<<<<<<");
                return Product.destroy({ where: { id } })
             } else {
-               console.log(data, "masuk ke else ni gaes");
                throw Error
                // next({ name: "DATA_NOT_FOUND" })
             }
          })
          .then((iniApa) => {
-            console.log(iniApa, "KOK DIA MASUK????");
             res.status(200).json({ message: "successfully deleted" })
          })
          .catch(err => {
