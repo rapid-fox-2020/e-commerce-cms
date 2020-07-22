@@ -27,16 +27,12 @@ class UserController {
 
         User.findOne({where: {email}})
         .then(result => {
-            if (!result) {
-                throw error
+            if (result && comparePass(password, result.password)) {
+                let {id, name, email, role} = result
+                let access_token = encode({id, name, email, role})
+                res.status(200).json({access_token})
             } else {
-                if (comparePass(password, result.password)) {
-                    let {id, name, email, role} = result
-                    let access_token = encode({id, name, email, role})
-                    res.status(200).json({access_token})
-                } else {
-                    throw error
-                }
+                throw error
             }
         })
         .catch(err => {

@@ -10,9 +10,8 @@ const error = (err, req, res, next) => {
         statusCode = 400
         message = `Email already registered, please use another email.`
     } else if (err.name === `SequelizeValidationError`) {
-        let errors = err.errors.map(e => e.message)
+        message = err.errors.map(e => e.message)
         statusCode = 400
-        message = errors
     } else if (err.name === `otherError`) {
         statusCode = err.statusCode
         message = err.message

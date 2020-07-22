@@ -19,27 +19,17 @@ const authentication = (req, res, next) => {
 }
 
 const authorization = (req, res, next) => {
-    let access_token = req.headers.access_token
-    // console.log(access_token, `ini di auth`)
-    let userData = decode(access_token)
     let error = {
         name: `otherError`,
         statusCode: 403,
         message: `You don't have access to this.`
     }
-
-    User.findByPk(userData.id) 
-    .then(result => {
-        // console.log(`ini abis di find`, result)
-        if (result.role === `admin`) {
-            next()
-        } else {
-            throw error
-        }
-    })
-    .catch(err => {
-        next(err)
-    })
+    let userRole = req.user.role
+    if (userRole === `admin`) {
+        next()
+    } else {
+        throw error
+    }
 }
 
 module.exports = {authentication, authorization}
