@@ -9,9 +9,9 @@ let access_token = ""
 let product;
 
 afterAll( (done) => {
-    queryInterface.bulkDelete("Users", {})
+    queryInterface.bulkDelete("Users", null, {})
     .then(data => {
-        return queryInterface.bulkDelete("Products", {})
+        return queryInterface.bulkDelete("Products", null, {})
     })
     .then(deleteProduct => {
         done()
@@ -27,7 +27,7 @@ beforeAll ((done) => {
         role: 'admin',
     })
     .then(newUser => {
-        access_token = jwt.sign(newUser, 'rahasia')
+        access_token = jwt.sign(newUser, process.env.SECRET)
     })
 })
 

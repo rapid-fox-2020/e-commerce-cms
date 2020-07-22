@@ -1,34 +1,36 @@
 const request = require('supertest')
 const server = require('../server.js')
-const { queryInterface } = require('sequelize')
-const { response } = require('express')
-const { User } = require('../models')
+const { User, sequelize } = require('../models')
+const {queryInterface} = sequelize
 
-describe('User Routes', () => {
-    const access_token = ""
-    afterAll(async (done) => {
-        try {
-            await queryInterface.bulkDelete("Users", {})
-            done ()
-        } catch (err) {
+
+afterAll((done) => {
+    return queryInterface.bulkDelete("Users",null, {})
+    .then(data => {
+        done()
+    })
+    .catch(err => {
+        done (err)
+    })
+})
+beforeAll(async (done) => {
+    const userCreate = {
+        email: "user@admin.com",
+        password: '1234',
+        role: "admin"
+    }
+    User.create(userCreate)
+        .then(newUser => {
+            // access_token = newUser
+            done()
+        })
+        .catch(err => {
             done (err)
-        }
-    })
-    beforeAll(async (done) => {
-        const userCreate = {
-            email: "user@admin.com",
-            password: '1234',
-            role: "admin"
-        }
-        User.create(userCreate)
-            .then(newUser => {
-                // access_token = newUser
-                done()
-            })
-            .catch(err => {
-                done (err)
-            }) 
-    })
+        }) 
+})
+
+const access_token = ""
+describe('User Routes', () => {
 
     describe("POST /login", () => {
         test("200 Login Succes - should return json message", (done) => {
