@@ -37,23 +37,23 @@ beforeAll ((done) => {
 })
 
 describe("Product Routes", () => {
-    test("401 Unauthorized - should return json message", (done) => {
-        return request(server)
-                .get('/products')
-                .set("Accept", "application/json")
-                .set("access_token", "sadsaddasdasdnbvas")
-                .then(result => {
-                    console.log(result, '<< ini result');
-                    const { body, status } = result
-                    expect(status).toBe(401)
-                    expect(body).toHaveProperty("message", "Not authroized to do the actions")
-                    done()
-                })
-                .catch (err => {
-                    console.log(err, 'ini err <<<');
-                    done (err)
-                })
-    })
+    // test("401 Unauthorized - should return json message", (done) => {
+    //     return request(server)
+    //             .get('/products')
+    //             .set("Accept", "application/json")
+    //             .set("access_token", "sadsaddasdasdnbvas")
+    //             .then(result => {
+    //                 console.log(result, '<< ini result');
+    //                 const { body, status } = result
+    //                 expect(status).toBe(401)
+    //                 expect(body).toHaveProperty("message", "Not authroized to do the actions")
+    //                 done()
+    //             })
+    //             .catch (err => {
+    //                 console.log(err, 'ini err <<<');
+    //                 done (err)
+    //             })
+    // })
     describe("POST /products", () => {
         test("201 created - should return json message", (done) => {
             const newProduct = {
@@ -68,7 +68,8 @@ describe("Product Routes", () => {
                 .set("access_token", access_token)
                 .send(newProduct)
                 .then(result => {
-                    // console.log(result, '<<< ini result');
+                    console.log('masuk<<');
+                    console.log(result, '<<< ini result');
                     const { body, status } = result
                     expect(status).toBe(201)
                     expect(body).toHaveProperty("id")
@@ -99,6 +100,7 @@ describe("Product Routes", () => {
                 .set("access_token", access_token)
                 .send(newProduct)
                 .then(result => {
+                    console.log('masuk sini');
                     const { body, status } = result
                     expect(status).toBe(400)
                     expect(body).toHaveProperty("message", "name cannot be empty!")
