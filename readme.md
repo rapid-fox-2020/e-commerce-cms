@@ -214,6 +214,7 @@ _Response (404)_
     }
 ```
 
+
 ### POST /register
 _Request Header_
 ```
