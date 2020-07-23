@@ -51,6 +51,21 @@ class UserController {
                 next(err)
             })
     }
+    static register (req, res, next) {
+        const { email, password, role } = req.body
+        User.create({
+            email: email,
+            password: password,
+            role: role
+        })
+            .then(newUser => {
+                console.log('masuk create');
+                res.status(201).json(newUser)
+            })
+            .catch(err => {
+                next (err)
+            })
+    }
 }
 
 module.exports = UserController
