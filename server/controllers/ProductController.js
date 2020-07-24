@@ -3,7 +3,7 @@ const {Product} = require(`../models`)
 class ProductController {
 
     static read(req, res, next) {
-        Product.findAll()
+        Product.findAll({order: [['createdAt', 'ASC']]})
         .then(result => {
             res.status(200).json(result)
         })
