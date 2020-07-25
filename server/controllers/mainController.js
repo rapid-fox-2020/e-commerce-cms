@@ -9,13 +9,17 @@ class MainController{
             password : req.body.password,
         }
         if(!loginData.email || loginData.email == "" ){
-            return res.status(400).json({
-                message: "email cannot be empty"
-            })
+            throw {
+                name: "customErr",
+                message: "email cannot be empty",
+                status : 400,
+            }
         } else if(!loginData.password || loginData.password == ""){
-            return res.status(400).json({
-                message: "password cannot be empty"
-            })
+            throw {
+                name: "customErr",
+                message: "password cannot be empty",
+                status : 400,
+            }
         }
         
         User.findOne ({ where : { email : loginData.email }})
@@ -31,15 +35,20 @@ class MainController{
                     id: result.id
                 })
             } else {
-                return res.status(404).json({
-                    message: "data not found"
-                })
+                throw {
+                    name: "customErr",
+                    message: "data not found",
+                    status : 404,
+                }
             }
         })
         .catch( err => {
-            return res.status(404).json({
-                message: "data not found"
-            })
+            let errMsg = {
+                name: "customErr",
+                message: "data not found",
+                status : 404,
+            }
+            next(errMsg)
         })
     }
 }
