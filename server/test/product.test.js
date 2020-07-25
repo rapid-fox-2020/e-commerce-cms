@@ -4,19 +4,20 @@ const { User, sequelize, Product } = require('../models')
 const { jwtSign , jwtVerify} = require('../helpers/jwt')
 const { queryInterface , Sequelize } = sequelize 
 
-let user1 = {
+let user1 = { 
     email: "admin@mail.com",
     password:"1234",
     role: "admin"
 }
 
 let user2 = {
-    email: "admin@mail.com",
+    email: "manager@mail.com",
     password:"1234",
-    role: "user"
+    role: "manager"
 }
 
 let access_token = ""
+let manager_token = ""
 let wrong_token = ""
 
 let product1 = {
@@ -79,28 +80,25 @@ let resultProduct = ""
 
 
 beforeAll( done =>{
+    
     User.create(user1)
     .then( adminData => {
-        console.log(adminData.dataValues,"adminDataadminData")
+        // console.log(adminData.dataValues,"adminDataadminData")
         access_token = jwtSign({
             id : adminData.dataValues.id,
             email: adminData.dataValues.email
         })
-        User.create(user2)
-        .then( notAdminData => {
-            wrong_token = jwtSign({
-                id : notAdminData.dataValues.id,
-                email: notAdminData.dataValues.email
-            })
-            console.log(access_token,"123access_tokenaccess_token")
-            done()
-
-        })
-        .catch( err => {
-            done(err)
-        })
-        // console.log(access_token,"access_tokenaccess_token")
+        return User.create(user2)
     })
+    .then( notAdminData => {
+        manager_token = jwtSign({
+            id : notAdminData.dataValues.id,
+            email: notAdminData.dataValues.email
+        })
+        // console.log(access_token,"123access_tokenaccess_token")
+        done()
+    })
+    // console.log(access_token,"access_tokenaccess_token")
     .catch( err => {
         done(err)
     })
@@ -186,39 +184,6 @@ afterAll( done => {
 })
 
 describe("Product Routes", () => {
-
-    test("401 Unauthorized", (done) => {
-        return request(app)
-            .get('/products')
-            .set("Accept", "application/json")
-            .set('access_token', wrong_token)
-            .then( response => {
-                const { body, status } = response
-
-                expect(status).toBe(401)
-                expect(body).toHaveProperty("message" , "access only for admin")
-                done()
-            })
-            .catch( (err) => {
-                done(err)
-            });
-    })
-
-    test("401 Not Login", (done) => {
-        return request(app)
-            .get('/products')
-            .set("Accept", "application/json")
-            .then( response => {
-                const { body, status } = response
-
-                expect(status).toBe(401)
-                expect(body).toHaveProperty("message" , "wrong access token")
-                done()
-            })
-            .catch( (err) => {
-                done(err)
-            });
-    })
 
     describe("Add Product Test", () => {
         test("201 success add product - return product details", (done) => {
@@ -368,12 +333,63 @@ describe("Product Routes", () => {
         })
     })
 
+    
+    test("401 Unauthorized", (done) => {
+        return request(app)
+            .delete(`/products/${resultProduct.id}`)
+            .set("Accept", "application/json")
+            .set('access_token', manager_token)
+            .then( response => {
+                const { body, status } = response
+
+                expect(status).toBe(401)
+                expect(body).toHaveProperty("message" , "access only for admin")
+                done()
+            })
+            .catch( (err) => {
+                done(err)
+            });
+    })
+
+    test("401 Unauthorized", (done) => {
+        return request(app)
+            .delete(`/products/${resultProduct.id}`)
+            .set("Accept", "application/json")
+            .set('access_token', manager_token)
+            .then( response => {
+                const { body, status } = response
+
+                expect(status).toBe(401)
+                expect(body).toHaveProperty("message" , "access only for admin")
+                done()
+            })
+            .catch( (err) => {
+                done(err)
+            });
+    })
+
+    test("401 Not Login", (done) => {
+        return request(app)
+            .get('/products')
+            .set("Accept", "application/json")
+            .then( response => {
+                const { body, status } = response
+
+                expect(status).toBe(401)
+                expect(body).toHaveProperty("message" , "wrong access token")
+                done()
+            })
+            .catch( (err) => {
+                done(err)
+            });
+    })
+
     describe("Get Product Test", () => {
         it("200 success get all products - return all products", (done) => {
             let getAll = []
             Product.findAll()
             .then( data => { 
-                console.log(data.dataValues,"datadata")
+                // console.log(data.dataValues,"datadata")
                 getAll = data
             })
 
@@ -387,18 +403,18 @@ describe("Product Routes", () => {
             //         .expect(200, done);
             //     });
             //   });
-            console.log(access_token,"ini access_token")
+            // console.log(access_token,"ini access_token")
     
             return request(app)
                 .get('/products')
                 .set("Accept", "application/json")
                 .set('access_token', access_token)
                 .then( response => {
-                    console.log(response, "responseresponse")
+                    // console.log(response, "responseresponse")
                     const { body, status } = response
                     
                     expect(status).toBe(200)
-                    // expect(body).toEqual(expect.any(Array))
+                    expect(body).toEqual(expect.any(Array))
 
                     done()
                 })
@@ -633,7 +649,7 @@ describe("Product Routes", () => {
                 .set("Accept", "application/json")
                 .set('access_token', access_token)
                 .then( response => {
-                    console.log(response,"responseresponse")
+                    // console.log(response,"responseresponse")
                     const { body, status } = response
     
                     expect(status).toBe(404)

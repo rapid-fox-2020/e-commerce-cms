@@ -3,20 +3,16 @@ const { User, Product } = require('../models')
 
 function authentication ( req, res, next ) {
     try {
-        console.log(req.headers.access_token,"req.headers.access_token")
+        // console.log(req.headers.access_token,"req.headers.access_token")
         req.userData = jwtVerify(req.headers.access_token)
 
         User.findByPk(req.userData.id)
         .then( data => {
-            console.log("masuk then")
-            if(data.role != "admin"){
-                return res.status(401).json({message: "access only for admin"})
-            } else {
-                next()
-            }
+            // console.log("masuk then")
+            next()
         })
         .catch( err => {
-            console.log("masuk catch")
+            // console.log("masuk catch")
             return res.status(404).json({message: "user no longer exist"})
         })
     }catch {
@@ -24,20 +20,38 @@ function authentication ( req, res, next ) {
     }
 }
 
-
-function authorization ( req, res, next ) {
-    const selectedId = req.params.id
-    Product.findByPk(selectedId)
+function authorizationAdmin ( req, res, next ) {
+    const userId = req.userData.id
+    User.findByPk(userId)
     .then( data => {
-        if( data.UserId === req.userData.id){
-            next()
+        if( data ){
+            if (!data) {
+                throw {
+                    name: "customErr",
+                    message: "no user found",
+                    status : 401,
+                }
+            } else if( data.role != "admin" ){
+                throw {
+                    name: "customErr",
+                    message: "access only for admin",
+                    status : 401,
+                }
+            } else {
+                next()
+            }
         } else {
-            res.status(401).json({message: "not authorized"})
+            throw {
+                name: "customErr",
+                message: "not authorized",
+                status : 401,
+            }
         }
     })
     .catch( err => {
-        res.status(404).json({message: "data not found"})
+        next(err)
     })
 }
 
-module.exports = { authentication , authorization }
+
+module.exports = { authentication , authorizationAdmin }
