@@ -22,8 +22,14 @@
               <span class="sr-only">(current)</span>
             </router-link>
           </li> -->
+          <li class="nav-item active">
+            <router-link to="/dashboard" class="nav-link">
+            Dasboard
+            <span class="sr-only">(current)</span>
+            </router-link>
+          </li>
           <li class="nav-item">
-            <router-link to="/dashboard" class="nav-link">Dasboard</router-link>
+            <router-link to="/" class="nav-link">Banner</router-link>
           </li>
         </ul>
         <div class="ml-auto">

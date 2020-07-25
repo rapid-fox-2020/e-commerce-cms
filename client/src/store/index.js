@@ -97,9 +97,7 @@ export default new Vuex.Store({
           router.push('/dashboard');
         })
         .catch((err) => {
-          console.log(err.response.data.message);
           const errors = err.response.data.message;
-          console.log(errors[0], 'errrrrrrrrrrrrrrrrrrrr');
           errors.forEach((item) => {
             swal('Error', `${item.slice(' ')}`, 'error');
           });
@@ -126,7 +124,7 @@ export default new Vuex.Store({
           router.push('/dashboard');
           swal({
             title: 'Success!',
-            text: 'New product has been updated',
+            text: `Product ${payload.name} has been updated`,
             icon: 'success',
             button: 'OK!',
           });
@@ -156,12 +154,11 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err);
           const errors = err.response.data.message;
-          // swal('Success!', `${errors} has benn deleted`, 'success');
           swal({
-            title: "Error!",
+            title: 'Error!',
             text: `${errors}`,
-            icon: "success",
-            button: "OK!",
+            icon: 'success',
+            button: 'OK!',
           });
         });
     },

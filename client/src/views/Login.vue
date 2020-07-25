@@ -5,6 +5,7 @@
         <form @submit.prevent="login">
           <h1 class="text-center">E-Commerce CMS</h1>
           <h3 class="text-center card-title">Login</h3>
+          <br>
           <div class="form-group">
             <label for="email">Email address</label>
             <input
@@ -21,13 +22,6 @@
             <label for="password">Password</label>
             <input v-model="passwordLogin" id="passwordLogin" type="password" class="form-control"/>
           </div>
-          <div class="form-group">
-            <!-- <label class="form-check-label" for="exampleCheck1">
-              No Account?
-              <a href="#" @click="register">Register here</a>
-            </label>-->
-          </div>
-
           <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group mr-2" role="group" aria-label="First group">
               <button type="submit" class="btn btn-primary">Login</button>
