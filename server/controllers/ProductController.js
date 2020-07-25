@@ -27,7 +27,7 @@ class ProductController {
         name: req.body.name,
         image_url: req.body.image_url,
         price: +req.body.price,
-        stock: +req.body.stock,
+        stock: req.body.stock,
       }
       newProduct = await Product.create(newProduct);
       return res.status(201).json(newProduct);
@@ -42,7 +42,7 @@ class ProductController {
         name: req.body.name,
         image_url: req.body.image_url,
         price: +req.body.price,
-        stock: +req.body.stock,
+        stock: req.body.stock,
         updatedAt: new Date()
       }
       newData = await Product.update(newData, {

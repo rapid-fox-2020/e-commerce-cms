@@ -2,7 +2,7 @@ const { User } = require('../models');
 const { validatePassword } = require('../helpers/bcrypt');
 const { encode } = require('../helpers/jwt');
 
-class UserController {
+class UserController {  
   static async login(req, res, next) {
     try {
       const user = await User.findOne({ where: { email: req.body.email } });

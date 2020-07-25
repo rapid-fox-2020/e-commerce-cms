@@ -25,9 +25,7 @@ describe('POST /login', function() {
         done();
       })
   });
-});
 
-describe('POST /login', function() {
   it('Login User with role NOT "admin"', function(done) {
     request(app)
       .post('/login')
@@ -41,4 +39,21 @@ describe('POST /login', function() {
         done();
       })
   });
+  
 });
+
+// describe('POST /login', function() {
+  // it('Login User with role NOT "admin"', function(done) {
+  //   request(app)
+  //     .post('/login')
+  //     .set('Accept', 'application/json')
+  //     .send(BukanAdminData)
+  //     .expect('Content-Type', /json/)
+  //     .then((response) => {
+  //       const { status, body } = response;
+  //       expect(status).toBe(401);
+  //       expect(body).toBe('Admin Only');
+  //       done();
+  //     })
+  // });
+// });
