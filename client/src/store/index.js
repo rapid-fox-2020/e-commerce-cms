@@ -4,6 +4,8 @@ import Axios from 'axios';
 import router from '../router';
 
 Vue.use(Vuex);
+const BaseUrl = 'http://localhost:3001/'
+const WebUrl = ''
 
 export default new Vuex.Store({
     state: {
