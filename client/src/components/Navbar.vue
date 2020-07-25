@@ -33,7 +33,7 @@
               {{ userEmail }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a role="button" class="dropdown-item" @click.prevent="processLogout">Logout</a>
+              <a class="dropdown-item" @click.prevent="processLogout">Logout</a>
             </div>
           </li>
         </ul>
@@ -47,19 +47,19 @@
 
 <script>
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   computed: {
     userEmail() {
-      return localStorage.getItem("userName");
-    }
+      return localStorage.getItem('userName');
+    },
   },
   methods: {
     processLogout() {
-      this.$store.dispatch("logout", () => {
-        this.$router.push({ name: "Login" });
+      this.$store.dispatch('logout', () => {
+        this.$router.push({ name: 'Login' });
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

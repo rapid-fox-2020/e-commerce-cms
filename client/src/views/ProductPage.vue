@@ -15,25 +15,23 @@
 </template>
 
 <script>
-import ProductList from "../components/ProductList.vue";
-import Navbar from "../components/Navbar.vue";
-import DetailPage from "../components/DetailPage.vue";
+import ProductList from '../components/ProductList.vue';
+import Navbar from '../components/Navbar.vue';
 
 export default {
-  name: "ProductPage",
+  name: 'ProductPage',
   components: {
     ProductList,
     Navbar,
-    DetailPage
   },
   methods: {
     toFormAdd() {
-      this.$router.push({ name: "FormAdd" });
-    }
+      this.$router.push({ name: 'FormAdd' });
+    },
   },
   created() {
     // this.$store.dispatch("fetchProducts");
-  }
+  },
 };
 </script>
 

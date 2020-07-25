@@ -55,18 +55,18 @@
 
 <script>
 export default {
-  name: "EditModal",
-  props: ["updatedProduct"],
+  name: 'EditModal',
+  props: ['updatedProduct'],
   methods: {
     processUpdate() {
-      this.$store.dispatch("updateProduct", this.updatedProduct);
+      this.$store.dispatch('updateProduct', this.updatedProduct);
       // this.$store.dispatch("changeShowModal");
-      this.$store.dispatch("fetchProducts");
+      this.$store.dispatch('fetchProducts');
     },
     modalEdit() {
-      this.$store.commit("changeShowModal", false);
-    }
-  }
+      this.$store.commit('changeShowModal', false);
+    },
+  },
 };
 </script>
 

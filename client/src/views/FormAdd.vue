@@ -32,32 +32,32 @@
 
 <script>
 export default {
-  name: "FormAdd",
+  name: 'FormAdd',
   data() {
     return {
       newProduct: {
-        name: "",
-        price: "",
-        stock: "",
-        imageUrl: "",
+        name: '',
+        price: '',
+        stock: '',
+        imageUrl: '',
         toDashboard: () => {
-          this.$router.push({ name: "ProductPage" });
-        }
-      }
+          this.$router.push({ name: 'ProductPage' });
+        },
+      },
     };
   },
   methods: {
     addProduct() {
-      this.$store.dispatch("addNewProduct", this.newProduct);
-      this.newProduct.name = "";
-      this.newProduct.price = "";
-      this.newProduct.stock = "";
-      this.newProduct.imageUrl = "";
+      this.$store.dispatch('addNewProduct', this.newProduct);
+      this.newProduct.name = '';
+      this.newProduct.price = '';
+      this.newProduct.stock = '';
+      this.newProduct.imageUrl = '';
     },
     processCancel() {
       this.newProduct.toDashboard();
-    }
-  }
+    },
+  },
 };
 </script>
 

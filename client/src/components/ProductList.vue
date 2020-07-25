@@ -40,44 +40,47 @@
 </template>
 
 <script>
-import EditModal from "./EditModal.vue";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
+import EditModal from './EditModal.vue';
 
 export default {
-  name: "ProductList",
+  name: 'ProductList',
   components: {
-    EditModal
+    EditModal,
   },
   data() {
     return {
       updateProduct: {
-        id: "",
-        name: "",
-        stock: "",
-        price: "",
-        imageUrl: ""
+        id: '',
+        name: '',
+        stock: '',
+        price: '',
+        imageUrl: '',
       },
       detailProduct: {
-        id: ""
-      }
+        id: '',
+      },
     };
   },
   methods: {
     processDelete(id) {
       Swal.fire({
-        title: "Are You Sure?",
-        text: "This data cant be restored",
-        icon: "question",
+        title: 'Are You Sure?',
+        text: 'This data cant be restored',
+        icon: 'question',
         showCancelButton: true,
-        confirmButtonText: "Delete"
+        confirmButtonText: 'Delete',
       })
-        .then(result => {
+        .then((result) => {
           if (result.value) {
-            this.$store.dispatch("deleteProduct", id);
+            this.$store.dispatch('deleteProduct', id);
           }
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Something Wrong',
+          });
         });
     },
     editProduct(product) {
@@ -86,16 +89,16 @@ export default {
       this.updateProduct.price = product.price;
       this.updateProduct.stock = product.stock;
       this.updateProduct.imageUrl = product.imageUrl;
-      this.$store.commit("changeShowModal", true);
+      this.$store.commit('changeShowModal', true);
     },
     getDetail(id) {
       this.detailProduct.id = id;
-      this.$store.dispatch("detailPage", this.detailProduct);
-    }
+      this.$store.dispatch('detailPage', this.detailProduct);
+    },
   },
   created() {
-    this.$store.dispatch("fetchProducts");
-  }
+    this.$store.dispatch('fetchProducts');
+  },
 };
 </script>
 

@@ -38,25 +38,25 @@
 
 <script>
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
       user: {
-        email: "",
-        password: "",
+        email: '',
+        password: '',
         toDashboard: () => {
-          this.$router.push({ name: "ProductPage" });
-        }
-      }
+          this.$router.push({ name: 'ProductPage' });
+        },
+      },
     };
   },
   methods: {
     processLogin() {
-      this.$store.dispatch("login", this.user);
-      this.user.email = "";
-      this.user.password = "";
-    }
-  }
+      this.$store.dispatch('login', this.user);
+      this.user.email = '';
+      this.user.password = '';
+    },
+  },
 };
 </script>
 

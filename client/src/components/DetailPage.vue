@@ -17,12 +17,12 @@
 
 <script>
 export default {
-  name: "DetailPage",
+  name: 'DetailPage',
   methods: {
     closeCard() {
-      this.$router.push({ name: "ProductPage" });
-    }
-  }
+      this.$router.push({ name: 'ProductPage' });
+    },
+  },
 };
 </script>
 

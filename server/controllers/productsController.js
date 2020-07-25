@@ -80,10 +80,9 @@ class productsController {
           return Product.destroy({ where: { id } });
         } else {
           throw Error;
-          // next({ name: "DATA_NOT_FOUND" })
         }
       })
-      .then((iniApa) => {
+      .then(() => {
         res.status(200).json({ message: "successfully deleted" });
       })
       .catch((err) => {
