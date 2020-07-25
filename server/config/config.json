@@ -6,13 +6,6 @@
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
-  "test": {
-    "username": "postgres",
-    "password": "root",
-    "database": "ecommerce_cms",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
-  },
   "production": {
     "username": "brftuupwbgaqgc",
     "password": "07eb3c50e584b699d5509578517744fa8fcf29b44db5a7813c8d9faf07ea8d94",
@@ -20,5 +13,5 @@
     "host": "ec2-34-200-15-192.compute-1.amazonaws.com",
     "dialect": "postgres",
     "port": 5432,
-  },
+  }
 }
