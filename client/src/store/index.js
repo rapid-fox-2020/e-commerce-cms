@@ -61,14 +61,15 @@ export default new Vuex.Store({
     },
     async destroyProduct(context, payload) {
       try {
-        const deletedProduct = await axios({
+        const res = await axios({
           method: "DELETE",
           url: `https://e-commerce-c.herokuapp.com/products/${payload}`,
           headers: {
             access_token: localStorage.access_token,
           }
         });
-        context.commit('removeProduct', deletedProduct.data.id);
+        context.commit('removeProduct', res.data.id);
+        return res.status;
       } catch (e) {
         console.log(e);
       }
@@ -91,7 +92,7 @@ export default new Vuex.Store({
         context.commit('addProduct', newProduct.data.id);
         return newProduct.status;
       } catch (e) {
-        console.log(e);
+        return e.message;
       }
     },
     async updateProduct(context, payload) {

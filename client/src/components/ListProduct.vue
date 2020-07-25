@@ -1,6 +1,10 @@
 <template>
   <!-- Mainboard -->
   <section class="container pt-4">
+    <aside class="alert alert-danger" v-if="status === 200">
+      <strong>SUCCESS</strong> delete product.
+    </aside>
+
     <div>
       <h1 class="page-label">Product List</h1>
     </div>
@@ -47,6 +51,11 @@ import swal from 'sweetalert';
 
 export default {
   name: "AddProduct",
+  data() {
+    return {
+      status: null,
+    }
+  },
   created() {
     this.$store.dispatch("fetchProduct");
   },
@@ -60,10 +69,13 @@ export default {
         dangerMode: true,
       })
       .then(answer => {
-        console.log(answer);
         if (answer) {
-          this.$store.dispatch("destroyProduct", productId);
+          return this.$store.dispatch("destroyProduct", productId);
         }
+      })
+      .then(res => {
+        console.log(res);
+        this.status = res;
       })
       .catch(err => console.log(err));
     },

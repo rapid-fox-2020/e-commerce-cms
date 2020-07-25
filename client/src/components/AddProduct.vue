@@ -3,11 +3,11 @@
   <section class="container pt-5">
     <h1 class="page-label">Add Product</h1>
 
-    <aside class="alert alert-success" v-if="status === 201 && name !== ''">
+    <aside class="alert alert-success" v-if="alert">
       <strong>SUCCESS</strong>: add {{ name }}.
     </aside>
-    <aside class="alert alert-danger" v-else-if="typeof status === 'string'">
-      <strong>FAIL</strong>: {{ status }}.
+    <aside class="alert alert-danger" v-else-if="alert && typeof message === 'string'">
+      <strong>FAIL</strong>: {{ message }}.
     </aside>
 
     <form @submit.prevent="addProduct()">
@@ -42,7 +42,8 @@ export default {
       image_url: '',
       price: '',
       stock: null,
-      status: null,
+      message: null,
+      alert: false,
     }
   },
   methods: {
@@ -59,14 +60,14 @@ export default {
         price: this.price,
         stock: this.stock,
       })
-      .then(status => {
-        this.status = status;
+      .then(message => {
+        this.alert = true;
+        this.message = message;
         this.image_url = '';
         this.stock = null;
         this.price = null;
-        setTimeout(() => this.name = '', 3000);
+        setTimeout(() => this.alert = false, 5000);
       })
-      .catch(err = console.log(err));
     }
   },
 };
