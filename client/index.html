@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>E-commerce CMS</title>
+  </head>
+  <body>
+    <div>
+      <div
+        class="login-admin"
+        style="padding: 120px 420px; background-color: grey; width: auto;
+        height: 705px;"
+      >
+        <div
+          class="form-login border"
+          style="padding: 100px; width: 600px; background-color: #7fdbda;"
+        >
+          <h2 style="text-align: center;">Login Admin</h2>
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input
+                placeholder="Email"
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input
+                placeholder="Password"
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 400px;">
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+      <div
+        class="home-layout"
+        style="width: auto;
+      height: 705px;"
+      >
+        <div class="d-flex" id="wrapper">
+          <!-- Sidebar -->
+          <div class="bg-info border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">E-Commerce</div>
+            <div class="list-group list-group-flush">
+              <a
+                href="#"
+                class="list-group-item list-group-item-action bg-info"
+                style="color: black;"
+                >Banner</a
+              >
+              <a
+                href="#"
+                class="list-group-item list-group-item-action bg-info"
+                style="color: black;"
+                >Products</a
+              >
+            </div>
+          </div>
+          <!-- /#sidebar-wrapper -->
+
+          <!-- Page Content -->
+          <div id="page-content-wrapper">
+            <nav
+              class="navbar navbar-expand-lg navbar-light bg-info border-bottom"
+            >
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: black;"
+                      >Logout</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </nav>
+
+            <div class="container-fluid" id="product-content">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                style="margin-top: 10px ;"
+              >
+                Add Product
+              </button>
+              <table class="table" style="margin-top: 10px;">
+                <thead class="thead-dark">
+                  <tr style="text-align: center;">
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Image Url</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="text-align: center;">
+                    <th scope="row">1</th>
+                    <td>Laptop</td>
+                    <td>image.com</td>
+                    <td>15000</td>
+                    <td>2</td>
+                    <td>Apa Aja boleh</td>
+                    <td><a href="#">Update</a> | <a href="#">Delete</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- /#page-content-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+      </div>
+    </div>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
