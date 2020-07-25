@@ -74,7 +74,6 @@ export default {
         }
       })
       .then(res => {
-        console.log(res);
         this.status = res;
       })
       .catch(err => console.log(err));
