@@ -9,7 +9,7 @@
   "test": {
     "username": "postgres",
     "password": 1234,
-    "database": "porto_cms",
+    "database": "porto_W3_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

@@ -15,12 +15,18 @@ class ProductController {
         console.log(req.body, 'req body <<<<<');
         let message = null
         try {
-            const { name, image_url, price, stock } = req.body
+            const { name, image_url, description, genre, price, stock } = req.body
             if (!name) {
                 message = "name cannot be empty!"  
             }
             if (!image_url) {
                 message = "image_url cannot be empty!"
+            }
+            if (!description) {
+                message = "description cannot be empty!" 
+            }
+            if (!genre) {
+                message = "genre cannot be empty!" 
             }
             if (!price) {
                 message = "price cannot be empty!" 
@@ -38,8 +44,11 @@ class ProductController {
             Product.create({
                 name: name,
                 image_url: image_url,
+                description: description,
+                genre: genre,
                 price: price,
                 stock: stock,
+                UserId: req.UserId
             })
                 .then(newProduct => {
                     console.log('masuk newProduct <<<<<');
@@ -58,7 +67,7 @@ class ProductController {
         const id = req.params.id
         let message = null;
         try {
-            const { name, image_url, price, stock } = req.body
+            const { name, image_url, description, genre, price, stock } = req.body
             if (!name) {
                 message = "name cannot be empty"  
             }
@@ -84,6 +93,8 @@ class ProductController {
                         product.update({
                             name: name,
                             image_url: image_url,
+                            description: description,
+                            genre: genre,
                             price: price,
                             stock: stock,
                         })
