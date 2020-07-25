@@ -6,22 +6,22 @@
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue";
+import Navbar from './components/Navbar.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Navbar,
   },
   created() {
     if (localStorage.access_token) {
-      this.$store.commit("SET_LOGIN", true);
+      this.$store.commit('SET_LOGIN', true);
       // if (this.$route.name !== "DashBoard") {
       //   this.$router.push({ path: "/dashboard" });
       // }
     } else {
       // console.log(this.$route.name, "<<<<<<<<<<<");
-      this.$store.commit("SET_LOGIN", false);
+      this.$store.commit('SET_LOGIN', false);
       // if (this.$route.name !== "Login") {
       //   this.$router.push({ path: "/" });
       // }

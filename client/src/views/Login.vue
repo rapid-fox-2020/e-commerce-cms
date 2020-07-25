@@ -26,19 +26,18 @@
   </div>
 </template>
 
-
 <script>
 export default {
-  name: "login",
+  name: 'login',
   data() {
     return {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     };
   },
   methods: {
     login() {
-      this.$store.dispatch("login", {
+      this.$store.dispatch('login', {
         email: this.email,
         password: this.password,
       });

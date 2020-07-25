@@ -6,7 +6,11 @@
       </div>
       <div class="col-11">
         <h1 class="text-center">Products</h1>
-        <button class="btn btn-primary" @click.prevent="showAdd()">Add</button>
+        <router-link to="/add">
+        <button class="btn btn-primary">
+         Add
+        </button>
+        </router-link>
         <table class="table table-striped table-dark">
           <thead>
             <tr>
@@ -26,25 +30,19 @@
 </template>
 
 <script>
-import ProductList from "../components/ProductList.vue";
-import store from "../store";
-import router from "../router";
+import ProductList from '../components/ProductList.vue';
 
 export default {
-  name: "dashboard",
+  name: 'dashboard',
   components: {
-    ProductList
+    ProductList,
   },
   data() {
     return {};
   },
   created() {
-    this.$store.dispatch("fetchProduct");
+    this.$store.dispatch('fetchProduct');
   },
-  methods: {
-    showAdd() {
-      router.push({ path: "/add" });
-    }
-  }
+  methods: {},
 };
 </script>

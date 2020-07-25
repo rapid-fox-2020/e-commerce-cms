@@ -25,6 +25,8 @@ List Endpoints :
 }
 ```
 
+#### (404 - Access token Not Found)
+
 > This error describes access token missing
 
 ```json

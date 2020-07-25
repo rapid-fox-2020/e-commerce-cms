@@ -17,10 +17,8 @@
 </template>
 
 <script>
-import store from "../store";
-
 export default {
-  name: "ProductList",
+  name: 'ProductList',
   data() {
     return {
       // isDate: new Date(this.product.updatedAt).toDateString()
@@ -32,12 +30,12 @@ export default {
   },
   methods: {
     processingDelete(id) {
-      this.$store.dispatch("deleteProduct", id);
+      this.$store.dispatch('deleteProduct', id);
     },
     showEditForm(id) {
       this.$router.push({ path: `/update/${id}` });
-    }
-  }
+    },
+  },
 };
 </script>
 

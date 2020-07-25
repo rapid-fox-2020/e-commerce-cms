@@ -4,22 +4,22 @@
     <form @submit.prevent="processEdit">
       <div class="form-group">
         <label for="exampleInputEmail1">Name</label>
-        <input type="text" class="form-control" v-model="EditName" aria-describedby="emailHelp" />
+        <input type="text" class="form-control" v-model="EditName" aria-describedby="emailHelp"  required/>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Image_url</label>
-        <input type="text" class="form-control" v-model="EditImage_url" />
+        <input type="text" class="form-control" v-model="EditImage_url" required/>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Price</label>
-        <input type="text" class="form-control" v-model="EditPrice" />
+        <input type="text" class="form-control" v-model="EditPrice" required/>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Stock</label>
-        <input type="text" class="form-control" v-model="EditStock" />
+        <input type="text" class="form-control" v-model="EditStock" required/>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button> |
-      <router-link to="/dashboard">
+      <router-link to="/products">
         <button class="btn btn-secondary">Back</button>
       </router-link>
     </form>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "FormEditProduct",
+  name: 'FormEditProduct',
   data() {
     return {
       EditName: this.$store.state.products[this.$route.params.id].name,
@@ -36,22 +36,19 @@ export default {
         .image_url,
       EditPrice: this.$store.state.products[this.$route.params.id].price,
       EditStock: this.$store.state.products[this.$route.params.id].stock,
-      EditId: this.$store.state.products[this.$route.params.id].id
+      EditId: this.$store.state.products[this.$route.params.id].id,
     };
-  },
-  created() {
-    console.log();
   },
   methods: {
     processEdit() {
-      this.$store.dispatch("updateProduct", {
+      this.$store.dispatch('updateProduct', {
         id: this.EditId,
         name: this.EditName,
         image_url: this.EditImage_url,
         price: this.EditPrice,
-        stock: this.EditStock
+        stock: this.EditStock,
       });
-    }
-  }
+    },
+  },
 };
 </script>

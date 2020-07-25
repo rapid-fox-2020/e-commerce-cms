@@ -1,10 +1,18 @@
 <template>
   <div>
     <nav
-      class="navbar navbar-expand-lg navbar-dark d flex justify-content-between shadow-sm p-3 mb-5 rounded"
+      class="navbar navbar-expand-lg navbar-dark
+      d flex justify-content-between shadow-sm p-3 mb-5 rounded"
       id="nav"
     >
-      <a class="navbar-brand" href="#">E-COMMERCE</a>
+      <a class="navbar-brand">E-COMMERCE</a>
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <router-link class="nav-link" to='/Products'>Products</router-link>
+          </li>
+        </ul>
+      </div>
       <button
         class="navbar-toggler"
         type="button"
@@ -38,18 +46,18 @@
 
 <script>
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   created() {
     this.renderEmailName();
   },
   data() {
     return {
-      emailName: "",
+      emailName: '',
     };
   },
   methods: {
     logout() {
-      this.$store.commit("SET_LOGOUT");
+      this.$store.commit('SET_LOGOUT');
     },
     renderEmailName() {
       this.emailName = this.$store.state.email;
