@@ -1,6 +1,8 @@
 <template>
-  <div>
+  <div class="d-flex justify-content-center">
     <form @submit.prevent="addProduct" class="w-50">
+      <h3>Add new Product</h3>
+      <br />
       <div class="form-group">
         <label>Product Name</label>
         <input
@@ -22,7 +24,8 @@
         <label>Image Url</label>
         <input type="text" class="form-control" v-model="newProduct.imageUrl" />
       </div>
-      <button type="submit" class="btn btn-info">Submit</button>
+      <button type="submit" class="btn btn-info">Submit</button> |
+      <button type="submit" class="btn btn-danger" @click.prevent="processCancel">Cancel</button>
     </form>
   </div>
 </template>
@@ -50,6 +53,9 @@ export default {
       this.newProduct.price = "";
       this.newProduct.stock = "";
       this.newProduct.imageUrl = "";
+    },
+    processCancel() {
+      this.newProduct.toDashboard();
     }
   }
 };

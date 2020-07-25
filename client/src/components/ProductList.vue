@@ -29,11 +29,7 @@
                 Delete
               </button>
               |
-              <router-link
-                class="btn btn-warning"
-                :to="{ name: 'DetailPage', params: { id: product.id, product: product } }"
-                >Detail</router-link
-              >
+              <a class="btn btn-warning" @click.prevent="getDetail(product.id)">Detail</a>
             </td>
           </tr>
           <!-- End Looping data Product-->
@@ -44,27 +40,45 @@
 </template>
 
 <script>
-import EditModal from './EditModal.vue';
+import EditModal from "./EditModal.vue";
+import Swal from "sweetalert2";
 
 export default {
-  name: 'ProductList',
+  name: "ProductList",
   components: {
-    EditModal,
+    EditModal
   },
   data() {
     return {
       updateProduct: {
-        id: '',
-        name: '',
-        stock: '',
-        price: '',
-        imageUrl: '',
+        id: "",
+        name: "",
+        stock: "",
+        price: "",
+        imageUrl: ""
       },
+      detailProduct: {
+        id: ""
+      }
     };
   },
   methods: {
     processDelete(id) {
-      this.$store.dispatch('deleteProduct', id);
+      Swal.fire({
+        title: "Are You Sure?",
+        text: "This data cant be restored",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Delete"
+      })
+        .then(result => {
+          if (result.value) {
+            this.$store.dispatch("deleteProduct", id);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     editProduct(product) {
       this.updateProduct.id = product.id;
@@ -72,9 +86,16 @@ export default {
       this.updateProduct.price = product.price;
       this.updateProduct.stock = product.stock;
       this.updateProduct.imageUrl = product.imageUrl;
-      this.$store.dispatch('changeShowModal');
+      this.$store.commit("changeShowModal", true);
     },
+    getDetail(id) {
+      this.detailProduct.id = id;
+      this.$store.dispatch("detailPage", this.detailProduct);
+    }
   },
+  created() {
+    this.$store.dispatch("fetchProducts");
+  }
 };
 </script>
 

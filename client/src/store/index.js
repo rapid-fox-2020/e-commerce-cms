@@ -1,154 +1,185 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import axios from 'axios';
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
+import Swal from "sweetalert2";
+import router from "../router/index";
 
 Vue.use(Vuex);
-const baseUrl = 'http://localhost:3000';
+const baseUrl = "http://localhost:3000";
 
 export default new Vuex.Store({
   state: {
     products: [],
     product: null,
     showModal: false,
+    userName: ""
   },
   mutations: {
-    fetchProducts(state, payload) {
-      state.products = payload;
+    SET_PRODUCTS(state, allProducts) {
+      state.products = allProducts;
     },
-    addNewProduct(state, payload) {
-      state.products.push(payload);
+    SET_NEW_PRODUCT(state, newProduct) {
+      state.products.push(newProduct);
     },
-    deleteProduct(state, payload) {
-      const result = state.products.filter((product) => product.id !== payload);
+    DESTROY_PRODUCT(state, deletedProduct) {
+      const result = state.products.filter(product => product.id !== deletedProduct);
 
       state.products = result;
     },
-    productById(state, payload) {
-      state.product = payload;
+    GET_PRODUCT_BY_ID(state, productById) {
+      state.product = productById;
     },
-    updateProduct() {
-      this.dispatch('fetchProducts');
+    UPDATE_PRODUCT(state, updatedProduct) {
+      const result = state.products.filter(product => product.id !== updatedProduct.id);
+      result.push(updatedProduct);
+      state.products = result.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0));
     },
-    changeShowModal(state) {
-      state.showModal = !state.showModal;
+    changeShowModal(state, status) {
+      state.showModal = status;
     },
+    SET_USERNAME(state, userName) {
+      state.userName = userName;
+    }
   },
   actions: {
-    login(_, payload) {
+    login(context, payload) {
       axios({
-        method: 'POST',
+        method: "POST",
         url: `${baseUrl}/login`,
         data: {
           email: payload.email,
-          password: payload.password,
-        },
+          password: payload.password
+        }
       })
         .then(({ data }) => {
-          localStorage.setItem('access_token', data.access_token);
+          localStorage.setItem("access_token", data.access_token);
+          localStorage.setItem("userName", data.email);
           payload.toDashboard();
+          context.commit("SET_USERNAME", data.email);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(err => {
+          Swal.fire({
+            icon: "error",
+            title: "Invalid Email or Password",
+            text: "Please fill your email correctly"
+          });
         });
     },
     fetchProducts(context) {
       axios({
-        method: 'GET',
+        method: "GET",
         url: `${baseUrl}/products`,
         headers: {
-          access_token: localStorage.getItem('access_token'),
-        },
+          access_token: localStorage.getItem("access_token")
+        }
       })
         .then(({ data }) => {
-          context.commit('fetchProducts', data);
+          context.commit("SET_PRODUCTS", data);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
     addNewProduct(context, payload) {
       axios({
-        method: 'POST',
+        method: "POST",
         url: `${baseUrl}/products`,
         headers: {
-          access_token: localStorage.getItem('access_token'),
+          access_token: localStorage.getItem("access_token")
         },
         data: {
           name: payload.name,
           stock: payload.stock,
           price: payload.price,
-          imageUrl: payload.imageUrl,
-        },
+          imageUrl: payload.imageUrl
+        }
       })
         .then(({ data }) => {
-          context.commit('addNewProduct', data);
+          Swal.fire({
+            icon: "success",
+            title: "Success Adding New Product"
+          });
+          context.commit("SET_NEW_PRODUCT", data);
           payload.toDashboard();
         })
-        .catch((err) => {
+        .catch(err => {
+          Swal.fire({
+            icon: "error",
+            title: "Please fill form correctly"
+          });
           console.log(err);
         });
     },
     deleteProduct(context, payload) {
       axios({
-        method: 'DELETE',
+        method: "DELETE",
         url: `${baseUrl}/products/${payload}`,
         headers: {
-          access_token: localStorage.getItem('access_token'),
-        },
+          access_token: localStorage.getItem("access_token")
+        }
       })
         .then(() => {
-          context.commit('deleteProduct', payload);
+          context.commit("DESTROY_PRODUCT", payload);
+          Swal.fire({
+            icon: "success",
+            title: "your item has been deleted?"
+          });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
     detailPage(context, payload) {
       axios({
-        method: 'GET',
+        method: "GET",
         url: `${baseUrl}/products/${payload.id}`,
         headers: {
-          access_token: localStorage.getItem('access_token'),
-        },
+          access_token: localStorage.getItem("access_token")
+        }
       })
         .then(({ data }) => {
-          context.commit('productById', data);
-          payload.toDetailPage();
+          context.commit("GET_PRODUCT_BY_ID", data);
+          router.push({ name: "DetailPage", params: { id: data.id } });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
-
     updateProduct(context, payload) {
       axios({
-        method: 'PUT',
+        method: "PUT",
         url: `${baseUrl}/products/${payload.id}`,
         headers: {
-          access_token: localStorage.getItem('access_token'),
+          access_token: localStorage.getItem("access_token")
         },
         data: {
           name: payload.name,
           stock: payload.stock,
           price: payload.price,
-          imageUrl: payload.imageUrl,
-        },
+          imageUrl: payload.imageUrl
+        }
       })
         .then(({ data }) => {
-          context.commit('updateProduct', data);
+          // router.push({ name: "ProductPage" });
+          context.commit("changeShowModal", false);
+
+          Swal.fire({
+            icon: "success",
+            title: "Success Edit New Product"
+          });
+          context.commit("UPDATE_PRODUCT", data);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(err => {
+          Swal.fire({
+            icon: "error",
+            title: "Please fill form correctly"
+          });
         });
     },
-    changeShowModal(context) {
-      context.commit('changeShowModal');
-    },
-
     logout(context, payload) {
       localStorage.clear();
       payload();
-    },
+    }
   },
-  modules: {},
+  modules: {}
 });

@@ -60,10 +60,11 @@ export default {
   methods: {
     processUpdate() {
       this.$store.dispatch("updateProduct", this.updatedProduct);
-      this.$store.dispatch("changeShowModal");
+      // this.$store.dispatch("changeShowModal");
+      this.$store.dispatch("fetchProducts");
     },
     modalEdit() {
-      this.$store.dispatch("changeShowModal");
+      this.$store.commit("changeShowModal", false);
     }
   }
 };

@@ -1,43 +1,39 @@
 <template>
   <div>
+    <Navbar></Navbar>
     <!--Start add Button-->
     <div class="d-flex justify-content-center">
-      <button type="button" class="btn btn-info" @click="toFormAdd">Add Products</button> |
-      <button type="button" class="btn btn-secondary" @click="processLogout">Logout</button>
+      <button type="button" class="btn btn-info" @click.prevent="toFormAdd">Add Products</button>
     </div>
-    <!--End add Button-->
+    <br />
+    <br />
 
+    <!--End add Button-->
+    <router-view></router-view>
     <ProductList></ProductList>
-    <router-view />
   </div>
 </template>
 
 <script>
-import ProductList from '@/components/ProductList.vue';
+import ProductList from "../components/ProductList.vue";
+import Navbar from "../components/Navbar.vue";
+import DetailPage from "../components/DetailPage.vue";
 
 export default {
-  name: 'ProductPage',
+  name: "ProductPage",
   components: {
     ProductList,
+    Navbar,
+    DetailPage
   },
   methods: {
     toFormAdd() {
-      this.$router.push({ name: 'FormAdd' });
-    },
-    toDetailPage(id) {
-      this.$router.push({ name: 'DetailPage', params: { id } });
-    },
-    processLogout() {
-      this.$store.dispatch('logout', () => {
-        this.$router.push({ name: 'Login' });
-      });
-    },
-  },
-  created() {
-    if (localStorage.getItem('access_token')) {
-      this.$store.dispatch('fetchProducts');
+      this.$router.push({ name: "FormAdd" });
     }
   },
+  created() {
+    // this.$store.dispatch("fetchProducts");
+  }
 };
 </script>
 
