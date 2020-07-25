@@ -7,7 +7,7 @@
             <img width="70" :src="image_url" alt="product">
           </div>
         </td>
-        <td>{{product.price}}</td>
+        <td>{{price}}</td>
         <td>{{product.stock}}</td>
         <td>{{product.category}}</td>
         <td>
@@ -30,6 +30,9 @@ export default {
   computed: {
     image_url() {
       return this.product.image_url;
+    },
+    price() {
+      return this.product.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
     },
   },
   methods: {

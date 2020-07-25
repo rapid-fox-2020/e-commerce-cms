@@ -1,7 +1,7 @@
 <template>
     <tr class="text-center">
         <td scope="row">{{index+1}}</td>
-        <td>{{banner.name}}</td>
+        <td class="text-wrap" style="width: 20rem;">{{banner.name}}</td>
         <td class="text-wrap" style="width: 20rem;">
             {{banner.description}}
         </td>

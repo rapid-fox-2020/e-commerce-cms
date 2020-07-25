@@ -32,12 +32,12 @@ const routes = [
         component: BannerTable,
       },
       {
-        path: '/dashboard/products/add',
+        path: '/dashboard/products/form',
         name: 'FormProduct',
         component: FormProduct,
       },
       {
-        path: '/dashboard/banners/add',
+        path: '/dashboard/banners/form',
         name: 'FormBanner',
         component: FormBanner,
       },
