@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import TableProducts from "../components/TableProduct.vue";
-import NavbarTopProducts from "../components/NavBarTopProducts.vue";
+import TableProducts from '../components/TableProduct.vue';
+import NavbarTopProducts from '../components/NavBarTopProducts.vue';
 
 export default {
   data() {
@@ -49,13 +49,13 @@ export default {
   },
   methods: {
     moveToBanner() {
-      this.$router.push({ name: "BannerProducts" });
-    }
+      this.$router.push({ name: 'BannerProducts' });
+    },
   },
   components: {
     TableProducts,
-    NavbarTopProducts
-  }
+    NavbarTopProducts,
+  },
 };
 </script>
 
