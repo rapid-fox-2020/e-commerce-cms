@@ -8,16 +8,16 @@ module.exports = {
     await queryInterface.bulkInsert('Users', 
     [
       {
-        email: 'admin@email.com',
+        email: 'admin3@email.com',
         password: bcrypt.hashSync("12345",saltRounds),
         role: "admin",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        email: 'admin2@email.com',
-        password: bcrypt.hashSync("67890",saltRounds),
-        role: "admin",
+        email: 'user@email.com',
+        password: bcrypt.hashSync("abcde",saltRounds),
+        role: "unknown",
         createdAt: new Date(),
         updatedAt: new Date()
       }

@@ -19,27 +19,17 @@ class UserController {
                     statusCode: 404,
                     message: 'Data not found!'
                 }
-            } else {
-                if (data.role !== "admin") {
-                    throw {
-                        name: "Validation_error",
-                        statusCode: 401,
-                        message: 'Not authorized user!'
-                    }
-                } else {
-                    if (bcrypt.compareSync(password, data.password)) {
-                        const token = jwtSign(
-                            { id: data.id, email: data.email, role: data.role}
-                        )
-                        return res.status(200).json({access_token: token})
-                    } else {
-                        throw {
-                            name: "Validation_error",
-                            statusCode: 400,
-                            message: 'Incorrect Email or Password!'
-                        }
-                    }
+            } else if (data && !bcrypt.compareSync(password, data.password)) {
+                throw {
+                    name: "Validation_error",
+                    statusCode: 400,
+                    message: "Incorrect Email or Password!",
                 }
+            } else if (data && bcrypt.compareSync(password, data.password)) {
+                const token = jwtSign({ 
+                    id: data.id, email: data.email, role: data.role
+                })
+                return res.status(200).json({access_token: token})    
             }
         })
         .catch(function(err){

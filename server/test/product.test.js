@@ -8,6 +8,7 @@ const {jwtSign} = require('../helpers/jwt')
 
 describe("Product Routes", function(){
     let token = ''
+    let token2 = ''
     let prodId = 0
     const tester = {
         name: "laptop",
@@ -21,11 +22,19 @@ describe("Product Routes", function(){
             prodId = product.id
             return User.findOne({ where: {email: "admin@email.com"} })
         })
-        .then(function(data){
+        .then(function(admin){
             token = jwtSign({
-                id: data.id,
-                email: data.email,
-                role: data.role
+                id: admin.id,
+                email: admin.email,
+                role: admin.role
+            })
+            return User.findOne({ where: {email: "user@email.com"} })
+        })
+        .then(function(user){
+            token2 = jwtSign({
+                id: user.id,
+                email: user.email,
+                role: user.role
             })
             done()
         })
@@ -215,6 +224,23 @@ describe("Product Routes", function(){
                 const {body, status} = response
                 expect(status).toBe(404)
                 expect(body).toHaveProperty("message", "Token is not found!")
+
+                done()
+            })
+            .catch(function(err){
+                done(err)
+            })
+        })
+        test("403 Failed Show all products role not an admin - should return json message", function(done){
+            request(app)
+            .get("/products")
+            .send()
+            .set("access_token", token2)
+            .set("Accept", "application/json")
+            .then(function(response){
+                const {body, status} = response
+                expect(status).toBe(403)
+                expect(body).toHaveProperty("message", "Forbidden Access!")
 
                 done()
             })
