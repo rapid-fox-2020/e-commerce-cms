@@ -63,7 +63,7 @@ export default new Vuex.Store({
       };
       axios({
         method: 'POST',
-        url: 'http://localhost:3000/login',
+        url: 'https://safe-anchorage-60319.herokuapp.com/login',
         data: getData,
       })
         .then((result) => {
@@ -80,7 +80,7 @@ export default new Vuex.Store({
     readProducts(context) {
       axios({
         method: 'GET',
-        url: 'http://localhost:3000/products',
+        url: 'https://safe-anchorage-60319.herokuapp.com/products',
         headers: { access_token: localStorage.access_token },
       })
         .then((result) => {
@@ -102,7 +102,7 @@ export default new Vuex.Store({
       };
       axios({
         method: 'POST',
-        url: 'http://localhost:3000/products',
+        url: 'https://safe-anchorage-60319.herokuapp.com/products',
         data: addProducts,
         headers: { access_token: localStorage.access_token },
       })
@@ -118,7 +118,7 @@ export default new Vuex.Store({
     deleteProducts(context, payload) {
       axios({
         method: 'DELETE',
-        url: `http://localhost:3000/products/${payload}`,
+        url: `https://safe-anchorage-60319.herokuapp.com/products/${payload}`,
         headers: { access_token: localStorage.access_token },
       })
         .then(() => {
@@ -132,7 +132,7 @@ export default new Vuex.Store({
     getProductsById(context, payload) {
       axios({
         method: 'GET',
-        url: `http://localhost:3000/products/${payload}`,
+        url: `https://safe-anchorage-60319.herokuapp.com/products/${payload}`,
         headers: { access_token: localStorage.access_token },
       })
         .then((result) => {
@@ -153,7 +153,7 @@ export default new Vuex.Store({
       };
       axios({
         method: 'PUT',
-        url: `http://localhost:3000/products/${payload.id}`,
+        url: `https://safe-anchorage-60319.herokuapp.com/products/${payload.id}`,
         data: updateProduct,
         headers: { access_token: localStorage.access_token },
       })

@@ -12,11 +12,11 @@
           class="sidebar-heading"
         >E-Commerce</div>
         <div class="list-group list-group-flush">
-          <router-link
-            to="/products/"
+          <a
+            @click="moveToBanner"
             class="list-group-item list-group-item-action"
             style="background-color:#041E3A; color:white;"
-          >Banner</router-link>
+          >Banner</a>
           <router-link
             class="list-group-item list-group-item-action"
             style="background-color:#041E3A; color:white;"
@@ -40,14 +40,22 @@
 </template>
 
 <script>
-import TableProducts from '../components/TableProduct.vue';
-import NavbarTopProducts from '../components/NavBarTopProducts.vue';
+import TableProducts from "../components/TableProduct.vue";
+import NavbarTopProducts from "../components/NavBarTopProducts.vue";
 
 export default {
+  data() {
+    return {};
+  },
+  methods: {
+    moveToBanner() {
+      this.$router.push({ name: "BannerProducts" });
+    }
+  },
   components: {
     TableProducts,
-    NavbarTopProducts,
-  },
+    NavbarTopProducts
+  }
 };
 </script>
 
