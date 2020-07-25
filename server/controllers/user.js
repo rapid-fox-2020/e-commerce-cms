@@ -18,12 +18,12 @@ module.exports = class UserController {
                 }
             })
             .then((data) => {
-                const token = generate({
+                const access_token = generate({
                     id: data.id,
                     email: data.email
                 })
                 console.log(data);
-                res.status(201).json({ token:token })
+                res.status(201).json({ access_token })
             }).catch(next)
     }
 

@@ -7,6 +7,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 const Swal = require('sweetalert2')
 Vue.use(Vuex);
 Vue.use(VueSweetalert2)
+// const url = `https://stormy-wave-88070.herokuapp.com`
 const url = `http://localhost:3000`
 export default new Vuex.Store({
   state: {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
       axios({
         method: 'get',
         url: url + '/products',
+        headers:{
+          access_token:localStorage.access_token
+        }
       })
         .then((result) => {
           console.log(result);
@@ -57,6 +61,9 @@ export default new Vuex.Store({
       axios({
         method: 'delete',
         url: `${url}/products/${productId}`,
+        headers:{
+          access_token:localStorage.access_token
+        }
       })
         .then((destroy) => {
           // console.log(destroy, 'result deltet');
@@ -82,7 +89,11 @@ export default new Vuex.Store({
           price: newProduct.price,
           stock: newProduct.stock,
           image_url: newProduct.image_url
+
+        },headers:{
+          access_token:localStorage.access_token
         }
+        
       })
 
         .then((result) => {
