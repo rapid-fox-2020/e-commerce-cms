@@ -32,7 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         price: {
             type: DataTypes.FLOAT,
+            allowNull: false,
             validate: {
+                notNull: {
+                    msg: 'Stock is required!'
+                },
                 notEmpty: {
                     msg: 'price is required!'
                 },
@@ -40,14 +44,18 @@ module.exports = (sequelize, DataTypes) => {
                     msg: "Price must number!"
                 },
                 min: {
-                    args: [0],
-                    msg: 'cannot input less than 1'
+                    args: [1],
+                    msg: 'Price cannot input less than 1'
                 }
             }
         },
         stock: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             validate: {
+                notNull: {
+                    msg: 'Stock is required!'
+                },
                 notEmpty: {
                     msg: 'stock is required!'
                 },
@@ -55,8 +63,8 @@ module.exports = (sequelize, DataTypes) => {
                     msg: 'stock must Number!'
                 },
                 min: {
-                    args: [0],
-                    msg: 'cannot input less than 1'
+                    args: [1],
+                    msg: 'Stock cannot input less than 1'
                 }
             }
         },

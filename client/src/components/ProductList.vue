@@ -8,7 +8,7 @@
       </td>
       <td>Rp.{{product.price}}</td>
       <td>{{product.stock}}</td>
-      <td>
+      <td>       
         <button class="btn btn-primary" @click="showEditForm(index)">Edit</button>
         <button class="btn btn-danger" @click="processingDelete(product.id)">Delete</button>
       </td>
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
+
 export default {
   name: 'ProductList',
   data() {
@@ -30,7 +32,21 @@ export default {
   },
   methods: {
     processingDelete(id) {
-      this.$store.dispatch('deleteProduct', id);
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this  file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+          if (willDelete) {
+            this.$store.dispatch('deleteProduct', id);
+            swal("Your  file has been deleted!", {
+              icon: "success",
+            });
+          }
+        });
     },
     showEditForm(id) {
       this.$router.push({ path: `/update/${id}` });

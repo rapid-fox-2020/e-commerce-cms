@@ -5,11 +5,11 @@
       d flex justify-content-between shadow-sm p-3 mb-5 rounded"
       id="nav"
     >
-      <a class="navbar-brand">E-COMMERCE</a>
+      <a class="navbar-brand" v-if="$store.state.isLogin">GANRI CMS</a>
        <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <router-link class="nav-link" to='/Products'>Products</router-link>
+            <router-link class="nav-link" to='/Products' v-if="$store.state.isLogin">Products</router-link>
           </li>
         </ul>
       </div>
@@ -58,6 +58,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit('SET_LOGOUT');
+      this.$router.push({name:"Login"})
     },
     renderEmailName() {
       this.emailName = this.$store.state.email;
@@ -73,7 +74,7 @@ export default {
 #Middle {
   font-family: "Bungee", cursive;
   font-size: 30px;
-  margin-right: 110px;
+  margin-right: 52rem;
   color: black;
 }
 #navbarDropdown {

@@ -4,19 +4,19 @@
     <form @submit.prevent="processAdd">
       <div class="form-group">
         <label for="exampleInputEmail1">Name</label>
-        <input type="text" class="form-control" v-model="name" aria-describedby="emailHelp" required/>
+        <input type="text" class="form-control" v-model="name" aria-describedby="emailHelp"/>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Image_url</label>
-        <input type="text" class="form-control" v-model="image_url" required/>
+        <input type="text" class="form-control" v-model="image_url"/>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Price</label>
-        <input type="text" class="form-control" v-model="price" required/>
+        <input type="text" class="form-control" v-model="price"/>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Stock</label>
-        <input type="text" class="form-control" v-model="stock" required/>
+        <input type="text" class="form-control" v-model="stock"/>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>|
       <router-link to="/products">
