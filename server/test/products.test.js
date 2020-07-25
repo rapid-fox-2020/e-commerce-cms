@@ -209,184 +209,184 @@ const testProduct = {
 
 // })
 
-describe('GET/products/:id', () => {
+// describe('GET/products/:id', () => {
 
-    test('Get One Product', (done) => {
-        return request(app)
-            .get(`/products/${globalId}`)
-            .set('access_token', access_token)
-            .set('Accept', 'application/json')
-            .send()
-            .then((response) => {
-                const { body, status } = response
-                expect(status).toBe(200)
-                expect(body).toHaveProperty('name', expect.any(String));
-                done()
-            })
-            .catch((err) => {
-                done(err)
-            })
-    })
-
-    test('Get One Product with wrong "id"', (done) => {
-        return request(app)
-            .get(`/products/15`)
-            .set('access_token', access_token)
-            .set('Accept', 'application/json')
-            .then((response) => {
-                const { status, body } = response;
-                expect(status).toBe(404);
-                expect(body).toHaveProperty('message' ,'Product not Found');
-                done();
-            })
-            .catch(err => {
-                console.log(err);
-                done(err);
-            })
-    });
-
-})
-
-// const testEditProduct = {
-//     name: 'Macbook edit',
-//     image_url: 'https://i.imgur.com/Bcz59cD.png',
-//     price: 23000000,
-//     stock: 8
-// }
-
-// describe('PUT/products/:id', () => {
-
-//     test('Update Product Success', (done) => {
+//     test('Get One Product', (done) => {
 //         return request(app)
-//             .put(`/products/${globalId}`)
+//             .get(`/products/${globalId}`)
 //             .set('access_token', access_token)
 //             .set('Accept', 'application/json')
-//             .send(testEditProduct)
-//         .then(response => {
-//             const { status, body } = response;
-//             expect(status).toBe(200);
-//             expect(body).toHaveProperty('name', testEditProduct.name)
-//             expect(body).toHaveProperty('image_url', testEditProduct.image_url)
-//             expect(body).toHaveProperty('price', testEditProduct.price)
-//             expect(body).toHaveProperty('stock', testEditProduct.stock)
-//             done();
-//         })
-//         .catch(err => {
-//             done(err);
-//         })
-//     });
+//             .send()
+//             .then((response) => {
+//                 const { body, status } = response
+//                 expect(status).toBe(200)
+//                 expect(body).toHaveProperty('name', expect.any(String));
+//                 done()
+//             })
+//             .catch((err) => {
+//                 done(err)
+//             })
+//     })
 
-//     test(`Update Product with wrong params.id`, (done) => {
-//         request(app)
-//             .put(`/products/15`)
-//             .set('access_token', access_token)
-//             .set('Accept', 'application/json')
-//             .send(testEditProduct)
-//         .then((response) => {
-//             const { status, body } = response;
-//             expect(status).toBe(404);
-//             expect(body).toHaveProperty('message', 'Product not found');
-//             done();
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             done(err);
-//         })
-//     });
-
-//     test(`Update Product with an Empty "name"`, (done) => {
-//         const dataTest = {
-//             name: '',
-//             image_url: 'https://i.imgur.com/Bcz59cD.png',
-//             price: 23000000,
-//             stock: 8
-//         }
+//     test('Get One Product with wrong "id"', (done) => {
 //         return request(app)
-//             .put(`/products/${globalId}`)
+//             .get(`/products/15`)
 //             .set('access_token', access_token)
 //             .set('Accept', 'application/json')
-//             .send(dataTest)
-//         .then((response) => {
-//             const { status, body } = response;
-//             expect(status).toBe(400);
-//             expect(body).toBe('name cannot be empty');
-//             done();
-//         })
-//         .catch(err => {
-//             done(err);
-//         })
-//     });
-
-//     test(`Update Product with wrong "image_url" format`, (done) => {
-//         const dataTest = {
-//             name: 'Macbook',
-//             image_url: 'MacbokUrl',
-//             price: 23000000,
-//             stock: 3
-//         }
-//         return request(app)
-//             .put(`/products/${globalId}`)
-//             .set('access_token', access_token)
-//             .set('Accept', 'application/json')
-//             .send(dataTest)
-//         .then((response) => {
-//             const { status, body } = response;
-//             expect(status).toBe(400);
-//             expect(body).toBe('incorrect format for image url');
-//             done();
-//         })
-//         .catch(err => {
-//             done(err);
-//         })
-//     });
-
-//     test(`Update Product with negative "price" value`, (done) => {
-//         const dataTest = {
-//             name: 'Macbook',
-//             image_url: 'https://zdnet2.cbsistatic.com/hub/i/2018/08/23/ee30e744-889f-4df4-86db-cdac30453d08/apple-mbp-15-header.jpg',
-//             price: -1,
-//             stock: 3
-//         }
-//         return request(app)
-//             .put(`/products/${globalId}`)
-//             .set('access_token', access_token)
-//             .set('Accept', 'application/json')
-//             .send(dataTest)
-//         .then((response) => {
-//             const { status, body } = response;
-//             expect(status).toBe(400);
-//             expect(body).toBe('price must be equal or greater than 0');
-//             done();
-//         })
-//         .catch(err => {
-//             done(err);
-//         })
-//     });
-
-//     test(`Update Product with negative "stock" value`, (done) => {
-//         const dataTest = {
-//             name: 'Macbook',
-//             image_url: 'https://zdnet2.cbsistatic.com/hub/i/2018/08/23/ee30e744-889f-4df4-86db-cdac30453d08/apple-mbp-15-header.jpg',
-//             price: 23000000,
-//             stock: -3
-//         }
-//         return request(app)
-//             .put(`/products/${globalId}`)
-//             .set('access_token', access_token)
-//             .set('Accept', 'application/json')
-//             .send(dataTest)
-//         .then((response) => {
-//             const { status, body } = response;
-//             expect(status).toBe(400);
-//             expect(body).toBe('stock must be equal or greater than 0');
-//             done();
-//         })
-//         .catch(err => {
-//             done(err);
-//         })
+//             .then((response) => {
+//                 const { status, body } = response;
+//                 expect(status).toBe(404);
+//                 expect(body).toHaveProperty('message' ,'Product not Found');
+//                 done();
+//             })
+//             .catch(err => {
+//                 console.log(err);
+//                 done(err);
+//             })
 //     });
 
 // })
+
+const testEditProduct = {
+    name: 'Macbook edit',
+    image_url: 'https://i.imgur.com/Bcz59cD.png',
+    price: 23000000,
+    stock: 8
+}
+
+describe('PUT/products/:id', () => {
+
+    test('Update Product Success', (done) => {
+        return request(app)
+            .put(`/products/${globalId}`)
+            .set('access_token', access_token)
+            .set('Accept', 'application/json')
+            .send(testEditProduct)
+        .then(response => {
+            const { status, body } = response;
+            expect(status).toBe(200);
+            expect(body).toHaveProperty('name', testEditProduct.name)
+            expect(body).toHaveProperty('image_url', testEditProduct.image_url)
+            expect(body).toHaveProperty('price', testEditProduct.price)
+            expect(body).toHaveProperty('stock', testEditProduct.stock)
+            done();
+        })
+        .catch(err => {
+            done(err);
+        })
+    });
+
+    test(`Update Product with wrong params.id`, (done) => {
+        request(app)
+            .put(`/products/15`)
+            .set('access_token', access_token)
+            .set('Accept', 'application/json')
+            .send(testEditProduct)
+        .then((response) => {
+            const { status, body } = response;
+            expect(status).toBe(404);
+            expect(body).toHaveProperty('message', 'Product not found');
+            done();
+        })
+        .catch(err => {
+            console.log(err);
+            done(err);
+        })
+    });
+
+    test(`Update Product with an Empty "name"`, (done) => {
+        const dataTest = {
+            name: '',
+            image_url: 'https://i.imgur.com/Bcz59cD.png',
+            price: 23000000,
+            stock: 8
+        }
+        return request(app)
+            .put(`/products/${globalId}`)
+            .set('access_token', access_token)
+            .set('Accept', 'application/json')
+            .send(dataTest)
+        .then((response) => {
+            const { status, body } = response;
+            expect(status).toBe(400);
+            expect(body).toBe('name cannot be empty');
+            done();
+        })
+        .catch(err => {
+            done(err);
+        })
+    });
+
+    test(`Update Product with wrong "image_url" format`, (done) => {
+        const dataTest = {
+            name: 'Macbook',
+            image_url: 'MacbokUrl',
+            price: 23000000,
+            stock: 3
+        }
+        return request(app)
+            .put(`/products/${globalId}`)
+            .set('access_token', access_token)
+            .set('Accept', 'application/json')
+            .send(dataTest)
+        .then((response) => {
+            const { status, body } = response;
+            expect(status).toBe(400);
+            expect(body).toBe('incorrect format for image url');
+            done();
+        })
+        .catch(err => {
+            done(err);
+        })
+    });
+
+    test(`Update Product with negative "price" value`, (done) => {
+        const dataTest = {
+            name: 'Macbook',
+            image_url: 'https://zdnet2.cbsistatic.com/hub/i/2018/08/23/ee30e744-889f-4df4-86db-cdac30453d08/apple-mbp-15-header.jpg',
+            price: -1,
+            stock: 3
+        }
+        return request(app)
+            .put(`/products/${globalId}`)
+            .set('access_token', access_token)
+            .set('Accept', 'application/json')
+            .send(dataTest)
+        .then((response) => {
+            const { status, body } = response;
+            expect(status).toBe(400);
+            expect(body).toBe('price must be equal or greater than 0');
+            done();
+        })
+        .catch(err => {
+            done(err);
+        })
+    });
+
+    test(`Update Product with negative "stock" value`, (done) => {
+        const dataTest = {
+            name: 'Macbook',
+            image_url: 'https://zdnet2.cbsistatic.com/hub/i/2018/08/23/ee30e744-889f-4df4-86db-cdac30453d08/apple-mbp-15-header.jpg',
+            price: 23000000,
+            stock: -3
+        }
+        return request(app)
+            .put(`/products/${globalId}`)
+            .set('access_token', access_token)
+            .set('Accept', 'application/json')
+            .send(dataTest)
+        .then((response) => {
+            const { status, body } = response;
+            expect(status).toBe(400);
+            expect(body).toBe('stock must be equal or greater than 0');
+            done();
+        })
+        .catch(err => {
+            done(err);
+        })
+    });
+
+})
 
 // describe('DELETE/products/id', () => {
 
