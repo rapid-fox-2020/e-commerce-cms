@@ -1,5 +1,7 @@
 <template>
 <!-- table Banner START -->
+  <div>
+    <h2>List of Banners</h2>
     <div class="info">
         <table class="table">
             <thead class="thead-dark">
@@ -22,6 +24,7 @@
             </tbody>
         </table>
     </div>
+  </div>
 <!-- table banner END -->
 </template>
 
@@ -39,6 +42,12 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+h2 {
+  background: none;
+  margin: 10px 20px;
+  font-weight: bold;
+  text-decoration: underline;
+  text-align: center;
+}
 </style>

@@ -6,7 +6,11 @@
             {{banner.description}}
         </td>
         <td>{{banner.status}}</td>
-        <td><img width="100" :src="image_url" alt="banner"></td>
+        <td>
+          <div class="zoom">
+            <img width="100" :src="image_url" alt="Banner">
+          </div>
+        </td>
         <td>
             <a @click="editForm(banner.id)" role="button" class="btn btn-warning">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -53,5 +57,11 @@ export default {
 </script>
 
 <style>
+.zoom {
+  transition: transform .2s;
+}
 
+.zoom:hover {
+  transform: scale(2);
+}
 </style>

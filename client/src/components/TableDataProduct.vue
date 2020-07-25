@@ -2,7 +2,11 @@
     <tr class="text-center">
         <td scope="row">{{index+1}}</td>
         <td>{{product.name}}</td>
-        <td><img width="100" :src="image_url" alt="product"></td>
+        <td>
+          <div class="zoom">
+            <img width="70" :src="image_url" alt="product">
+          </div>
+        </td>
         <td>{{product.price}}</td>
         <td>{{product.stock}}</td>
         <td>{{product.category}}</td>

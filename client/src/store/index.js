@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import router from '../router/index';
 
 Vue.use(Vuex);
+const baseURL = 'http://localhost:3000';
 
 export default new Vuex.Store({
   state: {
@@ -51,7 +52,7 @@ export default new Vuex.Store({
     showProducts(context) {
       axios({
         method: 'GET',
-        url: 'http://localhost:3000/products',
+        url: `${baseURL}/products`,
         headers: {
           access_token: localStorage.access_token,
         },
@@ -59,14 +60,14 @@ export default new Vuex.Store({
         .then((result) => {
           context.commit('SET_PRODUCTS', result.data);
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          swal('Error!', 'Something went error.', 'error');
         });
     },
     showBanners(context) {
       axios({
         method: 'GET',
-        url: 'http://localhost:3000/banners',
+        url: `${baseURL}/banners`,
         headers: {
           access_token: localStorage.access_token,
         },
@@ -74,14 +75,14 @@ export default new Vuex.Store({
         .then((result) => {
           context.commit('SET_BANNERS', result.data);
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          swal('Error!', 'Something went error.', 'error');
         });
     },
     deleteProduct(context, id) {
       axios({
         method: 'DELETE',
-        url: `http://localhost:3000/products/${id}`,
+        url: `${baseURL}/products/${id}`,
         headers: {
           access_token: localStorage.access_token,
         },
@@ -90,14 +91,14 @@ export default new Vuex.Store({
           context.commit('DELETE_PRODUCT', +id);
           swal('Success!', `${result.data.message}`, 'success');
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          swal('Error!', 'Something went error.', 'error');
         });
     },
     deleteBanner(context, id) {
       axios({
         method: 'DELETE',
-        url: `http://localhost:3000/banners/${id}`,
+        url: `${baseURL}/banners/${id}`,
         headers: {
           access_token: localStorage.access_token,
         },
@@ -106,14 +107,14 @@ export default new Vuex.Store({
           context.commit('DELETE_BANNER', +id);
           swal('Success!', `${result.data.message}`, 'success');
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          swal('Error!', 'Something went error.', 'error');
         });
     },
     findProduct(context, id) {
       axios({
         method: 'GET',
-        url: `http://localhost:3000/products/${id}`,
+        url: `${baseURL}/products/${id}`,
         headers: {
           access_token: localStorage.access_token,
         },
@@ -122,14 +123,14 @@ export default new Vuex.Store({
           context.commit('FIND_PRODUCT', result.data);
           router.push({ name: 'FormProduct' });
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          swal('Error!', 'Something went error.', 'error');
         });
     },
     findBanner(context, id) {
       axios({
         method: 'GET',
-        url: `http://localhost:3000/banners/${id}`,
+        url: `${baseURL}/banners/${id}`,
         headers: {
           access_token: localStorage.access_token,
         },
@@ -138,14 +139,14 @@ export default new Vuex.Store({
           context.commit('FIND_BANNER', result.data);
           router.push({ name: 'FormBanner' });
         })
-        .catch((err) => {
-          console.log(err.response);
+        .catch(() => {
+          swal('Error!', 'Something went error.', 'error');
         });
     },
     addProduct(context, newProduct) {
       axios({
         method: 'POST',
-        url: 'http://localhost:3000/products',
+        url: `${baseURL}/products`,
         headers: {
           access_token: localStorage.access_token,
         },
@@ -171,7 +172,7 @@ export default new Vuex.Store({
     addBanner(context, newBanner) {
       axios({
         method: 'POST',
-        url: 'http://localhost:3000/banners',
+        url: `${baseURL}/banners`,
         headers: {
           access_token: localStorage.access_token,
         },
@@ -196,7 +197,7 @@ export default new Vuex.Store({
     editProduct(context, editedProduct) {
       axios({
         method: 'PUT',
-        url: `http://localhost:3000/products/${editedProduct.id}`,
+        url: `${baseURL}/products/${editedProduct.id}`,
         headers: {
           access_token: localStorage.access_token,
         },
@@ -222,7 +223,7 @@ export default new Vuex.Store({
     editBanner(context, editedBanner) {
       axios({
         method: 'PUT',
-        url: `http://localhost:3000/banners/${editedBanner.id}`,
+        url: `${baseURL}/banners/${editedBanner.id}`,
         headers: {
           access_token: localStorage.access_token,
         },
@@ -244,7 +245,5 @@ export default new Vuex.Store({
           });
         });
     },
-  },
-  modules: {
   },
 });

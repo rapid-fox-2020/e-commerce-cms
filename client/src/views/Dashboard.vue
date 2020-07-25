@@ -3,8 +3,8 @@
         <!-- sidebar START -->
         <div class="sidebar">
             <div class="user">
-                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                <h5>Welcome, Admin</h5>
+              <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+              <h5>Welcome, Admin</h5>
             </div>
             <ul>
                 <li>
@@ -14,7 +14,7 @@
                 </li>
                 <li>
                   <router-link :to="{name:'BannerTable'}">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>Banner
+                    <i class="fa fa-list" aria-hidden="true"></i>Banner
                   </router-link>
                 </li>
                 <li>

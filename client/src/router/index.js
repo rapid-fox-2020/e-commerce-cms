@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) => {
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name === 'Login' && localStorage.access_token) next({ name: 'Dashboard' });
+  if (to.name === 'Login' && localStorage.access_token) next({ name: 'ProductTable' });
   else next();
 });
 

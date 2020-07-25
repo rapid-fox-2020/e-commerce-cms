@@ -24,7 +24,7 @@
                     id="image_url" placeholder="http://image.jpg">
                 </div>
                 <div class="form-group">
-                    <label for="category">Status Banner</label><br>
+                    <label for="category">Banner's Status</label><br>
                     <select v-model="status" name="status" id="status">
                       <option value="select" selected disabled>--select status--</option>
                       <option value="Active">Active</option>
@@ -59,7 +59,7 @@
                     id="image_url" placeholder="http://image.jpg">
                 </div>
                 <div class="form-group">
-                    <label for="category">Status Banner</label><br>
+                    <label for="category">Banner's Status</label><br>
                     <select v-model="status" name="status" id="status">
                       <option value="select" selected disabled>--select status--</option>
                       <option value="Active">Active</option>
@@ -96,9 +96,6 @@ export default {
   computed: {
     setStatus() {
       return this.$store.state.statusAdd;
-    },
-    initialData() {
-
     },
     name: {
       get() {
