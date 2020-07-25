@@ -12,7 +12,7 @@
               v-model="emailLogin"
               type="email"
               class="form-control"
-              aria-describedby="emailHelp"
+              placeholder="Your email"
             />
             <small class="form-text text-muted">
               We'll never share your email with anyone else.
@@ -20,7 +20,8 @@
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input v-model="passwordLogin" id="passwordLogin" type="password" class="form-control"/>
+            <input v-model="passwordLogin" id="passwordLogin" type="password" class="form-control"
+            placeholder="Your password"/>
           </div>
           <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group mr-2" role="group" aria-label="First group">

@@ -7,19 +7,23 @@
       <form @submit.prevent="addProduct">
         <div class="form-group">
           <label for="name">Product Name:</label>
-          <input v-model="newProduct.addName" type="text" class="form-control" id="name">
+          <input v-model="newProduct.addName" type="text" class="form-control" id="name"
+          placeholder="Product name">
         </div>
         <div class="form-group">
           <label for="image">Image Url:</label>
-          <input v-model="newProduct.addImage" type="text" class="form-control" id="image">
+          <input v-model="newProduct.addImage" type="text" class="form-control" id="image"
+          placeholder="Image url">
         </div>
           <div class="form-group">
           <label for="price">Price:</label>
-          <input v-model="newProduct.addPrice" type="text" class="form-control" id="price">
+          <input v-model="newProduct.addPrice" type="text" class="form-control" id="price"
+          placeholder="0">
         </div>
           <div class="form-group">
           <label for="stock">Stock:</label>
-          <input v-model="newProduct.addStock" type="stock" class="form-control" id="stock">
+          <input v-model="newProduct.addStock" type="stock" class="form-control" id="stock"
+          placeholder="0">
         </div>
         <div>
         <button type="submit" class="btn btn-primary">Save</button> |
@@ -39,8 +43,8 @@ export default {
       newProduct: {
         addName: '',
         addImage: '',
-        addPrice: 0,
-        addStock: 0,
+        addPrice: null,
+        addStock: null,
       },
     };
   },
