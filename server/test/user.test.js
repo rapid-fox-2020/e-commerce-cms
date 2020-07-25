@@ -4,14 +4,7 @@ const { encode } = require('../helper/jwt')
 const { User, sequelize } = require('../models')
 const { queryInterface } = sequelize
 
-beforeAll ( async (done) => {
-    try {
-        await queryInterface.bulkDelete(`Users`, {})
-        done()
-    } catch(err) {
-        done(err)
-    }
-
+beforeAll ((done) => {
     let input = {
         email: "admin@mail.com",
         password: "12345",
@@ -27,6 +20,15 @@ beforeAll ( async (done) => {
     }).catch((err) => {
         done(err)
     });
+})
+
+afterAll ( async (done) => {
+    try {
+        await queryInterface.bulkDelete(`Users`, {})
+        done()
+    } catch(err) {
+        done(err)
+    }
 })
 
 let correctUser = {
@@ -72,6 +74,5 @@ describe('POST /login', () => {
                 done(err)
             })
     });
-
 })
   
