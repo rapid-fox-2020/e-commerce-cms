@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import router from '../router/index';
 
 Vue.use(Vuex);
-const baseURL = 'http://localhost:3000';
+const baseURL = 'https://murmuring-headland-34171.herokuapp.com';
 
 export default new Vuex.Store({
   state: {

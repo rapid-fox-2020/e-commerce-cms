@@ -1,7 +1,7 @@
 <template>
     <tr class="text-center">
         <td scope="row">{{index+1}}</td>
-        <td>{{product.name}}</td>
+        <td class="text-wrap" style="width: 20rem;">{{product.name}}</td>
         <td>
           <div class="zoom">
             <img width="70" :src="image_url" alt="product">
