@@ -13,6 +13,10 @@ app.use(express.json());
 app.use(router);
 app.use(errorHandler);
 
+app.get("/", (req, res) => {
+  console.log("HALO SEMUANYA");
+});
+
 app.listen(PORT, function () {
   console.log(`NOW RUNNING ON PORT ${PORT}`);
 });
