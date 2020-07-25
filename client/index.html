@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <title>E-Commerce</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light" style=" background-color: #e3f2fd;">
+    <a class="navbar-brand" href="#">E-Commerce</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+
+  <!-- Table -->
+  <div class="container mt-3">
+    <section>
+      <h2 class="text-center">List of Products</h2>
+      <table class="table table-striped table-responsive-sm"">
+        <thead class=" text-center text-white thead-ligh bg-info ">
+          <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Action</th>
+
+          </tr>
+        </thead>
+        <tbody id=" todo-list">
+        <tr>
+          <td>1</td>
+          <td>Laptop</td>
+          <td>....</td>
+          <td>5000000</td>
+          <td>50</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-edit"> </i>Edit</button>
+            <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Delete</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>1</td>
+          <td>Laptop</td>
+          <td>....</td>
+          <td>5000000</td>
+          <td>50</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-edit"> </i>Edit</button>
+            <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <button type="button" class="btn btn-primary btn-sm float-right mb-1"><i class="fa fa-edit"> </i>+Add</button>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Login -->
+    <section>
+      <div class="card container my-5" style="width : 20em; border-radius : 41px; ">
+        <div class="my-2">
+          <!-- <h5 class="card-header white-text text-center py-8" style="border-radius : 50px; -webkit-box-shadow: inset 0px 0px 32px 9px rgba(51,181,229,0.6);
+            -moz-box-shadow: inset 0px 0px 32px 9px rgba(51,181,229,0.6);
+            box-shadow: inset 0px 0px 32px 9px rgba(51,181,229,0.6); "> -->
+
+          <div style="color:black; font-size:5em; margin-bottom:-45px; margin-top:-30px">
+            <i class="fab fa-aviato"></i>
+          </div>
+          <strong style="color: black">Sign in</strong>
+          </h5>
+        </div>
+        <div class="card-body px-lg-5 pt-0">
+          <form class="text-center" style="color: #757575;">
+            <div class="md-form">
+              <input type="email" id="materialLoginFormEmail" class="form-control" />
+              <label for="materialLoginFormEmail">Email</label>
+            </div>
+
+            <div class="md-form">
+              <input type="password" id="materialLoginFormPassword" class="form-control" />
+              <label for="materialLoginFormPassword">Password</label>
+            </div>
+
+            <!-- Sign in button -->
+            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit"
+              style="border-radius:50px; border-color: rgba(32,252,32,0.6);">Sign in</button>
+            <p> Not a member? <a href @click.prevent="registerPage">Register</a>
+            </p>
+            <p>or sign in with:</p> <a type="button" class="btn-floating btn-git" style="color:rgb(51, 181, 229)">
+              <i class="fab fa-google-plus" style="font-size:2em"></i>
+            </a>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Register -->
+    <section>
+      <div class="card container my-5" style="width : 19em; border-radius : 41px; ">
+        <div class="mt-2">
+          <!-- <h5 class="card-header white-text text-center py-7" style="border-radius : 50px; -webkit-box-shadow: inset 0px 0px 20px 0px rgba(32,252,32,0.8);
+              -moz-box-shadow: inset 0px 0px 20px 0px rgba(32,252,32,0.8);
+              box-shadow: inset 0px 0px 20px 0px rgba(32,252,32,0.8); "> -->
+
+          <div style="color:black; font-size:5em; margin-bottom:-45px; margin-top:-30px">
+            <i class="fab fa-aviato"></i>
+          </div>
+          <strong style="color: black">Sign Up</strong>
+          </h5>
+        </div>
+        <div class="card-body px-lg-5 pt-0">
+          <form class="text-center" style="color: #757575;">
+            <div class="md-form">
+              <input type="text" id="first_name" class="form-control" />
+              <label for="first_name">first name</label>
+            </div>
+            <div class="md-form">
+              <input type="text" id="last_name" class="form-control" />
+              <label for="first_name">last name</label>
+            </div>
+
+            <div class="md-form">
+              <input type="email" id="email" class="form-control" />
+              <label for="materialLoginFormEmail">email</label>
+            </div>
+
+            <div class="md-form">
+              <input type="password" id="materialLoginFormPassword" class="form-control" required
+                v-model="input_password" />
+              <label for="materialLoginFormPassword">password</label>
+            </div>
+
+            <!-- Sign in button -->
+            <button class="btn btn-outline-success btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit"
+              style="border-radius:50px;">Sign Up</button>
+
+            <p style="margin-bottom: -2px">
+              Back to Page
+            </p>
+            <a class="text-success" href @click.prevent="backToLogin">Login</a>
+          </form>
+        </div>
+      </div>
+    </section>
+
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAdd" data-whatever="@mdo">Open
+      modal add</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEdit" data-whatever="@fat">Open
+      modal edit</button>
+    <!-- Modal  -->
+    <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="name">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Price:</label>
+                <input type="text" class="form-control" id="price">
+              </div>
+
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Stock:</label>
+                <input type="text" class="form-control" id="stock">
+              </div>
+
+              <!-- <div class="form-group">
+                <label for="message-text" class="col-form-label">Price:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div> -->
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

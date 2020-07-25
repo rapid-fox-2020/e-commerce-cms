@@ -3,7 +3,11 @@ const { Product } = require('../models')
 class ProductController {
 
   static getAll(req, res, next) {
-    Product.findAll()
+    Product.findAll({
+      order: [
+        ['id', 'ASC']
+      ]
+    })
       .then((data) => {
         return res.status(200).json(data)
       })
@@ -34,7 +38,8 @@ class ProductController {
       name: req.body.name,
       img_url: req.body.img_url,
       price: req.body.price,
-      stock: req.body.stock
+      stock: req.body.stock,
+      updatedAt: new Date()
     }
     Product.update(newUpdate, { where: { id: productId }, returning: true })
       .then((data) => {

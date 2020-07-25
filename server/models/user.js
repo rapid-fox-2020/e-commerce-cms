@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     email: {
       type: DataTypes.STRING,
+      unique: true,
       validate: {
         notEmpty: {
           args: true,
           msg: "Email must be filled"
-
         },
         isEmail: true
       }

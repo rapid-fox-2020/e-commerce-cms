@@ -94,8 +94,157 @@ describe('POST/products', () => {
         done(err)
       })
   })
-})
 
+  test('post response name must be filled', (done) => {
+    request(app)
+      .post('/products')
+      .send({
+        name : '',
+        img_url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+        price: 5000000,
+        stock: 5
+      })
+      .set('access_token', access_token)
+      .set('Accept', 'application/json')
+      .then(response => {
+        const { body, status } = response
+        expect(status).toBe(400)
+        expect(Array.isArray([body])).toBe(true)
+        done()
+      })
+      .catch((err) => {
+        done(err)
+      })
+  })
+
+  test('post response img_url must be filled', (done) => {
+    request(app)
+      .post('/products')
+      .send({
+        name: 'Laptop',
+        img_url: '',
+        price: 5000000,
+        stock: 5
+      })
+      .set('access_token', access_token)
+      .set('Accept', 'application/json')
+      .then(response => {
+        const { body, status } = response
+        expect(status).toBe(400)
+        expect(Array.isArray([body])).toBe(true)
+        done()
+      })
+      .catch((err) => {
+        done(err)
+      })
+  })
+
+  test('post response price must be filled', (done) => {
+    request(app)
+      .post('/products')
+      .send({
+        name: 'Laptop',
+        img_url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+        price: '',
+        stock: 5
+      })
+      .set('access_token', access_token)
+      .set('Accept', 'application/json')
+      .then(response => {
+        const { body, status } = response
+        expect(status).toBe(400)
+        expect(Array.isArray([body])).toBe(true)
+        done()
+      })
+      .catch((err) => {
+        done(err)
+      })
+  })
+
+  test('post response stock must be filled', (done) => {
+    request(app)
+      .post('/products')
+      .send({
+        name: 'Laptop',
+        img_url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+        price: 500000,
+        stock: ''
+      })
+      .set('access_token', access_token)
+      .set('Accept', 'application/json')
+      .then(response => {
+        const { body, status } = response
+        expect(status).toBe(400)
+        expect(Array.isArray([body])).toBe(true)
+        done()
+      })
+      .catch((err) => {
+        done(err)
+      })
+  })
+
+  test('post response price minimal 0', (done) => {
+    request(app)
+      .post('/products')
+      .send({
+        name: 'Laptop',
+        img_url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+        price: -1,
+        stock: 10
+      })
+      .set('access_token', access_token)
+      .set('Accept', 'application/json')
+      .then(response => {
+        const { body, status } = response
+        expect(status).toBe(400)
+        expect(Array.isArray([body])).toBe(true)
+        done()
+      })
+      .catch((err) => {
+        done(err)
+      })
+  })
+
+
+  test('post response stock minimal 0', (done) => {
+    request(app)
+      .post('/products')
+      .send({
+        name: 'Laptop',
+        img_url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+        price: 5000000,
+        stock: -10
+      })
+      .set('access_token', access_token)
+      .set('Accept', 'application/json')
+      .then(response => {
+        const { body, status } = response
+        expect(status).toBe(400)
+        expect(Array.isArray([body])).toBe(true)
+        done()
+      })
+      .catch((err) => {
+        done(err)
+      })
+  })
+
+  test('post response access_token', (done) => {
+    request(app)
+      .post('/products')
+      .send(testProduct)
+      .set('Accept', 'application/json')
+      .then(response => {
+        const { body, status } = response
+        expect(status).toBe(404)
+        expect(body).toHaveProperty('message', 'Data not found')
+        done()
+      })
+      .catch((err) => {
+        done(err)
+      })
+  })
+
+})
 
 describe('GET/products', () => {
   test('get response json', (done) => {
@@ -108,7 +257,22 @@ describe('GET/products', () => {
         const { body, status } = response
         expect(status).toBe(200)
         expect(Array.isArray([body])).toBe(true)
+        done()
+      })
+      .catch((err) => {
+        done(err)
+      })
+  })
 
+  test('put response access_token', (done) => {
+    request(app)
+      .post('/products')
+      .send(testProduct)
+      .set('Accept', 'application/json')
+      .then(response => {
+        const { body, status } = response
+        expect(status).toBe(404)
+        expect(body).toHaveProperty('message', 'Data not found')
         done()
       })
       .catch((err) => {
@@ -133,6 +297,21 @@ describe('PUT/products/id', () => {
         done(err)
       })
   })
+
+  test('put response failed access_token', (done) => {
+    request(app)
+      .put(`/products/${globalId}`)
+      .set('Accept', 'application/json')
+      .then(response => {
+        const { body, status } = response
+        expect(status).toBe(404)
+        expect(body).toHaveProperty('message', 'Data not found')
+        done()
+      })
+      .catch((err) => {
+        done(err)
+      })
+  })
 })
 
 describe('DELETE/products/id', () => {
@@ -151,8 +330,22 @@ describe('DELETE/products/id', () => {
         done(err)
       })
   })
-})
 
+  test('delete response failed access_token', (done) => {
+    request(app)
+      .delete(`/products/${globalId}`)
+      .set('Accept', 'application/json')
+      .then(response => {
+        const { body, status } = response
+        expect(status).toBe(404)
+        expect(body).toHaveProperty('message', 'Data not found')
+        done()
+      })
+      .catch((err) => {
+        done(err)
+      })
+  })
+})
 
 describe('Error authorization', () => {
   test('error authorization response code 403', (done) => {

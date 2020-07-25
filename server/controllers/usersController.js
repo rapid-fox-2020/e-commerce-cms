@@ -17,9 +17,9 @@ class UserController {
       .then((data) => {
         if (!data) {
           throw {
-            statusCode: 404,
+            statusCode: 400,
             name: "CustomValidation",
-            message: "Data not found"
+            message: "email or password incorrect"
           }
         } else {
           if (checkPassword(password, data.password)) {
