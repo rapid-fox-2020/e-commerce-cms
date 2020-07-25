@@ -10,6 +10,9 @@
     "test": "jest --runInBand --detectOpenHandles --forceExit --verbose",
     "start" : "node app.js"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "keywords": [],
   "author": "Faturahman Yusup",
   "license": "ISC",
