@@ -1,5 +1,5 @@
 const { decode } = require("../helpers/jsonwebtoken.js")
-const { User, Task } = require("../models")
+const { User } = require("../models")
 
 const userAuthentication = (req,res,next)=>{
   let accessToken = req.headers.token

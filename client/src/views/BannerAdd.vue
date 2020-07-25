@@ -1,27 +1,27 @@
 <template>
   <div class="container col-6">
-    <h1>Add Your Product Here</h1>
-      <Form @updatedData="addProduct"></Form>
+    <h1>Add Your Banner Here</h1>
+      <FormBanner @updatedData="addBanner"></FormBanner>
   </div>
 </template>
 
 <script>
 // import axios from 'axios';
-import Form from '../components/Form.vue';
+import FormBanner from '../components/FormBanner.vue';
 
 export default {
   components: {
-    Form,
+    FormBanner,
   },
   data() {
     return {
     };
   },
   methods: {
-    addProduct() {
-      this.$store.dispatch('addProduct')
+    addBanner() {
+      this.$store.dispatch('addBanner')
         .then(() => {
-          this.$router.push({ name: 'Admin' });
+          this.$router.push({ name: 'Banner' });
         })
         .catch((err) => {
           console.log(err);

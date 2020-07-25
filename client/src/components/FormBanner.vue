@@ -1,37 +1,19 @@
 <template>
   <form v-on:submit.prevent="sendUpdateData">
     <div class="form-group">
-      <label for="exampleInputEmail1">Product Name</label>
-      <input type="text" class="form-control" placeholder="product_name"
-      v-model="$store.state.name">
+      <label for="exampleInputEmail1">Banner Image_URL</label>
+      <input type="text" class="form-control" placeholder="banner_image_url"
+      v-model="$store.state.banner_image_url">
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Product Image_URL</label>
-      <input type="text" class="form-control" placeholder="image_url"
-      v-model="$store.state.url">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Product Price</label>
-      <input type="number" class="form-control"
-      placeholder="product_price" v-model="$store.state.price">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Product Stock</label>
-      <input type="number" class="form-control"
-      placeholder="product_stock" v-model="$store.state.stock">
-    </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">Category</label>
-      <select class="form-control" id="exampleFormControlSelect1" v-model="$store.state.category">
-        <option :selected="$store.state.category == 'Kemeja'" >Kemeja</option>
-        <option :selected="$store.state.category == 'Kaos'" >Kaos</option>
-        <option :selected="$store.state.category == 'Celana'" >Celana</option>
-        <option :selected="$store.state.category == 'Sepatu'" >Sepatu</option>
-        <option :selected="$store.state.category == 'Jas'" >Jas</option>
+      <label for="exampleFormControlSelect1">Banner Status</label>
+      <select class="form-control" id="exampleFormControlSelect1" v-model="$store.state.banner_status">
+        <option :selected="$store.state.banner_status == 'active'" >Active</option>
+        <option :selected="$store.state.banner_status == 'inactive'" >Inactive</option>
       </select>
     </div>
     <button type="submit" class="btn btn-primary mr-3">Submit</button>
-    <router-link :to="{ name: 'Admin' }">
+    <router-link :to="{ name: 'Banner' }">
     <button type="button" class="btn btn-secondary" @click="backButton">Back</button>
   </router-link>
   </form>
@@ -49,7 +31,7 @@ export default {
       this.$emit('updatedData');
     },
     backButton() {
-      this.$store.commit('SET_EMPTYDATA')
+      this.$store.commit('SET_EMPTYDATABANNER')
     },
   },
   created() {

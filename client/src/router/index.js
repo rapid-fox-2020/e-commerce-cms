@@ -3,7 +3,11 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Admin from '../views/Admin.vue';
 import ProductAdd from '../views/ProductAdd.vue';
+import BannerAdd from '../views/BannerAdd.vue';
 import ProductEdit from '../views/ProductEdit.vue';
+import BannerEdit from '../views/BannerEdit.vue';
+import ProductByCategory from '../views/ProductByCategory.vue'
+import Banner from '../views/Banner.vue';
 import NotFound from '../views/NotFound.vue';
 
 Vue.use(VueRouter);
@@ -15,17 +19,14 @@ const routes = [
     component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
-  {
     path: '/dashboard',
     name: 'Admin',
     component: Admin,
+  },
+  {
+    path: '/banners',
+    name: 'Banner',
+    component: Banner,
   },
   {
     path: '/productAdd',
@@ -33,9 +34,26 @@ const routes = [
     component: ProductAdd,
   },
   {
+    path: '/bannerAdd',
+    name: 'BannerAdd',
+    component: BannerAdd,
+  },
+  {
     path: '/product/:id',
     name: 'ProductEdit',
     component: ProductEdit,
+    props: true,
+  },
+  {
+    path: '/banners/:id',
+    name: 'BannerEdit',
+    component: BannerEdit,
+    props: true,
+  },
+  {
+    path: '/products/:category',
+    name: 'ProductByCategory',
+    component: ProductByCategory,
     props: true,
   },
   {

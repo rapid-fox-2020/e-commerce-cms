@@ -1,18 +1,18 @@
 <template>
   <div class="container col-6">
-    <h1>Edit Your Product Here</h1>
-      <Form @updatedData="editProduct">
-    </Form>
+    <h1>Edit Your Banner Here</h1>
+      <FormBanner @updatedData="editBanner">
+    </FormBanner>
   </div>
 </template>
 
 <script>
 // import axios from 'axios';
-import Form from '../components/Form.vue';
+import FormBanner from '../components/FormBanner.vue';
 
 export default {
   components: {
-    Form,
+    FormBanner,
   },
   watch: {
     $route() {
@@ -25,11 +25,10 @@ export default {
     };
   },
   methods: {
-    editProduct() {
-      this.$store.dispatch('editProduct')
+    editBanner() {
+      this.$store.dispatch('editBanner')
         .then(() => {
-          console.log(this.$route.params)
-          this.$router.push({ name: 'Admin' });
+          this.$router.push({ name: 'Banner' });
         })
         .catch((err) => {
           console.log(err);

@@ -59,7 +59,16 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       }
-    }
+    },
+    category: {
+      type: DataTypes.STRING,
+      validate:{
+        notEmpty:{
+          args:true,
+          msg:"Category is required"
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'Product',

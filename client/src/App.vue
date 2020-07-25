@@ -12,18 +12,45 @@
         <li class="nav-item active">
           <router-link to="/" class="nav-link">Home</router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/about" class="nav-link">About</router-link>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="$store.state.isLoggedIn">
           <router-link to="/dashboard" class="nav-link">Dashboard</router-link>
         </li>
+        <li class="nav-item" v-if="$store.state.isLoggedIn">
+          <router-link to="/banners" class="nav-link">Banner</router-link>
+        </li>
       </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle mr-4"
+        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false"
+        v-if="$store.state.isLoggedIn">
+      Show Product By Category
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <router-link v-for="category in $store.state.categories"
+      :key="category.id"
+      :to="{ name: 'ProductByCategory', params: {category: category} }"
+      class="dropdown-item">{{ category }}</router-link>
     </div>
+    </div>
+      <button type="button" class="btn btn-danger"
+      v-if="$store.state.isLoggedIn" @click="logout">Logout</button>
   </nav>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    logout() {
+      this.$store.commit('SET_LOGOUT');
+      this.$router.push({ name: 'Home' });
+    },
+  },
+};
+</script>
 
 <style>
 

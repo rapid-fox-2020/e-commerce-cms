@@ -6,6 +6,8 @@ productRoutes.get("/products",userAuthentication, userAuthorization,ProductContr
 
 productRoutes.get("/products/:id",userAuthentication,userAuthorization,ProductController.showById)
 
+productRoutes.get("/products/:category",userAuthentication,userAuthorization,ProductController.showByCategory)
+
 productRoutes.post("/products",userAuthentication,userAuthorization,ProductController.addProduct)
 
 productRoutes.put("/products/:id",userAuthentication,userAuthorization,ProductController.updateProduct)

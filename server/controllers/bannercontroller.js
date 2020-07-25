@@ -1,8 +1,8 @@
-const { Product } = require("../models")
+const { Banner } = require("../models")
 
-class ProductController {
+class BannerController {
   static showAll(req,res,next){
-    Product.findAll({
+    Banner.findAll({
       order: [['id','ASC']]
     })
     .then((data)=>{
@@ -13,23 +13,8 @@ class ProductController {
     })
   }
 
-  static showByCategory(req,res,next){
-    Product.findAll({
-      where:{
-        category: req.body.category
-      },
-      order:[['id','ASC']]
-    })
-    .then((data)=>{
-      return res.status(200).json(data)
-    })
-    .catch(err=>{
-      next(err)
-    })
-  }
-
   static showById(req,res,next){
-    Product.findByPk(+req.params.id)
+    Banner.findByPk(+req.params.id)
     .then((data)=>{
       if(!data){
         const errorMessage = {
@@ -47,15 +32,13 @@ class ProductController {
       next(err)
     })
   }
-  static addProduct(req,res,next){
-    let product = {
-      name:req.body.name,
+
+  static addBanner(req,res,next){
+    let banner = {
       image_url: req.body.image_url,
-      price:req.body.price,
-      stock:req.body.stock,
-      category:req.body.category,
+      status:req.body.status,
     }
-    Product.create(product)
+    Banner.create(banner)
     .then((data)=>{
       if(data.id){
         return res.status(201).json(data)
@@ -66,14 +49,11 @@ class ProductController {
     })
   }
 
-  static updateProduct(req,res,next){
-    let { name, image_url, price, stock, category } = req.body
-    Product.update({
-          name:name,
+  static updateBanner(req,res,next){
+    let { image_url, status } = req.body
+    Banner.update({
           image_url:image_url,
-          price: +price,
-          stock: +stock,
-          category: category,
+          status: status,
         },{
           where:{
           id: +req.params.id
@@ -96,12 +76,12 @@ class ProductController {
     })
   }
 
-  static deleteProduct(req,res,next){
+  static deleteBanner(req,res,next){
     let deletedData = []
-    Product.findByPk(+req.params.id)
+    Banner.findByPk(+req.params.id)
     .then((data)=>{
       deletedData.push(data)
-      return Product.destroy({
+      return Banner.destroy({
         where:{
           id: +req.params.id
         }
@@ -126,4 +106,5 @@ class ProductController {
   }
 }
 
-module.exports = ProductController
+
+module.exports = BannerController
