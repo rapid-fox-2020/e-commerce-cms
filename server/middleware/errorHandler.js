@@ -6,9 +6,19 @@ function errorHandler (err, req, res, next) {
             err.errors.forEach(element => {
                 message.push(element.message)
             });
-            return res.status(400).json(message);
+            return res.status(400).json(message.join());
 
         case "ErrorValidation":
+            return res.status(err.status).json({
+                message: err.message
+            })
+
+        case "ProductNotFound":
+            return res.status(err.status).json({
+                message: err.message
+            })
+
+        case "invalidToken":
             return res.status(err.status).json({
                 message: err.message
             })

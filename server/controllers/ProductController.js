@@ -54,20 +54,18 @@ class ProductController {
             stock: req.body.stock,
         }
 
-        Product.update(updateProduct, {
-            where: {
-                id
-            },
-            returning: true
-        })
-        .then((updateProduct) => {
-            if (updateProduct){
-                return res.status(200).json(updateProduct[1][0])
+        Product.findByPk(id)
+        .then((product) => {
+            if (product) {
+                return product.update(updateProduct)
             } else {
-                throw {status: 404, name: "ErrorValidation", message:"Product not Found"}
+                throw { status: 404, message: 'Product not found', name: "ProductNotFound" }
             }
         })
-        .catch((err) => {
+        .then((data) => {
+            return res.status(200).json(data)
+        })
+        .catch(err => {
             next(err)
         })
     }
