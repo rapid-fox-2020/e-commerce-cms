@@ -18,11 +18,11 @@ module.exports = {
       },
       price: {
         allowNull: false,
-        type: Sequelize.DOUBLE
+        type: Sequelize.INTEGER
       },
       stock: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
