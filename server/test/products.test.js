@@ -188,39 +188,18 @@ const testProduct = {
     
 // });
 
-describe('GET/products', () => {
+// describe('GET/products', () => {
 
-    test('Get All Products', (done) => {
-        return request(app)
-            .get('/products')
-            .send()
-            .set('access_token', access_token)
-            .set('Accept', 'application/json')
-            .then(response => {
-                const { body, status } = response
-                expect(status).toBe(200)
-                expect(Array.isArray(body)).toBeTruthy();
-                done()
-            })
-            .catch((err) => {
-                done(err)
-            })
-    })
-
-})
-
-// describe('GET/products/:id', () => {
-
-//     test('Get One Product', (done) => {
+//     test('Get All Products', (done) => {
 //         return request(app)
-//             .get(`/products/${globalId}`)
+//             .get('/products')
+//             .send()
 //             .set('access_token', access_token)
 //             .set('Accept', 'application/json')
-//             .send()
-//             .then((response) => {
+//             .then(response => {
 //                 const { body, status } = response
 //                 expect(status).toBe(200)
-//                 expect(body).toHaveProperty('name', expect.any(String));
+//                 expect(Array.isArray(body)).toBeTruthy();
 //                 done()
 //             })
 //             .catch((err) => {
@@ -228,24 +207,45 @@ describe('GET/products', () => {
 //             })
 //     })
 
-//     test('Get One Product with wrong "id"', (done) => {
-//         return request(app)
-//             .get(`/products/15`)
-//             .set('access_token', access_token)
-//             .set('Accept', 'application/json')
-//             .then((response) => {
-//                 const { status, body } = response;
-//                 expect(status).toBe(404);
-//                 expect(body).toHaveProperty('message' ,'Product not Found');
-//                 done();
-//             })
-//             .catch(err => {
-//                 console.log(err);
-//                 done(err);
-//             })
-//     });
-
 // })
+
+describe('GET/products/:id', () => {
+
+    test('Get One Product', (done) => {
+        return request(app)
+            .get(`/products/${globalId}`)
+            .set('access_token', access_token)
+            .set('Accept', 'application/json')
+            .send()
+            .then((response) => {
+                const { body, status } = response
+                expect(status).toBe(200)
+                expect(body).toHaveProperty('name', expect.any(String));
+                done()
+            })
+            .catch((err) => {
+                done(err)
+            })
+    })
+
+    test('Get One Product with wrong "id"', (done) => {
+        return request(app)
+            .get(`/products/15`)
+            .set('access_token', access_token)
+            .set('Accept', 'application/json')
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toBe(404);
+                expect(body).toHaveProperty('message' ,'Product not Found');
+                done();
+            })
+            .catch(err => {
+                console.log(err);
+                done(err);
+            })
+    });
+
+})
 
 // const testEditProduct = {
 //     name: 'Macbook edit',
