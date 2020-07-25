@@ -1,4 +1,4 @@
-### Kanban API Documentation
+### e-commerce-cms API Documentation
 ​
 # Method Use (POST)
 ​
@@ -14,7 +14,7 @@ Request body:
 ​
 ```json
 {
-    "username": "admin",
+    "email": "admin",
     "password": "admin"
 }
 ```

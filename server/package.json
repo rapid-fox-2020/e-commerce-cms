@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --runInBand --detectOpenHandles --forceExit --verbose --watch"
+    "test": "jest --runInBand --detectOpenHandles --forceExit --verbose --watch",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
