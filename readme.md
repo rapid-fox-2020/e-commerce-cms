@@ -137,8 +137,11 @@ _Request Body_
 
 ```
 {
-    "title": "Learn third API",
-    "category": "Todo",
+    "name": "Laptop",
+    "image_url": "https://d2pa5gi5n2e1an.cloudfront.net/global/images/product/laptops/ASUS_ROG_STRIX_Hero_II_/ASUS_ROG_STRIX_Hero_II__L_1.jpg",
+    "price": 12000000,
+    "stock": 2,
+    "category": "elektronik",
 }
 ```
 
