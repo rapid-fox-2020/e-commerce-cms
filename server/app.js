@@ -14,7 +14,7 @@ app.use(router);
 app.use(errorHandler);
 
 app.get("/", (req, res) => {
-  console.log("HALO SEMUANYA");
+  res.send("halo semuanya");
 });
 
 app.listen(PORT, function () {
