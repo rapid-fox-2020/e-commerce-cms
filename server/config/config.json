@@ -20,5 +20,5 @@
     "host": "ec2-34-200-15-192.compute-1.amazonaws.com",
     "dialect": "postgres",
     "port": 5432,
-  }
+  },
 }
