@@ -52,7 +52,7 @@ export default {
       this.$router.push({path: '/login'});
     },
     showListProduct() {
-      this.selected = 'listProduct';
+      this.selected = 'Dashboard';
       this.page = 'listProduct';
     },
     showAddProduct() {

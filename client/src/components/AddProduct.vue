@@ -64,6 +64,7 @@ export default {
         this.image_url = '';
         this.stock = null;
         this.price = null;
+        setTimeout(() => this.name = '', 3000);
       })
       .catch(err = console.log(err));
     }

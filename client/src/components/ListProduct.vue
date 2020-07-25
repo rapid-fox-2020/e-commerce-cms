@@ -7,7 +7,7 @@
 
     <!-- Table -->
     <div class="mt-3 table-responsive scroll">
-      <table class="table table-striped scroll">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>No</th>
@@ -18,8 +18,8 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody class="scroll">
-          <tr v-for="(product, index) in $store.state.products" :key="product.updatedAt">
+        <tbody>
+          <tr v-for="(product, index) in $store.state.products" :key="product.id">
             <td>{{ index + 1}}</td>
             <td>{{ product.name }}</td>
             <td>
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import swal from 'sweetalert';
+
 export default {
   name: "AddProduct",
   created() {
@@ -50,7 +52,20 @@ export default {
   },
   methods: {
     destroy(productId) {
-      this.$store.dispatch("destroyProduct", productId);
+      swal({
+        title: "Are you sure?",
+        text: "This product will be delete permanently",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then(answer => {
+        console.log(answer);
+        if (answer) {
+          this.$store.dispatch("destroyProduct", productId);
+        }
+      })
+      .catch(err => console.log(err));
     },
     edit(product) {
       this.$emit("editPage", product);
