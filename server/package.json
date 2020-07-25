@@ -18,7 +18,8 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "jest --detectOpenHandles --runInBand --watchAll"
+    "test": "jest --detectOpenHandles --runInBand --watchAll",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
