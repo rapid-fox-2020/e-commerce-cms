@@ -119,7 +119,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'post',
-          url: 'http://localhost:3002/login',
+          url: 'https://nameless-ocean-59312.herokuapp.com/login',
           data: {
             email: this.state.emailLogin,
             password: this.state.passwordLogin,
@@ -139,7 +139,7 @@ export default new Vuex.Store({
     getProducts(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:3002/products',
+        url: 'https://nameless-ocean-59312.herokuapp.com/products',
         headers: {
           token: localStorage.accessToken,
         },
@@ -155,7 +155,7 @@ export default new Vuex.Store({
     getBanners(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:3002/banners',
+        url: 'https://nameless-ocean-59312.herokuapp.com/banners',
         headers: {
           token: localStorage.accessToken,
         },
@@ -172,7 +172,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'post',
-          url: 'http://localhost:3002/products',
+          url: 'https://nameless-ocean-59312.herokuapp.com/products',
           data: {
             name: this.state.name,
             image_url: this.state.url,
@@ -199,7 +199,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'post',
-          url: 'http://localhost:3002/banners',
+          url: 'https://nameless-ocean-59312.herokuapp.com/banners',
           data: {
             image_url: this.state.banner_image_url,
             status: this.state.banner_status,
@@ -222,7 +222,7 @@ export default new Vuex.Store({
     getProductById(context, payload) {
       axios({
         method: 'get',
-        url: `http://localhost:3002/products/${payload}`,
+        url: `https://nameless-ocean-59312.herokuapp.com/products/${payload}`,
         headers: {
           token: localStorage.accessToken,
         },
@@ -238,7 +238,7 @@ export default new Vuex.Store({
     getBannerById(context, payload) {
       axios({
         method: 'get',
-        url: `http://localhost:3002/banners/${payload}`,
+        url: `https://nameless-ocean-59312.herokuapp.com/banners/${payload}`,
         headers: {
           token: localStorage.accessToken,
         },
@@ -255,7 +255,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'put',
-          url: `http://localhost:3002/products/${this.state.id}`,
+          url: `https://nameless-ocean-59312.herokuapp.com/products/${this.state.id}`,
           headers: {
             token: localStorage.accessToken,
           },
@@ -283,7 +283,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'put',
-          url: `http://localhost:3002/banners/${this.state.banner_id}`,
+          url: `https://nameless-ocean-59312.herokuapp.com/banners/${this.state.banner_id}`,
           headers: {
             token: localStorage.accessToken,
           },
@@ -307,7 +307,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'delete',
-          url: `http://localhost:3002/products/${this.state.id}`,
+          url: `https://nameless-ocean-59312.herokuapp.com/products/${this.state.id}`,
           headers: {
             token: localStorage.accessToken,
           },
@@ -327,7 +327,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'delete',
-          url: `http://localhost:3002/banners/${this.state.banner_id}`,
+          url: `https://nameless-ocean-59312.herokuapp.com/banners/${this.state.banner_id}`,
           headers: {
             token: localStorage.accessToken,
           },
@@ -346,7 +346,7 @@ export default new Vuex.Store({
     getCategories(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:3002/products',
+        url: 'https://nameless-ocean-59312.herokuapp.com/products',
         headers: {
           token: localStorage.accessToken,
         },
@@ -368,7 +368,7 @@ export default new Vuex.Store({
     getByCategory(context,payload) {
       axios({
         method: 'get',
-        url: 'http://localhost:3002/products',
+        url: 'https://nameless-ocean-59312.herokuapp.com/products',
         headers: {
           token: localStorage.accessToken,
         },
