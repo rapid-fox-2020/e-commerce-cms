@@ -19,9 +19,9 @@
             <img :src="product.image_url" width="100px" />
           </td>
           <td>{{product.stock}}</td>
-          <td>{{product.price}}</td>
+          <td>{{ new Intl.NumberFormat('id', { style: 'currency', currency: 'idr' }).format(product.price)}}</td>
           <td>
-            <button type="button" class="btn btn-info" @click="toEdit(index)">Edit</button>
+            <button type="button" class="btn btn-warning" @click="toEdit(index)">Edit</button>
             |
             <button
               type="button"
@@ -39,6 +39,7 @@
 import router from "../router";
 
 export default {
+  computed: {},
   methods: {
     destroy(id) {
       this.$swal({
@@ -54,7 +55,7 @@ export default {
         if (data.isConfirmed) {
           this.$store.dispatch("deleteProduct", id);
         } else if (data.isDismissed) {
-          this.$swal("Cancelled", "Your imaginary file is safe :)", "error");
+          this.$swal("Cancelled", "Your Product file is safe :)", "error");
         }
       });
     },

@@ -43,10 +43,8 @@ module.exports = class UserController {
                         email: user.email,
                         role:user.role
                     }
-
                     let token = generate(dataUser)
                     res.status(200).json({ token })
-                    // console.log(token,'tokennnnnnnnnnnnn');
                 } else {
                     next(createError(400, 'invalid email or password'))
                 }

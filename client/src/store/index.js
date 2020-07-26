@@ -7,8 +7,8 @@ import VueSweetalert2 from 'vue-sweetalert2';
 const Swal = require('sweetalert2')
 Vue.use(Vuex);
 Vue.use(VueSweetalert2)
-// const url = `https://stormy-wave-88070.herokuapp.com`
-const url = `http://localhost:3000`
+const url = `https://stormy-wave-88070.herokuapp.com`
+// const url = `http://localhost:3000`
 export default new Vuex.Store({
   state: {
     products: [],
@@ -17,17 +17,14 @@ export default new Vuex.Store({
     SET_PRODUCT(state, payload) {
       state.products = payload
     },
-    // SET_LOGIN(state,token){
-    //   localStorage
-    // }
   },
   actions: {
     getProducts(context) {
       axios({
         method: 'get',
         url: url + '/products',
-        headers:{
-          access_token:localStorage.access_token
+        headers: {
+          access_token: localStorage.access_token
         }
       })
         .then((result) => {
@@ -38,7 +35,6 @@ export default new Vuex.Store({
         });
     },
     postLogin({ commit }, payload) {
-      // console.log(payload);
       axios({
         method: 'post',
         url: `${url}/login`,
@@ -48,28 +44,34 @@ export default new Vuex.Store({
         }
       })
         .then(result => {
-          // console.log(result.data);
           localStorage.setItem('access_token', result.data.token)
           router.push({ name: 'Products' })
+          Swal.fire(
+            'Success Login!',
+            ``,
+            'success'
+          )
 
         }).catch(err => {
-          console.log(err);
+          Swal.fire(
+            'Login Error!',
+            `${err.response.data.errors}`,
+            'error'
+          )
         })
     },
     deleteProduct({ dispatch }, productId) {
-      // console.log(productId);
       axios({
         method: 'delete',
         url: `${url}/products/${productId}`,
-        headers:{
-          access_token:localStorage.access_token
+        headers: {
+          access_token: localStorage.access_token
         }
       })
         .then((destroy) => {
-          // console.log(destroy, 'result deltet');
           if (destroy) {
             Swal.fire(
-              'Deleted!',
+              'Success Delete Product',
               `${destroy.data.name}`,
               'success'
             )
@@ -89,20 +91,34 @@ export default new Vuex.Store({
           price: newProduct.price,
           stock: newProduct.stock,
           image_url: newProduct.image_url
-
-        },headers:{
-          access_token:localStorage.access_token
+        },
+        headers: {
+          access_token: localStorage.access_token
         }
-        
       })
-
         .then((result) => {
-          console.log(result);
-          router.push({ name: 'Products' })
+          if (result) {
+            Swal.fire(
+              'Success Add Product',
+              `${result.data.name}`,
+              'success'
+            )
+            router.push({ name: 'Products' })
+          }
 
         }).catch((err) => {
           console.log(err);
-        });
+          if (err) {
+            let allErrors = err.response.data.errors.reverse()
+            allErrors.forEach(err => {
+              Swal.fire(
+                'please fill out this field',
+                `${err}`,
+                'error'
+              )
+            })
+          }
+        })
     },
     editProduct({ commit }, setProduct) {
       axios({
@@ -113,19 +129,28 @@ export default new Vuex.Store({
           price: setProduct.price,
           stock: setProduct.stock,
           image_url: setProduct.image_url
+        },
+        headers: {
+          access_token: localStorage.access_token
         }
       })
         .then((result) => {
-          console.log(result);
+          Swal.fire(
+            'Success Update Product',
+            `${result.data.name}`,
+            'success'
+          )
           router.push({ name: 'Products' })
-
         }).catch((err) => {
-          console.log(err);
+          err.response.data.errors.reverse().forEach(err => {
+            Swal.fire(
+              'please fill out this field',
+              `${err}`,
+              'error'
+            )
+          })
         });
     }
-
-
-
   },
   modules: {
   },

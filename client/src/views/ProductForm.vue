@@ -1,41 +1,43 @@
 <template>
   <div>
   <Navbar/>
-    <h1>ADD PRODUCT</h1>
+    <h1 class="text-info mt-5">ADD PRODUCT</h1>
+  <div class="container-sm bg-white mt-4 border border-info">
 
     <form @submit.prevent="newProduct">
-      <div class="form-group">
-        <label for="name">NAME</label>
+      <div class="form-group mt-3">
+        <label for="name">Name</label>
         <input
           type="text"
-          class="form-control"
+          class="form-control font-weight-bold"
           id="name"
           aria-describedby="emailHelp"
           placeholder="name"
           v-model="name"
         />
       </div>
-      <div class="form-group">
-        <label for="image_url">IMAGE</label>
+      <div class="form-group font-weight-bold">
+        <label for="image_url">Image_Url</label>
         <input
           v-model="image_url"
-          type="text"
+          type="url"
           class="form-control"
           id="image_url"
-          placeholder="url"
+          placeholder="www.image.png"
         />
       </div>
       <div class="form-group">
-        <label for="price">price</label>
-        <input v-model="price" type="number" class="form-control" id="price" placeholder="price" />
+        <label for="price">Price</label>
+        <input v-model="price" type="number" class="form-control" id="price" placeholder="Rp" />
       </div>
-      <div class="form-group">
-        <label for="stock">stock</label>
-        <input v-model="stock" type="number" class="form-control" id="stock" placeholder="stock" />
+      <div class="form-group font-weight-bold">
+        <label for="stock ">Stock</label>
+        <input v-model="stock" type="number" class="form-control" id="stock" placeholder="43" />
       </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary mb-4">Submit</button>
     </form>
+  </div>
   </div>
 </template>
 
@@ -45,8 +47,8 @@ export default {
   data() {
     return {
       name: "",
-      price: 0,
-      stock: 0,
+      price: null,
+      stock: null,
       image_url: ""
     };
   },

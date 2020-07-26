@@ -1,48 +1,53 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 import Dashboard from '../views/Dashboard.vue';
 import Login from '../views/Login.vue';
 import ProductForm from '../views/ProductForm.vue';
-import editProduct from '../views/EditForm.vue';
+import EditProduct from '../views/EditForm.vue';
+import NotFound from '../views/NotFound';
 
 Vue.use(VueRouter);
 
 const routes = [
-  
+
   {
-    path: '/',
+    path: '/products',
     name: 'Products',
     component: Dashboard,
   },
   {
-    path: '/login',
+    path: '/',
     name: 'Login',
-    component:Login,
+    component: Login,
   },
   {
     path: '/add',
     name: 'addProduct',
-    component:ProductForm,
+    component: ProductForm,
   },
   {
     path: '/edit/:id',
     name: 'editProduct',
-    component:editProduct,
+    component: EditProduct,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
+    path: '*',
+    name: '404',
+    component: NotFound
+  }
 ];
 
 const router = new VueRouter({
   mode: 'history',
   routes
 })
+router.beforeEach((to, from, next) => {
+  let path = ['Products', 'addProduct', 'editProduct']
+  if (path.includes(to.name) && !localStorage.access_token) {
+    next({ name: 'Login' });
+  } else if (to.name === 'Login' && localStorage.access_token) {
+    next({ name: 'Products' })
+  } else next()
+});
 
 export default router;

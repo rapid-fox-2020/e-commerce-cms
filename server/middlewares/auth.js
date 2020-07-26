@@ -1,5 +1,4 @@
-const { User } = require('../models')
-const { generate, decode } = require('../helpers/jwt')
+const { decode } = require('../helpers/jwt')
 
 
 module.exports = class Auth {
@@ -28,5 +27,4 @@ module.exports = class Auth {
             next(error)
         }
     }
-
 }

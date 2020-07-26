@@ -1,8 +1,6 @@
 module.exports = (err, req, res, next) => {
-    // console.log(err.message,'$$$$$$$$$$$$$$$$$$$$$$$$$$');
     let status = err.status || 500;
     let errors = [err.message] || ["internal server error"];
-    // console.log(errors,'@@@@@@@@@@');
     switch (err.name) {
         case "SequelizeValidationError":
             status = 400;
@@ -10,8 +8,6 @@ module.exports = (err, req, res, next) => {
             err.errors.forEach((error) => {
                 messages.push(error.message);
             });
-            // console.log(messages,'<<<<<<<<<<<<<<<<<<<<<<<<<<<');
-            // console.log(status,'<<<<<<<<<<<<<<<<<<<<<<<<<<<');
             errors = messages;
             break;
         case "SequelizeUniqueConstraintError":
@@ -23,6 +19,5 @@ module.exports = (err, req, res, next) => {
             errors = [err.message] || ["internal server error"];
             break;
     }
-    // console.log(status,errors,'$$$$$$$$$$$$$$$$$$$$$$$$$$');
     res.status(status).json({ errors });
 };
