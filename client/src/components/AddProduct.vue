@@ -3,11 +3,11 @@
   <section class="container pt-5">
     <h1 class="page-label">Add Product</h1>
 
-    <aside class="alert alert-success" v-if="alert">
-      <strong>SUCCESS</strong>: add {{ name }}.
-    </aside>
-    <aside class="alert alert-danger" v-else-if="alert && typeof message === 'string'">
+    <aside class="alert alert-danger" v-if="alert && typeof message === 'string'">
       <strong>FAIL</strong>: {{ message }}.
+    </aside>
+    <aside class="alert alert-success" v-if-else="alert">
+      <strong>SUCCESS</strong>: add {{ name }}.
     </aside>
 
     <form @submit.prevent="addProduct()">
