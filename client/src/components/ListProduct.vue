@@ -27,17 +27,18 @@
             <td>{{ index + 1}}</td>
             <td>{{ product.name }}</td>
             <td>
-              <img :src="product.image_url" alt width="80" />
+              <img :src="product.image_url" width="80"/>
             </td>
-            <td>{{ product.price }}</td>
+            <td>{{ new Intl.NumberFormat('id', { style: 'currency', currency: 'idr' }).format(product.price)}}</td>
             <td>{{ product.stock }}</td>
             <td>
               <i
                 class="fa fa-pencil-square"
                 style="margin-right: 10px;"
                 @click.prevent="edit(product)"
+                title="edit"
               ></i>
-              <i class="fa fa-trash" @click.prevent="destroy(product.id)"></i>
+              <i class="fa fa-trash" @click.prevent="destroy(product.id)" title="delete"></i>
             </td>
           </tr>
         </tbody>
