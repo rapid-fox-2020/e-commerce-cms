@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import router from '../router/index.js';
 
 Vue.use(Vuex);
 
@@ -74,7 +75,8 @@ export default new Vuex.Store({
       })
         .then((data) => {
           localStorage.setItem('access_token', data.data.access_token);
-          context.commit('SET_LOGGED', true);  
+          context.commit('SET_LOGGED', true);
+          router.push({name: "Home"});
         })
         .catch((err) => {
           console.log(err);
