@@ -61,6 +61,7 @@ describe("Product Routes", () => {
                 image_url: "https://www.google.com/",
                 price: 2000000,
                 stock: 10,
+                genre: "RPG",
                 description: "The Dragonborn Comes...",
             }
             return request(server)
@@ -78,6 +79,7 @@ describe("Product Routes", () => {
                     expect(body).toHaveProperty("image_url")
                     expect(body).toHaveProperty("price")
                     expect(body).toHaveProperty("stock")
+                    expect(body).toHaveProperty("genre")
                     expect(body).toHaveProperty("description")
                     expect(body).toHaveProperty("createdAt")
                     expect(body).toHaveProperty("updatedAt")
@@ -212,6 +214,8 @@ describe("Product Routes", () => {
                     expect(body).toHaveProperty("image_url")
                     expect(body).toHaveProperty("price")
                     expect(body).toHaveProperty("stock")
+                    expect(body).toHaveProperty("genre")
+                    expect(body).toHaveProperty("description")
                     expect(body).toHaveProperty("createdAt")
                     expect(body).toHaveProperty("updatedAt")
                     done()
@@ -257,6 +261,8 @@ describe("Product Routes", () => {
                     expect(body).toHaveProperty("image_url")
                     expect(body).toHaveProperty("price")
                     expect(body).toHaveProperty("stock")
+                    expect(body).toHaveProperty("genre")
+                    expect(body).toHaveProperty("description")
                     expect(body).toHaveProperty("createdAt")
                     expect(body).toHaveProperty("updatedAt")
                     product = body
@@ -393,6 +399,8 @@ describe("Product Routes", () => {
                     expect(body).toHaveProperty("image_url")
                     expect(body).toHaveProperty("price")
                     expect(body).toHaveProperty("stock")
+                    expect(body).toHaveProperty("genre")
+                    expect(body).toHaveProperty("description")
                     expect(body).toHaveProperty("createdAt")
                     expect(body).toHaveProperty("updatedAt")
                     done()

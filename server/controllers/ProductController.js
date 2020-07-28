@@ -19,20 +19,20 @@ class ProductController {
             if (!name) {
                 message = "name cannot be empty!"  
             }
-            if (!image_url) {
+            else if (!image_url) {
                 message = "image_url cannot be empty!"
             }
-            if (!description) {
-                message = "description cannot be empty!" 
-            }
-            if (!genre) {
-                message = "genre cannot be empty!" 
-            }
-            if (!price) {
+            else if (!price) {
                 message = "price cannot be empty!" 
             }
-            if (!stock) {
+            else if (!stock) {
                 message = "stock cannot be empty!" 
+            }
+            else if (!genre) {
+                message = "genre cannot be empty!" 
+            }
+            else if (!description) {
+                message = "description cannot be empty!" 
             }
             if (message) {
                 throw {
