@@ -45,7 +45,18 @@
                     type="number"
                     class="form-control" id="stock" placeholder="10">
                 </div>
+                <div class="form-group">
+                    <label for="BannerId">Set Banner</label><br>
+                    <select v-model="BannerId" name="BannerId" id="BannerId">
+                    <option value="select" selected disabled>--select banner--</option>
+                    <option v-for="(banner, index) in $store.state.banners" :key="index"
+                    :value=banner.id>{{banner.name}}</option>
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary">Add</button>
+                <router-link :to="{name: 'ProductTable'}">
+                  <button type="button" class="ml-2 btn btn-secondary">Cancel</button>
+                </router-link>
             </form>
             <!-- edit form -->
             <form v-else @submit.prevent="editProduct">
@@ -87,7 +98,18 @@
                     type="number"
                     class="form-control" id="stock" placeholder="10">
                 </div>
+                <div class="form-group">
+                    <label for="BannerId">Set Banner</label><br>
+                    <select v-model="BannerId" name="BannerId" id="BannerId">
+                    <option value="select" selected disabled>--select banner--</option>
+                    <option v-for="(banner, index) in $store.state.banners" :key="index"
+                    :value=banner.id>{{banner.name}}</option>
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary">Edit</button>
+                <router-link :to="{name: 'ProductTable'}">
+                  <button type="button" class="ml-2 btn btn-secondary">Cancel</button>
+                </router-link>
             </form>
         </div>
     </div>
@@ -105,7 +127,11 @@ export default {
       addPrice: 0,
       addStock: 0,
       addCategory: 'select',
+      addBannerId: 0,
     };
+  },
+  created() {
+    this.$store.dispatch('showBanners');
   },
   computed: {
     setStatus() {
@@ -156,6 +182,15 @@ export default {
         this.addCategory = newCategory;
       },
     },
+    BannerId: {
+      get() {
+        this.addBannerId = this.$store.state.product.BannerId || 'select';
+        return this.$store.state.product.BannerId || 'select';
+      },
+      set(newBannerId) {
+        this.addBannerId = newBannerId;
+      },
+    },
   },
   methods: {
     addProduct() {
@@ -165,6 +200,7 @@ export default {
         price: this.addPrice,
         stock: this.addStock,
         category: this.addCategory,
+        BannerId: this.addBannerId,
       };
       this.$store.dispatch('addProduct', newProduct);
     },
@@ -176,8 +212,8 @@ export default {
         stock: this.addStock,
         category: this.addCategory,
         id: this.$store.state.product.id,
+        BannerId: this.addBannerId,
       };
-      console.log(this.$store.state.product.id, 'ini id nya');
       this.$store.dispatch('editProduct', updatedProduct);
     },
   },

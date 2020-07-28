@@ -62,15 +62,22 @@ export default {
     processLogin() {
       axios({
         method: 'POST',
-        url: 'https://murmuring-headland-34171.herokuapp.com/login',
+        url: 'http://localhost:3000/login',
         data: {
           email: this.email,
           password: this.password,
         },
       })
         .then((result) => {
-          localStorage.setItem('access_token', result.data.access_token);
-          this.$router.push({ name: 'ProductTable' });
+          console.log(result.data);
+          if (result.data.role !== 'admin') {
+            swal('Error', 'Sorry, you don\'t have access!', 'error');
+            this.email = '';
+            this.password = '';
+          } else {
+            localStorage.setItem('access_token', result.data.access_token);
+            this.$router.push({ name: 'ProductTable' });
+          }
         })
         .catch((err) => {
           const error = err.response.data.message;

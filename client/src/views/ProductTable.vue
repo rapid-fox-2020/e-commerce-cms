@@ -12,6 +12,7 @@
                     <th scope="col">Price</th>
                     <th scope="col">Stock</th>
                     <th scope="col">Category</th>
+                    <th scope="col">Set Banner</th>
                     <th scope="col">Option</th>
                 </tr>
             </thead>

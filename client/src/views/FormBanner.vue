@@ -40,6 +40,9 @@
                     </textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Add</button>
+                <router-link :to="{name: 'BannerTable'}">
+                  <button type="button" class="ml-2 btn btn-secondary">Cancel</button>
+                </router-link>
             </form>
             <!-- edit form -->
             <form v-else @submit.prevent="editBanner">
@@ -75,6 +78,9 @@
                     </textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Edit</button>
+                <router-link :to="{name: 'BannerTable'}">
+                  <button type="button" class="ml-2 btn btn-secondary">Cancel</button>
+                </router-link>
             </form>
         </div>
     </div>

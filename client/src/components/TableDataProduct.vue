@@ -1,7 +1,7 @@
 <template>
     <tr class="text-center">
         <td scope="row">{{index+1}}</td>
-        <td class="text-wrap" style="width: 20rem;">{{product.name}}</td>
+        <td class="text-wrap" style="width: 14rem;">{{product.name}}</td>
         <td>
           <div class="zoom">
             <img width="70" :src="image_url" alt="product">
@@ -10,6 +10,11 @@
         <td>{{price}}</td>
         <td>{{product.stock}}</td>
         <td>{{product.category}}</td>
+        <td>
+          <div class="zoom">
+            <img width="100" :src="product.Banner.image_url" alt="banner">
+          </div>
+          </td>
         <td>
             <a @click="editForm(product.id)" role="button" class="btn btn-warning">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

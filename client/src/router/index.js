@@ -22,22 +22,22 @@ const routes = [
     component: Dashboard,
     children: [
       {
-        path: '/dashboard/products',
+        path: 'products',
         name: 'ProductTable',
         component: ProductTable,
       },
       {
-        path: '/dashboard/banners',
+        path: 'banners',
         name: 'BannerTable',
         component: BannerTable,
       },
       {
-        path: '/dashboard/products/form',
+        path: 'products/form',
         name: 'FormProduct',
         component: FormProduct,
       },
       {
-        path: '/dashboard/banners/form',
+        path: 'banners/form',
         name: 'FormBanner',
         component: FormBanner,
       },

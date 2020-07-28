@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import router from '../router/index';
 
 Vue.use(Vuex);
-const baseURL = 'https://murmuring-headland-34171.herokuapp.com';
+const baseURL = 'http://localhost:3000';
 
 export default new Vuex.Store({
   state: {
@@ -156,6 +156,7 @@ export default new Vuex.Store({
           price: +newProduct.price,
           stock: +newProduct.stock,
           category: newProduct.category,
+          BannerId: +newProduct.BannerId,
         },
       })
         .then(() => {
@@ -207,6 +208,7 @@ export default new Vuex.Store({
           price: +editedProduct.price,
           stock: +editedProduct.stock,
           category: editedProduct.category,
+          BannerId: +editedProduct.BannerId,
         },
       })
         .then(() => {
@@ -215,6 +217,7 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           const errors = err.response.data.message;
+          console.log(err);
           errors.forEach((element) => {
             swal('Error', `${element}`, 'error');
           });
