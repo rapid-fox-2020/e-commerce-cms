@@ -21,7 +21,7 @@
         <tr v-for="(product,i) in $store.state.products" :key="product.id">
           <td class="text-center">{{i+1}}</td>
           <td class="text-left">{{product.name}}</td>
-          <td class="text-left">
+          <td class="text-center">
             <img :src="product.img_url" width="100px" />
           </td>
           <td class="text-right">{{product.price.toLocaleString()}}</td>

@@ -1,8 +1,11 @@
 <template>
+<div>
+
+<Navbar></Navbar>
 <div class="container mt-3">
   <dir class="row justify-content-md-center">
     <div class="col-8">
-      <h3>Add Product</h3>
+      <h3 class="text-center">Add Product</h3>
       <br>
       <form @submit.prevent="addProduct">
         <div class="form-group">
@@ -33,11 +36,17 @@
     </div>
   </dir>
 </div>
+</div>
 </template>
 
 <script>
+import Navbar from '../views/Navbar.vue';
+
 export default {
   name: 'Add',
+  components: {
+    Navbar,
+  },
   data() {
     return {
       newProduct: {

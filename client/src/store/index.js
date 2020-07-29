@@ -6,6 +6,7 @@ import router from '../router';
 
 Vue.use(Vuex);
 const baseUrl = 'http://localhost:3000';
+// const baseUrl = 'https://salty-woodland-64680.herokuapp.com';
 export default new Vuex.Store({
   state: {
     flagLogin: false,
@@ -34,7 +35,6 @@ export default new Vuex.Store({
   },
   actions: {
     login(context, payload) {
-      console.log('>>>>>action>>>>>', payload);
       axios({
         method: 'POST',
         url: `${baseUrl}/login`,
@@ -44,13 +44,13 @@ export default new Vuex.Store({
         },
       })
         .then(({ data }) => {
-          console.log('>>>>>>result', data);
           localStorage.setItem('access_token', data.access_token);
           context.commit('SET_LOGIN', true);
           payload.cb();
         })
         .catch((err) => {
-          console.log(err.response.data.message);
+          const { message } = err.response.data;
+          swal('Error', message, 'error');
         });
     },
     fetchProduct(context) {
@@ -62,7 +62,6 @@ export default new Vuex.Store({
         },
       })
         .then(({ data }) => {
-          console.log(data);
           context.commit('SET_PRODUCTS', data);
         })
         .catch((err) => {
@@ -120,7 +119,6 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           console.log(data);
-          console.log(context, payload);
           router.push('/dashboard');
           swal({
             title: 'Success!',
@@ -138,7 +136,6 @@ export default new Vuex.Store({
     },
 
     deleteProduct(context, id) {
-      console.log(id, 'masuk action');
       axios({
         method: 'DELETE',
         url: `${baseUrl}/products/${id}`,
@@ -152,7 +149,6 @@ export default new Vuex.Store({
           swal('Success!', `${data.name} has benn deleted`, 'success');
         })
         .catch((err) => {
-          console.log(err);
           const errors = err.response.data.message;
           swal({
             title: 'Error!',

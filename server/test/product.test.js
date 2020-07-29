@@ -19,8 +19,8 @@ const testUser = {
 
 const testUserNonAdmin = {
   email: 'user@mail.com',
-  password: '12345',
-  role: 'Staff'
+  password: '54321',
+  role: 'User'
 }
 
 let access_token = ''
@@ -62,6 +62,14 @@ beforeAll((done) => {
 
 
 afterAll(done => {
+  User.destroy({ where: { email: testUserNonAdmin.email } })
+    .then((result) => {
+      done()
+    })
+    .catch((err)=>{
+      done(err)
+    })
+
   queryInterface.bulkDelete('Products', {})
     .then(result => {
       done()
@@ -70,7 +78,6 @@ afterAll(done => {
       done(err)
     })
 })
-
 
 describe('POST/products', () => {
   test('post response json', (done) => {
@@ -99,7 +106,7 @@ describe('POST/products', () => {
     request(app)
       .post('/products')
       .send({
-        name : '',
+        name: '',
         img_url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
         price: 5000000,
         stock: 5
@@ -364,4 +371,4 @@ describe('Error authorization', () => {
         done(err)
       })
   })
-})
+}) 

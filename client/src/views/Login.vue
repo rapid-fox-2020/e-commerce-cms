@@ -12,7 +12,7 @@
               v-model="emailLogin"
               type="email"
               class="form-control"
-              placeholder="Your email"
+              placeholder="example@mail.com"
             />
             <small class="form-text text-muted">
               We'll never share your email with anyone else.

@@ -3,7 +3,6 @@ const { User } = require('../models')
 
 const authentication = async (req, res, next) => {
   const access_token = req.headers.access_token
-
   try {
     if (!access_token) {
       throw {
