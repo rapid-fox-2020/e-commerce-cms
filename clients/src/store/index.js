@@ -45,7 +45,7 @@ export default new Vuex.Store({
     login(context, payload) {
       axios({
         method: 'POST',
-        url: 'https://fast-ravine-20823.herokuapp.com/users/login',
+        url: 'https://murmuring-wave-46445.herokuapp.com/users/login',
         data: { 
           email: payload.email, 
           password: payload.password,
@@ -65,7 +65,7 @@ export default new Vuex.Store({
     getProducts(context) {
       axios({
         method: 'GET',
-        url: 'https://fast-ravine-20823.herokuapp.com/products',
+        url: 'https://murmuring-wave-46445.herokuapp.com/products',
         headers: {
           access_token: localStorage.token,
         },
@@ -82,7 +82,7 @@ export default new Vuex.Store({
     addProduct(context, payload) {
       axios({
         method: 'POST',
-        url: 'https://fast-ravine-20823.herokuapp.com/products',
+        url: 'https://murmuring-wave-46445.herokuapp.com/products',
         headers: {
           access_token: localStorage.token,
         },
@@ -114,7 +114,7 @@ export default new Vuex.Store({
     getData(context, payload) {
       axios({
         method: 'GET',
-        url: `https://fast-ravine-20823.herokuapp.com/products/${payload}`,
+        url: `https://murmuring-wave-46445.herokuapp.com/products/${payload}`,
         headers: {
           access_token: localStorage.token,
         },
@@ -129,7 +129,7 @@ export default new Vuex.Store({
     editProduct(context, payload) {
       axios({
         method: 'PUT',
-        url: `https://fast-ravine-20823.herokuapp.com/products/${payload.id}`,
+        url: `https://murmuring-wave-46445.herokuapp.com/products/${payload.id}`,
         headers: {
           access_token: localStorage.token,
         },
@@ -158,7 +158,7 @@ export default new Vuex.Store({
     deleteProds(context, payload) {
       axios({
         method: 'DELETE',
-        url: `https://fast-ravine-20823.herokuapp.com/products/${payload}`,
+        url: `https://murmuring-wave-46445.herokuapp.com/products/${payload}`,
         headers: {
           access_token: localStorage.token,
         },
