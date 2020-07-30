@@ -44,13 +44,14 @@ export default new Vuex.Store({
       context.commit('SET_OPENADD', true);
     },
     openEditpage(context, payload) {
-      console.log(payload, '<>>><');
+      console.log(payload);
       context.commit('SET_OPENEDIT', true);
       axios({
         method: 'GET',
         url: `http://localhost:3000/products/${payload}`,
       })
         .then((data) => {
+          console.log(data.data, 'ini data findOne');
           context.commit('SET_EDITPRODUCT', data.data);
         })
         .catch((err) => {

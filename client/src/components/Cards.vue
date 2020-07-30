@@ -30,22 +30,22 @@
 </template>
 
 <script>
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
 
 export default {
   name: 'Cards',
   props: ['cards'],
-  data() {
+  data () {
     return {
-      qty: 0,
-    };
+      qty: 0
+    }
   },
   methods: {
-    addStock(id) {
+    addStock (id) {
       const payload = {
-        id,
-        stock: this.qty,
-      };
+        id: id,
+        stock: this.qty
+      }
       this.$store.dispatch('addStock', payload)
         .then((data) => {
           const Toast = Swal.mixin({
@@ -55,18 +55,18 @@ export default {
             timer: 3000,
             timerProgressBar: true,
             onOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer);
-              toast.addEventListener('mouseleave', Swal.resumeTimer);
-            },
-          });
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
           Toast.fire({
             icon: 'success',
-            title: 'Added successfully',
-          });
-          this.$store.dispatch('getProducts');
-          this.qty = 0;
+            title: 'Added successfully'
+          })
+          this.$store.dispatch('getProducts')
+          this.qty = 0
         })
-        .catch((err) => {
+        .catch(err => {
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -74,58 +74,43 @@ export default {
             timer: 3000,
             timerProgressBar: true,
             onOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer);
-              toast.addEventListener('mouseleave', Swal.resumeTimer);
-            },
-          });
-          Toast.fire({
-            icon: 'error',
-            title: err,
-          });
-          this.qty = 0;
-        });
-    },
-    editpanel(id) {
-      console.log(id);
-      this.$store.dispatch('openEditpage', id);
-    },
-    deletebtn(id) {Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085D6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, destroy it!'})
-        .then(results => {
-          if (results.value) {
-              this.$store.dispatch('deleteProduct', id)
-                .then((result) => {
-                  this.$store.dispatch('getProducts');
-                  const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    onOpen: (toast) => {
-                      toast.addEventListener('mouseenter', Swal.stopTimer);
-                      toast.addEventListener('mouseleave', Swal.resumeTimer);
-                    },
-                  });
-                  Toast.fire({
-                    icon: 'success',
-                    title: 'Deleted successfully',
-                  });
-                });
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
           })
-          .catch(err => {
-            console.log(err);
+          Toast.fire({
+            icon: 'error',
+            title: err
           })
+          this.qty = 0
+        })
     },
-  },
-};
+    editpanel (id) {
+      this.$store.dispatch('openEditpage', id)
+    },
+    deletebtn (id) {
+      this.$store.dispatch('deleteProduct', id)
+        .then((result) => {
+          this.$store.dispatch('getProducts')
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            onOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          Toast.fire({
+            icon: 'success',
+            title: 'Deleted successfully'
+          })
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

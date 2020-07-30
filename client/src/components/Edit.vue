@@ -1,22 +1,22 @@
 <template>
   <div class="Edit">
     <div class="form-bg">
-        <h1>Edit Product {{name}} </h1>
+        <h1>Edit Product</h1>
         <form>
-          <input type="text" id="form-input" placeholder="name" v-model="name" required>
-          <input type="text" id="form-input" placeholder="image_url" v-model="image_url" required>
-          <input type="text" id="form-input" placeholder="description" v-model="description" required>
-          <select id="form-input-select" v-model="genre">
+          <input type="text" id="form-input" :placeholder="editing.name" v-model="newdata.name" required>
+          <input type="text" id="form-input" :placeholder="editing.image_url" v-model="newdata.image_url" required>
+          <input type="text" id="form-input" :placeholder="editing.description" v-model="newdata.description" required>
+          <select id="form-input-select" v-model="newdata.genre">
           <option value="" selected>Select Genre</option>
           <option value="Adventure">Adventure</option>
           <option value="RPG">RPG</option>
           <option value="Horror">Horror</option>
           <option value="Simulation">Simulation</option>
           </select>
-          <input type="number" id="form-input-number" placeholder="stock" :min="0" v-model="stock" required>
-          <input type="number" id="form-input-number" placeholder="price" :min="0" v-model="price" required>
+          <input type="number" id="form-input-number" :placeholder="editing.stock" :min="0" v-model="newdata.stock" required>
+          <input type="number" id="form-input-number" :placeholder="editing.price" :min="0" v-model="newdata.price" required>
           <div class="btn-panel">
-          <button class="btn btn-primary" id="Editbtn" @click.prevent="edit">Update</button>
+          <button class="btn btn-primary" id="Editbtn" @click.prevent="edit">Edit</button>
           <button class="btn btn-primary" id="cancelbtn" @click.prevent="cancelEdit">Cancel</button>
           </div>
         </form>
@@ -25,54 +25,43 @@
 </template>
 
 <script>
-import Swal from 'sweetalert2';
-
+import Swal from 'sweetalert2'
 export default {
   name: 'Edit',
-  data() {
+  data () {
     return {
-      id: this.$store.state.editProduct.id,
-      // name: this.$store.state.editProduct.name,
-      image_url: '',
-      description: '',
-      stock: '',
-      price: '',
-      genre: '',
-    };
+      newdata: {
+        name: '',
+        image_url: '',
+        description: '',
+        stock: '',
+        price: '',
+        genre: ''
+      }
+    }
   },
   computed: {
-    name () {
-      return this.$store.state.editProduct.name
-    },
-    // name: {
-    //   get () {
-    //     return this.$store.state.editProduct.name
-    //   },
-    //   set (value) {
-    //     this.$store.commit('updateName', value)
-    //   }
-    // },
-    editing() {
-      return this.$store.state.editProduct;
-    },
+    editing () {
+      return this.$store.state.editProduct
+    }
   },
   methods: {
-    cancelEdit() {
-      this.$store.dispatch('closeEditpage');
+    cancelEdit () {
+      this.$store.dispatch('closeEditpage')
     },
-    edit() {
+    edit () {
       const payload = {
-        name: this.name,
-        image_url: this.image_url,
-        description: this.description,
-        stock: this.stock,
-        price: this.price,
-        genre: this.genre,
-        id: this.id,
-      };
+        name: this.newdata.name || this.editing.name,
+        image_url: this.newdata.image_url || this.editing.image_url,
+        description: this.newdata.description || this.editing.description,
+        stock: this.newdata.stock || this.editing.stock,
+        price: this.newdata.price || this.editing.price,
+        genre: this.newdata.genre || this.editing.genre,
+        id: this.editing.id
+      }
       this.$store.dispatch('edit', payload)
-        .then((data) => {
-          this.$store.dispatch('closeEditpage');
+        .then(data => {
+          this.$store.dispatch('closeEditpage')
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -80,18 +69,19 @@ export default {
             timer: 3000,
             timerProgressBar: true,
             onOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer);
-              toast.addEventListener('mouseleave', Swal.resumeTimer);
-            },
-          });
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
           Toast.fire({
             icon: 'success',
-            title: 'Edited successfully',
-          });
-          this.$store.dispatch('getProducts');
+            title: 'Edited successfully'
+          })
+          this.$store.dispatch('getProducts')
         })
-        .catch((err) => {
-          this.$store.dispatch('closeEditpage');
+        .catch(err => {
+          this.$store.dispatch('closeEditpage')
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -99,19 +89,19 @@ export default {
             timer: 3000,
             timerProgressBar: true,
             onOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer);
-              toast.addEventListener('mouseleave', Swal.resumeTimer);
-            },
-          });
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
 
           Toast.fire({
             icon: 'error',
-            title: err,
-          });
-        });
-      },
-  },
-};
+            title: err
+          })
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>

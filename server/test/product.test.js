@@ -74,8 +74,8 @@ describe("Product Routes", () => {
                     console.log(result, '<<< ini result');
                     const { body, status } = result
                     expect(status).toBe(201)
-                    expect(body).toHaveProperty("id")
-                    expect(body).toHaveProperty("name")
+                    // expect(body).toHaveProperty("id")
+                    expect(body).toHaveProperty("name", "windows")
                     expect(body).toHaveProperty("image_url")
                     expect(body).toHaveProperty("price")
                     expect(body).toHaveProperty("stock")
