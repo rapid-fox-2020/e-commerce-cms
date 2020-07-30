@@ -5,6 +5,7 @@ import router from '../router';
 
 Vue.use(Vuex);
 const baseUrl = 'http://localhost:3000';
+// const baseUrl = 'https://boiling-chamber-92274.herokuapp.com';
 
 export default new Vuex.Store({
   state: {

@@ -68,7 +68,6 @@ const testProduct = {
 }
 
 describe('POST /products', () => {
-    console.log(`ini id post >>>> ', ${globalId}`);
 
     test('Create Product Success', (done) => {
       return request(app)
@@ -84,7 +83,6 @@ describe('POST /products', () => {
             expect(body).toHaveProperty('image_url', testProduct.image_url)
             expect(body).toHaveProperty('price', testProduct.price)
             expect(body).toHaveProperty('stock', testProduct.stock)
-            console.log('ini dari post', body.id);
             globalId = body.id
             done();
         })
@@ -276,7 +274,7 @@ describe('PUT/products/:id', () => {
         })
     });
 
-    test(`Update Product with wrong params.id`, (done) => {
+    test(`Update Product with Product not found`, (done) => {
         request(app)
             .put(`/products/15`)
             .set('access_token', access_token)
@@ -407,7 +405,7 @@ describe('DELETE/products/id', () => {
         })
     })
 
-    test(`Delete Product with wrong id`, (done) => {
+    test(`Delete Product with Product not Found`, (done) => {
         const dataTest = {
             name: 'Macbook edit',
             image_url: 'https://zdnet2.cbsistatic.com/hub/i/2018/08/23/ee30e744-889f-4df4-86db-cdac30453d08/apple-mbp-15-header.jpg',
