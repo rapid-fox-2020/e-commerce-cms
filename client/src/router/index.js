@@ -9,6 +9,9 @@ import BannerEdit from '../views/BannerEdit.vue';
 import ProductByCategory from '../views/ProductByCategory.vue'
 import Banner from '../views/Banner.vue';
 import NotFound from '../views/NotFound.vue';
+import Secret from '../views/Secret.vue';
+import SecretAdd from '../views/SecretAdd.vue';
+
 
 Vue.use(VueRouter);
 
@@ -24,6 +27,11 @@ const routes = [
     component: Admin,
   },
   {
+    path: '/secrets',
+    name: 'Secret',
+    component: Secret,
+  },
+  {
     path: '/banners',
     name: 'Banner',
     component: Banner,
@@ -32,6 +40,11 @@ const routes = [
     path: '/productAdd',
     name: 'ProductAdd',
     component: ProductAdd,
+  },
+  {
+    path: '/secretAdd',
+    name: 'SecretAdd',
+    component: SecretAdd,
   },
   {
     path: '/bannerAdd',

@@ -19,6 +19,6 @@
     "database": "da8gp4jiql47ks",
     "host": "ec2-34-200-15-192.compute-1.amazonaws.com",
     "dialect": "postgres",
-    "port": 5432,
+    "port": 5432
   }
 }

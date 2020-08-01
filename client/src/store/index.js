@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import swal from 'sweetalert';
+import FormData from 'form-data';
 
 Vue.use(Vuex);
 
@@ -23,8 +24,17 @@ export default new Vuex.Store({
     banner_id: '',
     banner_image_url: '',
     banner_status: '',
+    secret_name: '',
+    secret_images: '',
+    secrets: [],
   },
   mutations: {
+    SET_SECRETS(state, payload) {
+      state.secrets = payload.data.data;
+    },
+    SET_SECRETIMAGE(state, payload) {
+      state.secret_images = payload;
+    },
     SET_LOGIN(state, payload) {
       localStorage.accessToken = payload;
       state.isLoggedIn = true;
@@ -149,7 +159,6 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err);
-        // swal("Failed!", "Please Try Again", "error");
         });
     },
     getBanners(context) {
@@ -165,7 +174,6 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err);
-        // swal("Failed!", "Please Try Again", "error");
         });
     },
     addProduct(context) {
@@ -198,16 +206,16 @@ export default new Vuex.Store({
     addBanner(context) {
       return new Promise((resolve, reject) => {
         axios({
-          method: 'post',
-          url: 'https://my-e-commerce-02.herokuapp.com/banners',
-          data: {
-            image_url: this.state.banner_image_url,
-            status: this.state.banner_status,
-          },
-          headers: {
-            token: localStorage.accessToken,
-          },
-        })
+            method: 'post',
+            url: 'https://my-e-commerce-02.herokuapp.com/banners',
+            data: {
+              image_url: this.state.banner_image_url,
+              status: this.state.banner_status
+            },
+            headers: {
+              token: localStorage.accessToken,
+            },
+          })
           .then(() => {
             context.commit('SET_ADDBANNER');
             swal('Success!', 'You have added a banner', 'success');
@@ -218,6 +226,25 @@ export default new Vuex.Store({
             swal('Failed!', 'Please Try Again', 'error');
           });
       });
+    },
+    submitImage() {
+      const formData = new FormData();
+      formData.append('file', this.state.secret_images[0]);
+      formData.append('image_url', this.state.secret_name);
+      axios.post('http://localhost:3002/secrets',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            token: localStorage.accessToken,
+          },
+        })
+        .then(() => {
+          swal('Success!', 'You have added a secret product', 'success');
+        })
+        .catch((err) => {
+          swal('Failed!', 'Please Try Again', 'error');
+        });
     },
     getProductById(context, payload) {
       axios({
@@ -232,7 +259,6 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err);
-          // swal("Failed!", "Please Try Again", "error");
         });
     },
     getBannerById(context, payload) {
@@ -248,7 +274,6 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err);
-          // swal("Failed!", "Please Try Again", "error");
         });
     },
     editProduct(context) {
@@ -362,7 +387,6 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err);
-        // swal("Failed!", "Please Try Again", "error");
         });
     },
     getByCategory(context,payload) {
@@ -384,13 +408,22 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err);
-        // swal("Failed!", "Please Try Again", "error");
         });
     },
-  },
-  getters: {
-
-  },
-  modules: {
+    getSecrets(context) {
+      axios({
+        method: 'get',
+        url: 'http://localhost:3002/secrets',
+        headers: {
+          token: localStorage.accessToken,
+        },
+      })
+        .then((results) => {
+          context.commit('SET_SECRETS', results);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 });

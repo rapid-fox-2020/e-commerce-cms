@@ -4,7 +4,7 @@ const { userAuthentication, userAuthorization } = require("../middlewares/auth.j
 
 bannerRoutes.get("/banners",userAuthentication,userAuthorization,BannerController.showAll)
 
-bannerRoutes.post("/banners",userAuthentication,userAuthorization,BannerController.addBanner)
+bannerRoutes.post("/banners",userAuthentication,userAuthorization, BannerController.addBanner)
 
 bannerRoutes.get("/banners/:id",userAuthentication,userAuthorization,BannerController.showById)
 

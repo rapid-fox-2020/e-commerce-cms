@@ -5,6 +5,9 @@
       <button type="button" name="button" class="btn btn-primary mt-3 mb-4"
       v-on:click="showFormAdd">
         <i class="fa fa-plus-square" aria-hidden="true"></i> | Add Product</button>
+      <button type="button" name="button" class="btn btn-success mt-3 mb-4 ml-3"
+        v-on:click="showFormAddSecret">
+          <i class="fa fa-plus-square" aria-hidden="true"></i> | Add Secret</button>
     </div>
     <ModalComponent></ModalComponent>
     <table class="table table-striped" style="text-align:center;">
@@ -46,6 +49,9 @@ export default {
     showFormAdd() {
       this.$store.commit('SET_EMPTYDATA')
       this.$router.push({ name: 'ProductAdd' });
+    },
+    showFormAddSecret() {
+      this.$router.push({ name: 'SecretAdd' });
     },
   },
   created() {

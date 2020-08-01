@@ -18,6 +18,9 @@
         <li class="nav-item" v-if="$store.state.isLoggedIn">
           <router-link to="/banners" class="nav-link">Banner</router-link>
         </li>
+        <li class="nav-item" v-if="$store.state.isLoggedIn">
+          <router-link to="/secrets" class="nav-link">Secrets</router-link>
+        </li>
       </ul>
       </div>
       <div class="dropdown">
