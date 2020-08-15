@@ -16,32 +16,46 @@ List Endpoints
 
  ### POST /login
   * Request header
+    ```
     no needed
+    ```
   * Request Body
+    ```
     {
       "email": "<email_for_login>"
       "password": "<password_for_login>"
     }
+    ```
   * Response(200)
+    ```
     {
       "token": "<access_token_JWT>"
     }
+    ```
   * Response(401)
+    ```
     {
       "message" : "<AuthValidationError>"
     }
+    ```
   * Response(404)
+    ```
     {
       "message" : "Email Not Found"
     }
-
+    ```
 
 ### GET /products
   * Request header
+    ```
     accessToken : "<token_by_localStorage>"
+    ```
   * Request Body
+    ```
     no needed
+    ```
   * Response (200)
+    ```
     [
       {
         "id": 1,
@@ -64,15 +78,21 @@ List Endpoints
         "updatedAt": "2020-07-25T01:51:18.977Z"
       }
     ]
+    ```
   * Response (500) - Internal Server Error
+    ```
     {
       "message": "Internal Server Error"
     }
+    ```
 
 ### POST /products
   * Request header
+    ```
     accessToken : "<token_by_localStorage>"
+    ```
   * Request Body
+    ```
     {
       "name": "<name to get insert into>",
       "image_url": "<image_url to get insert into>",
@@ -80,7 +100,9 @@ List Endpoints
       "stock": "<stock to get insert into>",
       "category": "<category to get insert into>"
     }
+    ```
   * Response (201)
+    ```
     {
       "id": <given id by system>,
       "name": "<added_name>",
@@ -91,21 +113,31 @@ List Endpoints
       "createdAt": "2020-03-20T07:15:12.149Z",
       "updatedAt": "2020-03-20T07:15:12.149Z",
     }
+    ```
   * Response (400)
+    ```
     {
       "message": "<ValidationError>"
     }
+    ```
   * Response (500)
+    ```
     {
       "message" : "Internal Server Error"
     }
+    ```
 
 ### GET /products/:id
   * Request header
+    ```
     accessToken : "<token_by_localStorage>"
+    ```
   * Request Body
+    ```
     no needed
+    ```
   * Response (200)
+    ```
     {
         "id": "<product_id>",
         "name": "<product_title>",
@@ -115,20 +147,28 @@ List Endpoints
         "category": "<product_category>"
         "createdAt": "2020-03-20T07:15:12.149Z",
         "updatedAt": "2020-03-20T07:15:12.149Z",
-      }
+     }
+     ```
   * Response(404)
+    ```
     {
       "message": "Data Not Found"
     }
+    ```
   * Response (500) - Internal Server Error
+    ```
     {
       "message": "Internal Server Error"
     }
+    ```
 
 ### PUT /products/:id
   * Request header
+    ```
     accessToken : "<token_by_localStorage>"
+    ```
   * Request Body
+    ```
     {
       "name": "<name to update>",
       "image_url": "<image_url to update>",
@@ -136,7 +176,9 @@ List Endpoints
       "stock": "<stock to update>",
       "category": "<category to update>",
     }
+    ```
   * Response (200)
+    ```
     {
       "id": "<generatedsystemid>",
       "name": "<product updated name>",
@@ -147,25 +189,37 @@ List Endpoints
       "createdAt": "2020-03-20T07:15:12.149Z",
       "updatedAt": "<updated date and time>",
     }
+    ```
   * Response(404)
+    ```
     {
       "message": "Data Not Found"
     }
+    ```
   * Response(400)
+    ```
     {
       "message": "<ErrorValidation>"
     }
+    ```
   * Response (500) - Internal Server Error
+    ```
     {
       "message": "Internal Server Error"
     }
+    ```
 
 ### DELETE /products/:id
   * Request header
+    ```
     accessToken : "<token_by_localStorage>"
+    ```
   * Request Body
+    ```
     no needed
+    ```
   * Response (200)
+    ```
     {
       "id": <deleted_id>,
       "name": "<deleted product name>",
@@ -176,11 +230,16 @@ List Endpoints
       "createdAt": "2020-03-20T07:15:12.149Z",
       "updatedAt": "2020-03-20T07:15:12.149Z,
     }
+    ```
  * Response(404)
+   ```
     {
       "message": "Data Not Found"
     }
+   ```
  * Response (500) - Internal Server Error
+    ```
     {
       "message": "Internal Server Error"
     }
+    ```
