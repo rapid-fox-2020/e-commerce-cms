@@ -1,4 +1,10 @@
-# Kanban-Beta DOCUMENTATION
+# e-commerce-cms DOCUMENTATION
+FireBase <<<<< https://supercms-fe875.web.app
+
+Heroku <<<<< https://stormy-wave-88070.herokuapp.com
+
+admin@gmail.com
+sudosudo
 
 > RESTful endpoint for E-Commerce-App CRUD operation with JSON formatted response
 
