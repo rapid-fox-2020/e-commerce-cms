@@ -13,4 +13,4 @@ app.use('/', routes)
 app.listen(port, () => {
     console.log(`server running on port: ${port}`);
 })
-module.exports = app
+module.exports = app;
